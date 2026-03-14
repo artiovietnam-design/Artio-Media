@@ -7,113 +7,70 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="images/favicon.png">
 <style>
-  :root {
-    --bg: #f0ede8;
-    --dark: #111111;
-    --white: #ffffff;
-    --accent: #ff4d00;
-    --accent2: #ffe600;
-    --accent3: #00c2ff;
-    --muted: #888880;
-    --radius: 20px;
-    --radius-lg: 28px;
+  :root{--bg:#f0ede8;--dark:#111111;--white:#ffffff;--accent:#ff4d00;--accent2:#ffe600;--accent3:#00c2ff;--muted:#888880;--radius:20px;--radius-lg:28px}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Be Vietnam Pro',sans-serif;background:var(--bg);color:var(--dark);overflow-x:hidden}
+  nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:18px 48px;background:var(--bg);border-bottom:1px solid rgba(0,0,0,.08);backdrop-filter:blur(12px)}
+  .nav-logo{display:flex;align-items:center;text-decoration:none;font-family:'Be Vietnam Pro',sans-serif;font-weight:800;font-size:22px;color:var(--dark)}
+  .nav-logo span{color:var(--accent)}
+  .nav-logo img{display:block;height:36px}
+  .nav-links{display:flex;gap:8px;align-items:center}
+  .nav-links a{font-size:14px;font-weight:500;color:var(--dark);text-decoration:none;padding:8px 14px;border-radius:100px;transition:background .2s}
+  .nav-links a:hover{background:rgba(0,0,0,.07)}
+  .btn-primary{background:var(--accent);color:var(--white);padding:10px 22px;border-radius:100px;font-size:14px;font-weight:600;text-decoration:none;transition:transform .2s,background .2s,color .2s;display:inline-block}
+  .btn-primary:hover{transform:scale(1.04);background:var(--dark);color:var(--accent)}
+  .portfolio-hero{padding:80px 48px 48px;max-width:1100px;margin:0 auto;text-align:center}
+  .section-label{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+  .portfolio-hero h1{font-family:'Be Vietnam Pro',sans-serif;font-size:clamp(40px,5vw,64px);font-weight:800;letter-spacing:-2px;line-height:1.05}
+  .portfolio-hero h1 em{font-style:italic;color:var(--accent)}
+  .portfolio-hero p{margin-top:16px;font-size:17px;color:var(--muted);max-width:480px;margin:16px auto 0}
+  .portfolio-section{padding:20px 48px 80px;max-width:1100px;margin:0 auto}
+  .portfolio-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .project-card{border-radius:var(--radius);overflow:hidden;aspect-ratio:4/3;position:relative;cursor:pointer;transition:transform .3s,box-shadow .3s;background:#222;text-decoration:none;display:block}
+  .project-card:hover{transform:scale(1.03);box-shadow:0 24px 60px rgba(0,0,0,.18)}
+  .project-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:filter .3s,transform .3s}
+  .project-card:hover .project-img{filter:brightness(.65);transform:scale(1.06)}
+  .project-overlay{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:24px;opacity:0;transition:opacity .3s;background:linear-gradient(to top,rgba(0,0,0,.75) 0%,transparent 60%)}
+  .project-card:hover .project-overlay{opacity:1}
+  .project-overlay span{color:white;font-weight:700;font-family:'Be Vietnam Pro',sans-serif;font-size:15px;line-height:1.3}
+  .project-overlay small{color:rgba(255,255,255,.6);font-size:12px;margin-top:4px;display:block}
+  .portfolio-cta{background:var(--dark);color:white;text-align:center;padding:64px 48px}
+  .portfolio-cta h2{font-family:'Be Vietnam Pro',sans-serif;font-size:clamp(28px,3.5vw,42px);font-weight:800;letter-spacing:-1px;margin-bottom:16px}
+  .portfolio-cta h2 em{font-style:italic;color:var(--accent2)}
+  .portfolio-cta p{color:rgba(255,255,255,.55);font-size:16px;margin-bottom:32px}
+  .portfolio-cta-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+  .cta-btn-white{background:white;color:var(--dark);padding:14px 28px;border-radius:100px;font-weight:700;font-size:15px;text-decoration:none;transition:background .2s,transform .15s}
+  .cta-btn-white:hover{background:var(--accent);color:white;transform:scale(1.04)}
+  .cta-btn-outline{background:transparent;color:white;border:2px solid rgba(255,255,255,.3);padding:14px 28px;border-radius:100px;font-weight:700;font-size:15px;text-decoration:none;transition:border-color .2s,transform .15s}
+  .cta-btn-outline:hover{border-color:var(--accent2);color:var(--accent2);transform:scale(1.04)}
+  footer{background:#0a0a0a;color:rgba(255,255,255,.35);padding:32px 48px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+  footer a{color:rgba(255,255,255,.35);text-decoration:none;font-size:13px}
+  footer a:hover{color:var(--accent)}
+  .footer-brand{display:flex;align-items:center;font-family:'Be Vietnam Pro',sans-serif;font-weight:800;font-size:18px;color:var(--white)}
+  .footer-brand span{color:var(--accent)}
+  .footer-brand img{height:32px;display:block}
+  .footer-links{display:flex;gap:24px}
+  .fade-up{opacity:0;transform:translateY(24px);transition:opacity .5s ease,transform .5s ease}
+  .fade-up.visible{opacity:1;transform:translateY(0)}
+  @media(max-width:768px){
+    nav{padding:16px 20px}
+    .portfolio-hero,.portfolio-section{padding-left:20px;padding-right:20px}
+    .portfolio-grid{grid-template-columns:repeat(2,1fr);gap:14px}
+    .portfolio-cta{padding:48px 20px}
   }
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body { font-family: 'Be Vietnam Pro', sans-serif; background: var(--bg); color: var(--dark); overflow-x: hidden; }
-
-  /* NAV */
-  nav { position: sticky; top: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 18px 48px; background: var(--bg); border-bottom: 1px solid rgba(0,0,0,.08); backdrop-filter: blur(12px); }
-  .nav-logo { font-family: 'Be Vietnam Pro', sans-serif; font-weight: 800; font-size: 22px; letter-spacing: -0.5px; color: var(--dark); text-decoration: none; }
-  .nav-logo span { color: var(--accent); }
-  .nav-links { display: flex; gap: 8px; align-items: center; }
-  .nav-links a { font-size: 14px; font-weight: 500; color: var(--dark); text-decoration: none; padding: 8px 14px; border-radius: 100px; transition: background .2s; }
-  .nav-links a:hover { background: rgba(0,0,0,.07); }
-  .btn-primary { background: var(--accent); color: var(--white); padding: 10px 22px; border-radius: 100px; font-size: 14px; font-weight: 600; text-decoration: none; transition: transform .2s, background .2s, color .2s; display: inline-block; }
-  .btn-primary:hover { transform: scale(1.04); background: var(--dark); color: var(--accent); }
-
-  /* HERO PORTFOLIO */
-  .portfolio-hero {
-    padding: 80px 48px 60px;
-    max-width: 1100px; margin: 0 auto;
-    text-align: center;
-  }
-  .portfolio-hero .section-label { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; }
-  .portfolio-hero h1 { font-family: 'Be Vietnam Pro', sans-serif; font-size: clamp(40px, 5vw, 64px); font-weight: 800; letter-spacing: -2px; line-height: 1.05; }
-  .portfolio-hero h1 em { font-style: italic; color: var(--accent); }
-  .portfolio-hero p { margin-top: 16px; font-size: 17px; color: var(--muted); max-width: 480px; margin: 16px auto 0; }
-
-  /* GRID */
-  .portfolio-section { padding: 20px 48px 80px; max-width: 1100px; margin: 0 auto; }
-  .portfolio-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-  .project-card {
-    border-radius: var(--radius);
-    overflow: hidden;
-    aspect-ratio: 4/3;
-    position: relative;
-    cursor: pointer;
-    transition: transform .3s, box-shadow .3s;
-    background: #222;
-    text-decoration: none;
-    display: block;
-  }
-  .project-card:hover { transform: scale(1.03); box-shadow: 0 24px 60px rgba(0,0,0,.18); }
-  .project-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: filter .3s, transform .3s; }
-  .project-card:hover .project-img { filter: brightness(.65); transform: scale(1.06); }
-  .project-overlay {
-    position: absolute; inset: 0;
-    display: flex; flex-direction: column; justify-content: flex-end;
-    padding: 24px; opacity: 0;
-    transition: opacity .3s;
-    background: linear-gradient(to top, rgba(0,0,0,.75) 0%, transparent 60%);
-  }
-  .project-card:hover .project-overlay { opacity: 1; }
-  .project-overlay span { color: white; font-weight: 700; font-family: 'Be Vietnam Pro', sans-serif; font-size: 15px; line-height: 1.3; }
-  .project-overlay small { color: rgba(255,255,255,.6); font-size: 12px; margin-top: 4px; display: block; }
-
-  /* Fallback bg nếu ảnh lỗi */
-  .project-card.no-img { background: linear-gradient(135deg, var(--accent), #111); }
-
-  /* CTA BOTTOM */
-  .portfolio-cta { background: var(--dark); color: white; text-align: center; padding: 64px 48px; }
-  .portfolio-cta h2 { font-family: 'Be Vietnam Pro', sans-serif; font-size: clamp(28px, 3.5vw, 42px); font-weight: 800; letter-spacing: -1px; margin-bottom: 16px; }
-  .portfolio-cta h2 em { font-style: italic; color: var(--accent2); }
-  .portfolio-cta p { color: rgba(255,255,255,.55); font-size: 16px; margin-bottom: 32px; }
-  .portfolio-cta-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
-  .cta-btn-white { background: white; color: var(--dark); padding: 14px 28px; border-radius: 100px; font-weight: 700; font-size: 15px; text-decoration: none; transition: background .2s, transform .15s; }
-  .cta-btn-white:hover { background: var(--accent); color: white; transform: scale(1.04); }
-  .cta-btn-outline { background: transparent; color: white; border: 2px solid rgba(255,255,255,.3); padding: 14px 28px; border-radius: 100px; font-weight: 700; font-size: 15px; text-decoration: none; transition: border-color .2s, transform .15s; }
-  .cta-btn-outline:hover { border-color: var(--accent2); color: var(--accent2); transform: scale(1.04); }
-
-  /* FOOTER */
-  footer { background: #0a0a0a; color: rgba(255,255,255,.35); padding: 32px 48px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
-  footer a { color: rgba(255,255,255,.35); text-decoration: none; font-size: 13px; }
-  footer a:hover { color: var(--accent); }
-  .footer-brand { font-family: 'Be Vietnam Pro', sans-serif; font-weight: 800; font-size: 18px; color: var(--white); }
-  .footer-brand span { color: var(--accent); }
-  .footer-links { display: flex; gap: 24px; }
-
-  /* ANIMATE */
-  .fade-up { opacity: 0; transform: translateY(24px); transition: opacity .5s ease, transform .5s ease; }
-  .fade-up.visible { opacity: 1; transform: translateY(0); }
-
-  @media (max-width: 768px) {
-    nav { padding: 16px 20px; }
-    .portfolio-hero, .portfolio-section { padding-left: 20px; padding-right: 20px; }
-    .portfolio-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
-    .portfolio-cta { padding: 48px 20px; }
-  }
-  @media (max-width: 480px) {
-    .portfolio-grid { grid-template-columns: 1fr; }
-  }
+  @media(max-width:480px){.portfolio-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
-  <a href="index.html" class="nav-logo">Artio<span>.</span></a>
+  <a href="index.html" class="nav-logo">
+    <img src="images/Logo.png" alt="Artio Media" onerror="this.style.display='none';this.nextElementSibling.style.display='inline'">
+    <span style="display:none">Artio<span>.</span></span>
+  </a>
   <div class="nav-links">
     <a href="index.html#services">Dịch vụ</a>
     <a href="portfolio.html" style="color:var(--accent);font-weight:700">Portfolio</a>
@@ -122,39 +79,37 @@
   </div>
 </nav>
 
-<!-- HERO -->
 <div class="portfolio-hero fade-up">
   <p class="section-label">Artio Media — Portfolio</p>
   <h1>Tất cả <em>dự án</em><br>thiết kế</h1>
   <p>Hơn 23 dự án thực tế — branding, packaging, print, digital và nhiều hơn nữa.</p>
 </div>
 
-<!-- PORTFOLIO GRID -->
 <section class="portfolio-section">
   <div class="portfolio-grid">
 
     <a href="https://www.behance.net/gallery/245510555/Design-SME-Banner-MB-Bank" target="_blank" class="project-card fade-up">
-      <img class="project-img" src="https://mir-s3-cdn-cf.behance.net/projects/404/09847f245510555.Y3JvcCwxMTc2LDkxOSwwLDgyNg.jpeg" alt="Design SME Banner MB Bank" onerror="this.style.display='none'">
+      <img class="project-img" src="https://mir-s3-cdn-cf.behance.net/project_modules/max_632_webp/805959245510555.69af971730da1.jpeg" alt="MB Bank" onerror="this.style.display='none'">
       <div class="project-overlay"><span>Design SME Banner MB Bank</span><small>Banner / Poster Design</small></div>
     </a>
 
     <a href="https://www.behance.net/gallery/237106489/Wataros-AI-Crypto-AppWeb3-Design-UIUX" target="_blank" class="project-card fade-up" style="transition-delay:.05s">
-      <img class="project-img" src="https://mir-s3-cdn-cf.behance.net/projects/404/1a3c26237106489.Y3JvcCw3ODYsNjE1LDYzNiwyMTQ.jpg" alt="Wataros AI Crypto Web3" onerror="this.style.display='none'">
+      <img class="project-img" src="https://mir-s3-cdn-cf.behance.net/projects/404/1a3c26237106489.Y3JvcCw3ODYsNjE1LDYzNiwyMTQ.jpg" alt="Wataros" onerror="this.style.display='none'">
       <div class="project-overlay"><span>Wataros — AI Crypto Web3</span><small>UI/UX Design</small></div>
     </a>
 
     <a href="https://www.behance.net/gallery/225390927/OCOP-Brand-Dc-Sn-Tay-Bc-Son-La" target="_blank" class="project-card fade-up" style="transition-delay:.1s">
-      <img class="project-img" src="https://mir-s3-cdn-cf.behance.net/projects/404/974f78225390927.Y3JvcCwyNDgwLDE5MzksMCwyNjMz.jpg" alt="OCOP Brand Tây Bắc" onerror="this.style.display='none'">
+      <img class="project-img" src="https://mir-s3-cdn-cf.behance.net/projects/404/974f78225390927.Y3JvcCwyNDgwLDE5MzksMCwyNjMz.jpg" alt="OCOP" onerror="this.style.display='none'">
       <div class="project-overlay"><span>OCOP Brand — Đặc Sản Tây Bắc</span><small>Brand Identity / Packaging</small></div>
     </a>
 
     <a href="https://www.behance.net/gallery/210936923/Spa-Brand-Design-GiaoChiLegend-Spa-Wellness" target="_blank" class="project-card fade-up" style="transition-delay:.15s">
-      <img class="project-img" src="https://mir-s3-cdn-cf.behance.net/projects/404/8c59e1210936923.Y3JvcCwxNzk3LDE0MDYsMzUxLDA.jpg" alt="GiaoChiLegend Spa" onerror="this.style.display='none'">
+      <img class="project-img" src="https://mir-s3-cdn-cf.behance.net/projects/404/8c59e1210936923.Y3JvcCwxNzk3LDE0MDYsMzUxLDA.jpg" alt="GiaoChiLegend" onerror="this.style.display='none'">
       <div class="project-overlay"><span>GiaoChiLegend — Spa &amp; Wellness</span><small>Brand Identity</small></div>
     </a>
 
     <a href="https://www.behance.net/gallery/181491049/Crypto-Design-Brand-Crypto-De-Fi-Project-EtherMax" target="_blank" class="project-card fade-up" style="transition-delay:.2s">
-      <img class="project-img" src="https://mir-s3-cdn-cf.behance.net/projects/404/6c62c7181491049.Y3JvcCwzMTcwLDI0ODAsMCww.jpg" alt="EtherMax Crypto DeFi" onerror="this.style.display='none'">
+      <img class="project-img" src="https://mir-s3-cdn-cf.behance.net/projects/404/6c62c7181491049.Y3JvcCwzMTcwLDI0ODAsMCww.jpg" alt="EtherMax" onerror="this.style.display='none'">
       <div class="project-overlay"><span>EtherMax — Crypto De-Fi Brand</span><small>Brand Identity / Digital</small></div>
     </a>
 
@@ -163,95 +118,94 @@
       <div class="project-overlay"><span>H+ Cà Phê</span><small>Brand Identity / Packaging</small></div>
     </a>
 
-    <a href="https://www.behance.net/gallery/141784361/KYN-COFFEE-HANOI" target="_blank" class="project-card fade-up" style="transition-delay:.3s">
-      <img class="project-img" src="https://mir-s3-cdn-cf.behance.net/projects/404/0552a8141784361.Y3JvcCw4NzUsNjg0LDQsOTk.jpeg" alt="KYN Coffee Hanoi" onerror="this.style.display='none'">
+    <a href="https://www.behance.net/gallery/141784361/KYN-COFFEE-HANOI" target="_blank" class="project-card fade-up" style="transition-delay:.05s">
+      <img class="project-img" src="https://mir-s3-cdn-cf.behance.net/projects/404/0552a8141784361.Y3JvcCw4NzUsNjg0LDQsOTk.jpeg" alt="KYN Coffee" onerror="this.style.display='none'">
       <div class="project-overlay"><span>KYN Coffee — Hà Nội</span><small>Brand Identity</small></div>
     </a>
 
-    <a href="https://www.behance.net/gallery/117077857/Hc-vin-dao-to-pha-ch-VNBS-Artio-Media-Project" target="_blank" class="project-card fade-up" style="transition-delay:.35s">
-      <img class="project-img" src="https://mir-s3-cdn-cf.behance.net/projects/404/8f0e74117077857.Y3JvcCwyODQyLDIyMjMsMCww.png" alt="Học viện VNBS" onerror="this.style.display='none'">
+    <a href="https://www.behance.net/gallery/117077857/Hc-vin-dao-to-pha-ch-VNBS-Artio-Media-Project" target="_blank" class="project-card fade-up" style="transition-delay:.1s">
+      <img class="project-img" src="https://mir-s3-cdn-cf.behance.net/projects/404/8f0e74117077857.Y3JvcCwyODQyLDIyMjMsMCww.png" alt="VNBS" onerror="this.style.display='none'">
       <div class="project-overlay"><span>Học viện Pha Chế VNBS</span><small>Brand Identity / Print</small></div>
     </a>
 
-    <a href="https://www.behance.net/gallery/103173469/Giao-Trinh-Detox-Healthy-Design-Khoa-Hc-Detox" target="_blank" class="project-card fade-up" style="transition-delay:.4s">
-      <img class="project-img" src="https://mir-s3-cdn-cf.behance.net/projects/404/b91f97103173469.Y3JvcCwzODM1LDMwMDAsMzMyLDA.jpeg" alt="Giáo Trình Detox Healthy" onerror="this.style.display='none'">
+    <a href="https://www.behance.net/gallery/103173469/Giao-Trinh-Detox-Healthy-Design-Khoa-Hc-Detox" target="_blank" class="project-card fade-up" style="transition-delay:.15s">
+      <img class="project-img" src="https://mir-s3-cdn-cf.behance.net/projects/404/b91f97103173469.Y3JvcCwzODM1LDMwMDAsMzMyLDA.jpeg" alt="Detox" onerror="this.style.display='none'">
       <div class="project-overlay"><span>Giáo Trình Detox Healthy</span><small>Print Design</small></div>
     </a>
 
-    <a href="https://www.behance.net/gallery/102478129/Nha-hang-Chicken-Garden-Ha-Ni" target="_blank" class="project-card fade-up" style="transition-delay:.05s">
-      <img class="project-img" src="https://mir-s3-cdn-cf.behance.net/projects/404/6df129102478129.Y3JvcCw1MTMzLDQwMTUsNDQ0LDA.jpeg" alt="Chicken Garden Hà Nội" onerror="this.style.display='none'">
+    <a href="https://www.behance.net/gallery/102478129/Nha-hang-Chicken-Garden-Ha-Ni" target="_blank" class="project-card fade-up" style="transition-delay:.2s">
+      <img class="project-img" src="https://mir-s3-cdn-cf.behance.net/projects/404/6df129102478129.Y3JvcCw1MTMzLDQwMTUsNDQ0LDA.jpeg" alt="Chicken Garden" onerror="this.style.display='none'">
       <div class="project-overlay"><span>Nhà hàng Chicken Garden</span><small>Brand Identity / Menu</small></div>
     </a>
 
-    <a href="https://www.behance.net/gallery/102434765/Chao-Quan-Ha-Dong-Artio-Media" target="_blank" class="project-card fade-up" style="transition-delay:.1s">
-      <img class="project-img" src="https://mir-s3-cdn-cf.behance.net/projects/404/a83a02102434765.Y3JvcCw1Mzc0LDQyMDQsNDEyLDA.jpeg" alt="Chao Quán Hà Đông" onerror="this.style.display='none'">
+    <a href="https://www.behance.net/gallery/102434765/Chao-Quan-Ha-Dong-Artio-Media" target="_blank" class="project-card fade-up" style="transition-delay:.25s">
+      <img class="project-img" src="https://mir-s3-cdn-cf.behance.net/projects/404/a83a02102434765.Y3JvcCw1Mzc0LDQyMDQsNDEyLDA.jpeg" alt="Chao Quán" onerror="this.style.display='none'">
       <div class="project-overlay"><span>Chao Quán Hà Đông</span><small>Brand Identity</small></div>
     </a>
 
-    <a href="https://www.behance.net/gallery/102320301/Him-Coffee-Vng-Tau" target="_blank" class="project-card fade-up" style="transition-delay:.15s">
-      <img class="project-img" src="https://mir-s3-cdn-cf.behance.net/projects/404/f6c050102320301.5f3429567ebde.jpg" alt="Him Coffee Vũng Tàu" onerror="this.style.display='none'">
+    <a href="https://www.behance.net/gallery/102320301/Him-Coffee-Vng-Tau" target="_blank" class="project-card fade-up" style="transition-delay:.05s">
+      <img class="project-img" src="https://mir-s3-cdn-cf.behance.net/projects/404/f6c050102320301.5f3429567ebde.jpg" alt="Him Coffee" onerror="this.style.display='none'">
       <div class="project-overlay"><span>Him Coffee Vũng Tàu</span><small>Brand Identity / Packaging</small></div>
     </a>
 
-    <a href="https://www.behance.net/gallery/86044463/Nhn-din-thuong-hiu-Tim-Tra-Chanh-Ci-Xay-Gio" target="_blank" class="project-card fade-up" style="transition-delay:.2s">
-      <img class="project-img" src="https://mir-s3-cdn-cf.behance.net/projects/404/4fc52986044463.Y3JvcCwxMjAwLDkzOCwwLDA.jpg" alt="Tim Trà Chanh" onerror="this.style.display='none'">
+    <a href="https://www.behance.net/gallery/86044463/Nhn-din-thuong-hiu-Tim-Tra-Chanh-Ci-Xay-Gio" target="_blank" class="project-card fade-up" style="transition-delay:.1s">
+      <img class="project-img" src="https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/0ed09886044463.5d8d89b7593a8.jpg" alt="Trà Chanh Cối Xay Gió" onerror="this.style.display='none'">
       <div class="project-overlay"><span>Tim Trà Chanh Cối Xay Gió</span><small>Brand Identity</small></div>
     </a>
 
-    <a href="https://www.behance.net/gallery/85527961/Hi-Coffee-Menu-Design" target="_blank" class="project-card fade-up" style="transition-delay:.25s">
-      <img class="project-img" src="https://mir-s3-cdn-cf.behance.net/projects/404/57e40585527961.Y3JvcCwxMjAwLDkzOCwwLDA.jpg" alt="Hi Coffee Menu" onerror="this.style.display='none'">
+    <a href="https://www.behance.net/gallery/85527961/Hi-Coffee-Menu-Design" target="_blank" class="project-card fade-up" style="transition-delay:.15s">
+      <img class="project-img" src="https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/17575685527961.5d7efe35eb38c.jpg" alt="Hi Coffee Menu" onerror="this.style.display='none'">
       <div class="project-overlay"><span>Hi Coffee — Menu Design</span><small>Print Design / Menu</small></div>
     </a>
 
-    <a href="https://www.behance.net/gallery/85281037/Lofita-Love-At-First-Taste" target="_blank" class="project-card fade-up" style="transition-delay:.3s">
-      <img class="project-img" src="https://mir-s3-cdn-cf.behance.net/projects/404/36e4e085281037.Y3JvcCwxMjAwLDkzOCwwLDA.jpg" alt="Lofita Love At First Taste" onerror="this.style.display='none'">
+    <a href="https://www.behance.net/gallery/85281037/Lofita-Love-At-First-Taste" target="_blank" class="project-card fade-up" style="transition-delay:.2s">
+      <img class="project-img" src="https://mir-s3-cdn-cf.behance.net/project_modules/max_632_webp/8f859185281037.5d7762354bc17.jpg" alt="Lofita" onerror="this.style.display='none'">
       <div class="project-overlay"><span>Lofita — Love At First Taste</span><small>Brand Identity</small></div>
     </a>
 
-    <a href="https://www.behance.net/gallery/82622625/L-COFFEE-MENU-HUNG-TRN-DESIGN" target="_blank" class="project-card fade-up" style="transition-delay:.05s">
-      <img class="project-img" src="https://mir-s3-cdn-cf.behance.net/projects/404/34d7c282622625.Y3JvcCwxMjAwLDkzOCwwLDA.jpg" alt="L Coffee Menu" onerror="this.style.display='none'">
-      <div class="project-overlay"><span>L Coffee — Menu Design</span><small>Print Design / Menu</small></div>
+    <a href="https://www.behance.net/gallery/82622625/L-COFFEE-MENU-HUNG-TRN-DESIGN" target="_blank" class="project-card fade-up" style="transition-delay:.25s">
+      <img class="project-img" src="https://mir-s3-cdn-cf.behance.net/project_modules/max_632_webp/16030f82622625.5d23755b46202.jpg" alt="Lạ Coffee" onerror="this.style.display='none'">
+      <div class="project-overlay"><span>Lạ Coffee — Menu Design</span><small>Print Design / Menu</small></div>
     </a>
 
-    <a href="https://www.behance.net/gallery/81422231/House-Of-Cha-Hung-Trn-Design-0844-12-1234-(Vietnam_" target="_blank" class="project-card fade-up" style="transition-delay:.1s">
-      <img class="project-img" src="https://mir-s3-cdn-cf.behance.net/projects/404/81f81481422231.Y3JvcCwxMjAwLDkzOCwwLDA.jpg" alt="House Of Cha" onerror="this.style.display='none'">
+    <a href="https://www.behance.net/gallery/81422231/House-Of-Cha-Hung-Trn-Design-0844-12-1234-(Vietnam_" target="_blank" class="project-card fade-up" style="transition-delay:.05s">
+      <img class="project-img" src="https://mir-s3-cdn-cf.behance.net/projects/404/c5572481422231.Y3JvcCwxMjAwLDkzOCwwLDA.jpg" alt="House of Cha" onerror="this.style.display='none'">
       <div class="project-overlay"><span>House Of Cha</span><small>Brand Identity</small></div>
     </a>
 
-    <a href="https://www.behance.net/gallery/81028265/Pizza-Menu-Design-Hung-Trn-Design" target="_blank" class="project-card fade-up" style="transition-delay:.15s">
-      <img class="project-img" src="https://mir-s3-cdn-cf.behance.net/projects/404/06fe4681028265.Y3JvcCwxMjAwLDkzOCwwLDA.jpg" alt="Pizza Menu Design" onerror="this.style.display='none'">
+    <a href="https://www.behance.net/gallery/81028265/Pizza-Menu-Design-Hung-Trn-Design" target="_blank" class="project-card fade-up" style="transition-delay:.1s">
+      <img class="project-img" src="https://mir-s3-cdn-cf.behance.net/projects/404/d77ddd81028265.Y3JvcCwxMjAwLDkzOCwwLDA.jpg" alt="Pizza Menu" onerror="this.style.display='none'">
       <div class="project-overlay"><span>Pizza Menu Design</span><small>Print Design / Menu</small></div>
     </a>
 
-    <a href="https://www.behance.net/gallery/80978141/OLYMPUS-COFFEE-HUNG-TRN-DESIGN" target="_blank" class="project-card fade-up" style="transition-delay:.2s">
-      <img class="project-img" src="https://mir-s3-cdn-cf.behance.net/projects/404/e29b5f80978141.Y3JvcCwxMjAwLDkzOCwwLDA.jpg" alt="Olympus Coffee" onerror="this.style.display='none'">
+    <a href="https://www.behance.net/gallery/80978141/OLYMPUS-COFFEE-HUNG-TRN-DESIGN" target="_blank" class="project-card fade-up" style="transition-delay:.15s">
+      <img class="project-img" src="https://mir-s3-cdn-cf.behance.net/projects/404/1e3bd780978141.Y3JvcCwxMjAwLDkzOCwwLDA.jpg" alt="Olympus Coffee" onerror="this.style.display='none'">
       <div class="project-overlay"><span>Olympus Coffee</span><small>Brand Identity</small></div>
     </a>
 
-    <a href="https://www.behance.net/gallery/80977727/LASVEGAS-COFFEE" target="_blank" class="project-card fade-up" style="transition-delay:.25s">
-      <img class="project-img" src="https://mir-s3-cdn-cf.behance.net/projects/404/90166380977727.Y3JvcCwxMjAwLDkzOCwwLDA.jpg" alt="Las Vegas Coffee" onerror="this.style.display='none'">
+    <a href="https://www.behance.net/gallery/80977727/LASVEGAS-COFFEE" target="_blank" class="project-card fade-up" style="transition-delay:.2s">
+      <img class="project-img" src="https://mir-s3-cdn-cf.behance.net/projects/404/a7555a80977727.Y3JvcCwxMjAwLDkzOCwwLDA.jpg" alt="Las Vegas Coffee" onerror="this.style.display='none'">
       <div class="project-overlay"><span>Las Vegas Coffee</span><small>Brand Identity</small></div>
     </a>
 
-    <a href="https://www.behance.net/gallery/80387305/MAY-GARDEN-COFFEE-HA-NI" target="_blank" class="project-card fade-up" style="transition-delay:.3s">
-      <img class="project-img" src="https://mir-s3-cdn-cf.behance.net/projects/404/c2b50480387305.Y3JvcCwxMjAwLDkzOCwwLDA.jpg" alt="May Garden Coffee Hà Nội" onerror="this.style.display='none'">
+    <a href="https://www.behance.net/gallery/80387305/MAY-GARDEN-COFFEE-HA-NI" target="_blank" class="project-card fade-up" style="transition-delay:.25s">
+      <img class="project-img" src="https://mir-s3-cdn-cf.behance.net/projects/404/36aeec80387305.Y3JvcCwxMjAwLDkzOCwwLDA.jpg" alt="May Garden Coffee" onerror="this.style.display='none'">
       <div class="project-overlay"><span>May Garden Coffee — Hà Nội</span><small>Brand Identity</small></div>
     </a>
 
     <a href="https://www.behance.net/gallery/76686179/Zeus-Coffee-Packing-Hung-Trn-Design-0844-12-1234" target="_blank" class="project-card fade-up" style="transition-delay:.05s">
-      <img class="project-img" src="https://mir-s3-cdn-cf.behance.net/projects/404/81272476686179.Y3JvcCwxMjAwLDkzOCwwLDA.jpg" alt="Zeus Coffee Packaging" onerror="this.style.display='none'">
+      <img class="project-img" src="https://mir-s3-cdn-cf.behance.net/projects/404/2c3f2e76686179.Y3JvcCwxMjAwLDkzOCwwLDA.jpg" alt="Zeus Coffee" onerror="this.style.display='none'">
       <div class="project-overlay"><span>Zeus Coffee — Packaging</span><small>Packaging Design</small></div>
     </a>
 
     <a href="https://www.behance.net/gallery/76679097/Ca-phe-Cat-Tung-Nam-Dnh-Hung-Trn-Design" target="_blank" class="project-card fade-up" style="transition-delay:.1s">
-      <img class="project-img" src="https://mir-s3-cdn-cf.behance.net/projects/404/7c8e9376679097.Y3JvcCwxMjAwLDkzOCwwLDA.jpg" alt="Cà Phê Cát Tùng" onerror="this.style.display='none'">
+      <img class="project-img" src="https://mir-s3-cdn-cf.behance.net/projects/404/44af5576679097.Y3JvcCwxMjAwLDkzOCwwLDA.jpg" alt="Cà Phê Cát Tùng" onerror="this.style.display='none'">
       <div class="project-overlay"><span>Cà Phê Cát Tùng — Nam Định</span><small>Brand Identity / Packaging</small></div>
     </a>
 
   </div>
 </section>
 
-<!-- CTA -->
 <div class="portfolio-cta">
   <h2>Bạn có dự án<br><em>cần thiết kế?</em></h2>
   <p>Hãy để Artio Media biến ý tưởng của bạn thành thương hiệu ấn tượng.</p>
@@ -261,9 +215,11 @@
   </div>
 </div>
 
-<!-- FOOTER -->
 <footer>
-  <div class="footer-brand">Artio<span>.</span></div>
+  <a href="index.html" class="footer-brand">
+    <img src="images/logo-white.png" alt="Artio Media" onerror="this.style.display='none';this.nextElementSibling.style.display='inline'">
+    <span style="display:none">Artio<span>.</span></span>
+  </a>
   <div class="footer-links">
     <a href="index.html#services">Dịch vụ</a>
     <a href="portfolio.html">Portfolio</a>
@@ -276,7 +232,7 @@
 <script>
   const faders = document.querySelectorAll('.fade-up');
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
   }, { threshold: 0.08 });
   faders.forEach(el => observer.observe(el));
 </script>
