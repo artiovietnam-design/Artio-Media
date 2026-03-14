@@ -9,7 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&display=swap" rel="stylesheet">
 <link rel="icon" type="image/png" href="images/favicon.png">
 <style>
-  :root { --bg:#f0ede8; --dark:#111111; --white:#ffffff; --accent:#ff4d00; --accent2:#ffe600; --accent3:#00c2ff; --accent4:#c8ff00; --muted:#888880; --radius:20px; --radius-lg:28px; }
+  :root{--bg:#f0ede8;--dark:#111111;--white:#ffffff;--accent:#ff4d00;--accent2:#ffe600;--accent3:#00c2ff;--accent4:#c8ff00;--muted:#888880;--radius:20px;--radius-lg:28px}
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
   body{font-family:'Be Vietnam Pro',sans-serif;background:var(--bg);color:var(--dark);overflow-x:hidden;font-size:16px;line-height:1.6}
@@ -82,6 +82,16 @@
   .ta1{background:var(--accent3);color:white}.ta2{background:var(--accent);color:white}
   .testi-author-info strong{display:block;font-weight:700;font-size:14px}
   .testi-author-info span{font-size:13px;color:var(--muted)}
+  /* MARQUEE */
+  .marquee-section{padding:48px 0;overflow:hidden;background:var(--bg);border-top:1px solid rgba(0,0,0,.07);border-bottom:1px solid rgba(0,0,0,.07)}
+  .marquee-label{text-align:center;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:24px}
+  .marquee-track{display:flex;gap:16px;width:max-content;animation:marqueeScroll 50s linear infinite}
+  .marquee-track:hover{animation-play-state:paused}
+  @keyframes marqueeScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+  .marquee-item{flex-shrink:0;width:180px;height:120px;border-radius:16px;overflow:hidden;background:#fff;border:1px solid rgba(0,0,0,.06);box-shadow:0 4px 16px rgba(0,0,0,.06);transition:transform .25s,box-shadow .25s}
+  .marquee-item:hover{transform:scale(1.06);box-shadow:0 12px 32px rgba(0,0,0,.14)}
+  .marquee-item img{width:100%;height:100%;object-fit:cover;display:block}
+  /* WORK */
   .work{padding:80px 48px;max-width:1100px;margin:0 auto}
   .work-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:40px}
   .work-header h2{font-family:'Be Vietnam Pro',sans-serif;font-size:36px;font-weight:800;letter-spacing:-1px}
@@ -112,7 +122,7 @@
   .price-features{list-style:none;margin-bottom:32px}
   .price-features li{font-size:14px;padding:9px 0;border-bottom:1px solid rgba(0,0,0,.06);display:flex;align-items:center;gap:8px}
   .pc-dark .price-features li{border-color:rgba(255,255,255,.08)}
-  .price-features li::before{content:'✓';width:20px;height:20px;background:var(--accent4);color:var(--dark);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;flex-shrink:0}
+  .price-features li::before{content:'checkmark';font-size:0;width:20px;height:20px;background:var(--accent4);color:var(--dark);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;flex-shrink:0}
   .price-cta{display:block;text-align:center;padding:15px 24px;border-radius:12px;font-weight:700;font-size:15px;text-decoration:none;transition:transform .15s,background .2s}
   .price-cta:hover{transform:scale(1.03)}
   .pc-light .price-cta{background:var(--dark);color:white}.pc-light .price-cta:hover{background:var(--accent)}
@@ -164,6 +174,7 @@
     .hero,.how,.benefits,.work,.pricing,.faq{padding:48px 20px}
     .footer-cta{padding:60px 20px}
     .logo-bar{gap:20px;padding:20px}
+    .marquee-item{width:140px;height:95px}
   }
 </style>
 </head>
@@ -274,6 +285,42 @@
   </div>
 </div>
 
+<!-- MARQUEE INSPIRATION -->
+<div class="marquee-section">
+  <p class="marquee-label">✦ Logo &amp; Brand Inspiration ✦</p>
+  <div style="overflow:hidden;position:relative">
+    <div style="position:absolute;left:0;top:0;bottom:0;width:100px;background:linear-gradient(to right,var(--bg),transparent);z-index:2;pointer-events:none"></div>
+    <div style="position:absolute;right:0;top:0;bottom:0;width:100px;background:linear-gradient(to left,var(--bg),transparent);z-index:2;pointer-events:none"></div>
+    <div class="marquee-track">
+      <div class="marquee-item"><img src="https://mir-s3-cdn-cf.behance.net/project_modules/max_632_webp/8f859185281037.5d7762354bc17.jpg" alt="" onerror="this.parentElement.style.background='linear-gradient(135deg,#ff4d00,#111)'"></div>
+      <div class="marquee-item"><img src="https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/0ed09886044463.5d8d89b7593a8.jpg" alt="" onerror="this.parentElement.style.background='linear-gradient(135deg,#ffe600,#00c2ff)'"></div>
+      <div class="marquee-item"><img src="https://mir-s3-cdn-cf.behance.net/projects/404/8c59e1210936923.Y3JvcCwxNzk3LDE0MDYsMzUxLDA.jpg" alt="" onerror="this.parentElement.style.background='linear-gradient(135deg,#c8ff00,#111)'"></div>
+      <div class="marquee-item"><img src="https://mir-s3-cdn-cf.behance.net/project_modules/max_632_webp/16030f82622625.5d23755b46202.jpg" alt="" onerror="this.parentElement.style.background='linear-gradient(135deg,#00c2ff,#ff4d00)'"></div>
+      <div class="marquee-item"><img src="https://mir-s3-cdn-cf.behance.net/projects/404/974f78225390927.Y3JvcCwyNDgwLDE5MzksMCwyNjMz.jpg" alt="" onerror="this.parentElement.style.background='linear-gradient(135deg,#ff9cf5,#111)'"></div>
+      <div class="marquee-item"><img src="https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/17575685527961.5d7efe35eb38c.jpg" alt="" onerror="this.parentElement.style.background='linear-gradient(135deg,#111,#ff4d00)'"></div>
+      <div class="marquee-item"><img src="https://mir-s3-cdn-cf.behance.net/projects/404/615411143074527.Y3JvcCwxMjAwLDkzOCwwLDA.jpg" alt="" onerror="this.parentElement.style.background='linear-gradient(135deg,#ffe600,#ff4d00)'"></div>
+      <div class="marquee-item"><img src="https://mir-s3-cdn-cf.behance.net/projects/404/6df129102478129.Y3JvcCw1MTMzLDQwMTUsNDQ0LDA.jpeg" alt="" onerror="this.parentElement.style.background='linear-gradient(135deg,#00c2ff,#c8ff00)'"></div>
+      <div class="marquee-item"><img src="https://mir-s3-cdn-cf.behance.net/projects/404/a83a02102434765.Y3JvcCw1Mzc0LDQyMDQsNDEyLDA.jpeg" alt="" onerror="this.parentElement.style.background='linear-gradient(135deg,#ff4d00,#ff9cf5)'"></div>
+      <div class="marquee-item"><img src="https://mir-s3-cdn-cf.behance.net/projects/404/f6c050102320301.5f3429567ebde.jpg" alt="" onerror="this.parentElement.style.background='linear-gradient(135deg,#c8ff00,#00c2ff)'"></div>
+      <div class="marquee-item"><img src="https://mir-s3-cdn-cf.behance.net/projects/404/b91f97103173469.Y3JvcCwzODM1LDMwMDAsMzMyLDA.jpeg" alt="" onerror="this.parentElement.style.background='linear-gradient(135deg,#111,#ffe600)'"></div>
+      <div class="marquee-item"><img src="https://mir-s3-cdn-cf.behance.net/projects/404/8f0e74117077857.Y3JvcCwyODQyLDIyMjMsMCww.png" alt="" onerror="this.parentElement.style.background='linear-gradient(135deg,#ff4d00,#00c2ff)'"></div>
+      <!-- duplicate set for seamless loop -->
+      <div class="marquee-item"><img src="https://mir-s3-cdn-cf.behance.net/project_modules/max_632_webp/8f859185281037.5d7762354bc17.jpg" alt="" onerror="this.parentElement.style.background='linear-gradient(135deg,#ff4d00,#111)'"></div>
+      <div class="marquee-item"><img src="https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/0ed09886044463.5d8d89b7593a8.jpg" alt="" onerror="this.parentElement.style.background='linear-gradient(135deg,#ffe600,#00c2ff)'"></div>
+      <div class="marquee-item"><img src="https://mir-s3-cdn-cf.behance.net/projects/404/8c59e1210936923.Y3JvcCwxNzk3LDE0MDYsMzUxLDA.jpg" alt="" onerror="this.parentElement.style.background='linear-gradient(135deg,#c8ff00,#111)'"></div>
+      <div class="marquee-item"><img src="https://mir-s3-cdn-cf.behance.net/project_modules/max_632_webp/16030f82622625.5d23755b46202.jpg" alt="" onerror="this.parentElement.style.background='linear-gradient(135deg,#00c2ff,#ff4d00)'"></div>
+      <div class="marquee-item"><img src="https://mir-s3-cdn-cf.behance.net/projects/404/974f78225390927.Y3JvcCwyNDgwLDE5MzksMCwyNjMz.jpg" alt="" onerror="this.parentElement.style.background='linear-gradient(135deg,#ff9cf5,#111)'"></div>
+      <div class="marquee-item"><img src="https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/17575685527961.5d7efe35eb38c.jpg" alt="" onerror="this.parentElement.style.background='linear-gradient(135deg,#111,#ff4d00)'"></div>
+      <div class="marquee-item"><img src="https://mir-s3-cdn-cf.behance.net/projects/404/615411143074527.Y3JvcCwxMjAwLDkzOCwwLDA.jpg" alt="" onerror="this.parentElement.style.background='linear-gradient(135deg,#ffe600,#ff4d00)'"></div>
+      <div class="marquee-item"><img src="https://mir-s3-cdn-cf.behance.net/projects/404/6df129102478129.Y3JvcCw1MTMzLDQwMTUsNDQ0LDA.jpeg" alt="" onerror="this.parentElement.style.background='linear-gradient(135deg,#00c2ff,#c8ff00)'"></div>
+      <div class="marquee-item"><img src="https://mir-s3-cdn-cf.behance.net/projects/404/a83a02102434765.Y3JvcCw1Mzc0LDQyMDQsNDEyLDA.jpeg" alt="" onerror="this.parentElement.style.background='linear-gradient(135deg,#ff4d00,#ff9cf5)'"></div>
+      <div class="marquee-item"><img src="https://mir-s3-cdn-cf.behance.net/projects/404/f6c050102320301.5f3429567ebde.jpg" alt="" onerror="this.parentElement.style.background='linear-gradient(135deg,#c8ff00,#00c2ff)'"></div>
+      <div class="marquee-item"><img src="https://mir-s3-cdn-cf.behance.net/projects/404/b91f97103173469.Y3JvcCwzODM1LDMwMDAsMzMyLDA.jpeg" alt="" onerror="this.parentElement.style.background='linear-gradient(135deg,#111,#ffe600)'"></div>
+      <div class="marquee-item"><img src="https://mir-s3-cdn-cf.behance.net/projects/404/8f0e74117077857.Y3JvcCwyODQyLDIyMjMsMCww.png" alt="" onerror="this.parentElement.style.background='linear-gradient(135deg,#ff4d00,#00c2ff)'"></div>
+    </div>
+  </div>
+</div>
+
 <section class="work fade-up" id="work">
   <div class="work-header">
     <h2>Dự án nổi bật</h2>
@@ -281,7 +328,7 @@
   </div>
   <div class="work-grid">
     <a href="https://www.behance.net/gallery/245510555/Design-SME-Banner-MB-Bank" target="_blank" class="work-item">
-      <img class="work-img" src="https://mir-s3-cdn-cf.behance.net/projects/404/09847f245510555.Y3JvcCwxMTc2LDkxOSwwLDgyNg.jpeg" alt="MB Bank" onerror="this.style.display='none'">
+      <img class="work-img" src="https://mir-s3-cdn-cf.behance.net/project_modules/max_632_webp/805959245510555.69af971730da1.jpeg" alt="MB Bank" onerror="this.style.display='none'">
       <div class="work-item-overlay"><span>Design SME Banner MB Bank</span></div>
     </a>
     <a href="https://www.behance.net/gallery/237106489/Wataros-AI-Crypto-AppWeb3-Design-UIUX" target="_blank" class="work-item">
