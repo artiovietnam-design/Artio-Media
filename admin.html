@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Artio Admin — Đăng bài</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#f0ede8;--dark:#111;--white:#fff;--accent:#ff4d00;--accent2:#ffe600;--muted:#888880;--radius:12px}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Be Vietnam Pro',sans-serif;background:var(--bg);color:var(--dark);min-height:100vh}
+
+  /* LOGIN */
+  .login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center}
+  .login-card{background:var(--white);border-radius:24px;padding:48px 40px;width:100%;max-width:400px;box-shadow:0 24px 80px rgba(0,0,0,.12);text-align:center}
+  .login-logo{font-family:'Be Vietnam Pro',sans-serif;font-weight:800;font-size:28px;color:var(--dark);margin-bottom:8px}
+  .login-logo span{color:var(--accent)}
+  .login-sub{font-size:14px;color:var(--muted);margin-bottom:32px}
+  .login-card input[type=password]{width:100%;padding:14px 18px;border:2px solid rgba(0,0,0,.1);border-radius:var(--radius);font-size:16px;font-family:'Be Vietnam Pro',sans-serif;outline:none;transition:border .2s;margin-bottom:12px}
+  .login-card input[type=password]:focus{border-color:var(--accent)}
+  .login-btn{width:100%;background:var(--accent);color:white;border:none;padding:14px;border-radius:var(--radius);font-size:15px;font-weight:700;font-family:'Be Vietnam Pro',sans-serif;cursor:pointer;transition:background .2s,transform .15s}
+  .login-btn:hover{background:#e03d00;transform:scale(1.02)}
+  .login-err{color:#e03d00;font-size:13px;margin-top:8px;display:none}
+
+  /* ADMIN LAYOUT */
+  .admin-wrap{display:none;min-height:100vh}
+  .admin-header{background:var(--dark);color:white;padding:16px 32px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+  .admin-header .logo{font-weight:800;font-size:20px}
+  .admin-header .logo span{color:var(--accent)}
+  .admin-header-right{display:flex;align-items:center;gap:12px}
+  .admin-header-right a{color:rgba(255,255,255,.6);text-decoration:none;font-size:14px;transition:color .2s}
+  .admin-header-right a:hover{color:white}
+  .logout-btn{background:rgba(255,255,255,.1);border:none;color:white;padding:8px 16px;border-radius:100px;font-size:13px;font-weight:600;cursor:pointer;font-family:'Be Vietnam Pro',sans-serif;transition:background .2s}
+  .logout-btn:hover{background:rgba(255,255,255,.2)}
+
+  .admin-body{display:grid;grid-template-columns:1fr 340px;gap:24px;padding:32px;max-width:1400px;margin:0 auto}
+
+  /* EDITOR */
+  .editor-panel{display:flex;flex-direction:column;gap:20px}
+  .panel-card{background:var(--white);border-radius:var(--radius);padding:24px;border:1px solid rgba(0,0,0,.06)}
+  .panel-card h3{font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+
+  .field-group{display:flex;flex-direction:column;gap:6px;margin-bottom:16px}
+  .field-group:last-child{margin-bottom:0}
+  .field-group label{font-size:13px;font-weight:600;color:var(--dark)}
+  .field-group input,.field-group select,.field-group textarea{padding:12px 14px;border:1.5px solid rgba(0,0,0,.1);border-radius:10px;font-size:14px;font-family:'Be Vietnam Pro',sans-serif;outline:none;transition:border .2s;width:100%;resize:vertical}
+  .field-group input:focus,.field-group select:focus,.field-group textarea:focus{border-color:var(--accent)}
+  .field-group textarea{min-height:120px}
+
+  /* TOOLBAR */
+  .editor-toolbar{display:flex;gap:6px;flex-wrap:wrap;padding:10px;background:#f8f7f5;border-radius:10px 10px 0 0;border:1.5px solid rgba(0,0,0,.1);border-bottom:none}
+  .tb-btn{padding:6px 12px;background:white;border:1px solid rgba(0,0,0,.1);border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;font-family:'Be Vietnam Pro',sans-serif;transition:all .15s}
+  .tb-btn:hover{background:var(--dark);color:white;border-color:var(--dark)}
+  .tb-sep{width:1px;background:rgba(0,0,0,.1);margin:0 4px}
+  #editor-content{min-height:400px;padding:20px;border:1.5px solid rgba(0,0,0,.1);border-radius:0 0 10px 10px;font-size:15px;line-height:1.8;outline:none;background:white;font-family:'Be Vietnam Pro',sans-serif}
+  #editor-content:focus{border-color:var(--accent)}
+  #editor-content h2{font-size:24px;font-weight:800;margin:24px 0 12px;color:var(--dark)}
+  #editor-content h3{font-size:18px;font-weight:700;margin:20px 0 10px;color:var(--dark)}
+  #editor-content p{margin-bottom:14px}
+  #editor-content ul,#editor-content ol{margin:12px 0 12px 24px}
+  #editor-content li{margin-bottom:6px}
+  #editor-content blockquote{border-left:4px solid var(--accent);padding:12px 20px;background:#fff5f2;border-radius:0 8px 8px 0;margin:16px 0;font-style:italic}
+  #editor-content img{max-width:100%;border-radius:12px;margin:12px 0}
+  #editor-content a{color:var(--accent)}
+
+  /* SIDEBAR */
+  .sidebar-panel{display:flex;flex-direction:column;gap:20px}
+
+  /* COVER IMAGE */
+  .cover-upload{border:2px dashed rgba(0,0,0,.15);border-radius:10px;padding:24px;text-align:center;cursor:pointer;transition:border .2s;position:relative;overflow:hidden}
+  .cover-upload:hover{border-color:var(--accent)}
+  .cover-upload input{position:absolute;inset:0;opacity:0;cursor:pointer}
+  .cover-upload-icon{font-size:32px;margin-bottom:8px}
+  .cover-upload p{font-size:13px;color:var(--muted)}
+  .cover-preview{width:100%;border-radius:10px;object-fit:cover;height:180px;display:none}
+
+  /* SLUG */
+  .slug-wrap{display:flex;align-items:center;gap:8px;padding:10px 14px;background:#f8f7f5;border-radius:10px;border:1.5px solid rgba(0,0,0,.1)}
+  .slug-base{font-size:12px;color:var(--muted);white-space:nowrap}
+  .slug-input{border:none;background:transparent;font-size:12px;font-family:'Be Vietnam Pro',sans-serif;outline:none;flex:1;color:var(--accent);font-weight:600}
+
+  /* TAGS */
+  .tags-input-wrap{display:flex;flex-wrap:wrap;gap:8px;padding:10px;border:1.5px solid rgba(0,0,0,.1);border-radius:10px;min-height:48px;cursor:text}
+  .tag-chip{background:var(--dark);color:white;font-size:12px;font-weight:600;padding:4px 10px;border-radius:100px;display:flex;align-items:center;gap:6px}
+  .tag-chip button{background:none;border:none;color:rgba(255,255,255,.6);cursor:pointer;font-size:14px;line-height:1;padding:0}
+  .tags-input-wrap input{border:none;outline:none;font-size:13px;font-family:'Be Vietnam Pro',sans-serif;min-width:80px;flex:1}
+
+  /* PUBLISH BUTTON */
+  .publish-btn{width:100%;background:var(--accent);color:white;border:none;padding:16px;border-radius:var(--radius);font-size:16px;font-weight:800;font-family:'Be Vietnam Pro',sans-serif;cursor:pointer;transition:background .2s,transform .15s;letter-spacing:.5px}
+  .publish-btn:hover{background:#e03d00;transform:scale(1.02)}
+
+  /* OUTPUT MODAL */
+  .modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:200;display:none;align-items:center;justify-content:center;padding:20px}
+  .modal-bg.show{display:flex}
+  .modal{background:white;border-radius:20px;padding:32px;width:100%;max-width:700px;max-height:90vh;overflow-y:auto}
+  .modal h2{font-size:20px;font-weight:800;margin-bottom:8px}
+  .modal p{font-size:14px;color:var(--muted);margin-bottom:20px}
+  .modal pre{background:#f8f7f5;border-radius:10px;padding:16px;font-size:12px;overflow-x:auto;white-space:pre-wrap;word-break:break-all;max-height:300px;overflow-y:auto;border:1px solid rgba(0,0,0,.08)}
+  .modal-actions{display:flex;gap:12px;margin-top:20px}
+  .copy-btn{flex:1;background:var(--dark);color:white;border:none;padding:14px;border-radius:var(--radius);font-size:14px;font-weight:700;cursor:pointer;font-family:'Be Vietnam Pro',sans-serif;transition:background .2s}
+  .copy-btn:hover{background:#333}
+  .close-btn{background:rgba(0,0,0,.08);color:var(--dark);border:none;padding:14px 20px;border-radius:var(--radius);font-size:14px;font-weight:600;cursor:pointer;font-family:'Be Vietnam Pro',sans-serif}
+
+  /* STEPS */
+  .steps-list{display:flex;flex-direction:column;gap:12px}
+  .step-item{display:flex;gap:12px;align-items:flex-start}
+  .step-num{width:28px;height:28px;background:var(--accent);color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;flex-shrink:0;margin-top:2px}
+  .step-item p{font-size:13px;line-height:1.6;color:#444}
+  .step-item strong{color:var(--dark)}
+
+  .toast{position:fixed;bottom:24px;right:24px;background:var(--dark);color:white;padding:14px 20px;border-radius:12px;font-size:14px;font-weight:600;transform:translateY(80px);opacity:0;transition:all .3s;z-index:300}
+  .toast.show{transform:translateY(0);opacity:1}
+
+  @media(max-width:900px){
+    .admin-body{grid-template-columns:1fr}
+    .sidebar-panel{order:-1}
+  }
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div class="login-wrap" id="loginWrap">
+  <div class="login-card">
+    <div class="login-logo">Artio<span>.</span></div>
+    <div class="login-sub">Trang quản trị — Đăng bài viết</div>
+    <input type="password" id="pwInput" placeholder="Nhập mật khẩu..." onkeydown="if(event.key==='Enter')doLogin()">
+    <button class="login-btn" onclick="doLogin()">Đăng nhập →</button>
+    <div class="login-err" id="loginErr">Mật khẩu không đúng. Thử lại!</div>
+  </div>
+</div>
+
+<!-- ADMIN -->
+<div class="admin-wrap" id="adminWrap">
+  <div class="admin-header">
+    <div class="logo">Artio<span>.</span> Admin</div>
+    <div class="admin-header-right">
+      <a href="../blog.html" target="_blank">↗ Xem trang Blog</a>
+      <a href="../index.html" target="_blank">↗ Trang chủ</a>
+      <button class="logout-btn" onclick="doLogout()">Đăng xuất</button>
+    </div>
+  </div>
+
+  <div class="admin-body">
+    <!-- EDITOR -->
+    <div class="editor-panel">
+      <div class="panel-card">
+        <h3>✍️ Nội dung bài viết</h3>
+        <div class="field-group">
+          <label>Tiêu đề bài viết *</label>
+          <input type="text" id="postTitle" placeholder="Ví dụ: 5 xu hướng thiết kế logo 2026..." oninput="autoSlug()">
+        </div>
+        <div class="field-group">
+          <label>Mô tả ngắn (hiển thị ở trang Blog) *</label>
+          <textarea id="postExcerpt" placeholder="Tóm tắt ngắn gọn nội dung bài viết, khoảng 1-2 câu..."></textarea>
+        </div>
+
+        <!-- TOOLBAR -->
+        <div class="field-group">
+          <label>Nội dung chi tiết *</label>
+          <div class="editor-toolbar">
+            <button class="tb-btn" onclick="fmt('bold')" title="Bold"><b>B</b></button>
+            <button class="tb-btn" onclick="fmt('italic')" title="Italic"><i>I</i></button>
+            <button class="tb-btn" onclick="fmt('underline')" title="Underline"><u>U</u></button>
+            <div class="tb-sep"></div>
+            <button class="tb-btn" onclick="insertBlock('h2')" title="Tiêu đề lớn">H2</button>
+            <button class="tb-btn" onclick="insertBlock('h3')" title="Tiêu đề nhỏ">H3</button>
+            <div class="tb-sep"></div>
+            <button class="tb-btn" onclick="fmt('insertUnorderedList')" title="Danh sách">• List</button>
+            <button class="tb-btn" onclick="fmt('insertOrderedList')" title="Đánh số">1. List</button>
+            <div class="tb-sep"></div>
+            <button class="tb-btn" onclick="insertQuote()" title="Trích dẫn">❝ Quote</button>
+            <button class="tb-btn" onclick="insertLink()" title="Link">🔗 Link</button>
+            <button class="tb-btn" onclick="insertImage()" title="Chèn ảnh URL">🖼 Ảnh URL</button>
+          </div>
+          <div id="editor-content" contenteditable="true" spellcheck="false">
+            <p>Bắt đầu viết nội dung bài viết tại đây...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SIDEBAR -->
+    <div class="sidebar-panel">
+
+      <!-- COVER -->
+      <div class="panel-card">
+        <h3>🖼 Ảnh bìa</h3>
+        <div class="cover-upload" id="coverUploadArea">
+          <input type="file" id="coverFile" accept="image/*" onchange="previewCover(this)">
+          <div class="cover-upload-icon">📸</div>
+          <p>Kéo thả hoặc click để chọn ảnh<br><small style="color:#aaa">JPG, PNG — khuyến nghị 1200×630px</small></p>
+        </div>
+        <img id="coverPreview" class="cover-preview" alt="Cover preview">
+        <div class="field-group" style="margin-top:12px">
+          <label>Hoặc dán URL ảnh</label>
+          <input type="text" id="coverUrl" placeholder="https://..." oninput="previewCoverUrl(this.value)">
+        </div>
+      </div>
+
+      <!-- META -->
+      <div class="panel-card">
+        <h3>⚙️ Thông tin bài viết</h3>
+        <div class="field-group">
+          <label>Danh mục</label>
+          <select id="postCategory">
+            <option value="Branding">Branding</option>
+            <option value="Logo Design">Logo Design</option>
+            <option value="Packaging">Packaging Design</option>
+            <option value="UI/UX">UI/UX</option>
+            <option value="Print Design">Print Design</option>
+            <option value="Xu hướng">Xu hướng thiết kế</option>
+            <option value="Case Study">Case Study</option>
+            <option value="Kiến thức">Kiến thức</option>
+          </select>
+        </div>
+        <div class="field-group">
+          <label>Đường dẫn (slug)</label>
+          <div class="slug-wrap">
+            <span class="slug-base">artio.vn/blog/</span>
+            <input class="slug-input" type="text" id="postSlug" placeholder="ten-bai-viet">
+          </div>
+        </div>
+        <div class="field-group">
+          <label>Tags (Enter để thêm)</label>
+          <div class="tags-input-wrap" id="tagsWrap" onclick="document.getElementById('tagInput').focus()">
+            <input type="text" id="tagInput" placeholder="Thêm tag..." onkeydown="addTag(event)">
+          </div>
+        </div>
+        <div class="field-group">
+          <label>Tác giả</label>
+          <input type="text" id="postAuthor" value="Hưng Trần — Artio Media">
+        </div>
+        <div class="field-group">
+          <label>Ngày đăng</label>
+          <input type="date" id="postDate">
+        </div>
+      </div>
+
+      <!-- PUBLISH -->
+      <div class="panel-card">
+        <h3>🚀 Xuất bài viết</h3>
+        <div class="steps-list">
+          <div class="step-item">
+            <div class="step-num">1</div>
+            <p>Điền đầy đủ thông tin và nội dung bài viết</p>
+          </div>
+          <div class="step-item">
+            <div class="step-num">2</div>
+            <p>Bấm <strong>"Tạo file HTML"</strong> — code sẽ tự động tạo ra</p>
+          </div>
+          <div class="step-item">
+            <div class="step-num">3</div>
+            <p>Copy code → Tạo file mới trên GitHub trong folder <strong>/blog/</strong></p>
+          </div>
+          <div class="step-item">
+            <div class="step-num">4</div>
+            <p>Cập nhật <strong>blog.html</strong> thêm bài mới vào danh sách</p>
+          </div>
+        </div>
+        <br>
+        <button class="publish-btn" onclick="generatePost()">⚡ Tạo file HTML →</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- OUTPUT MODAL -->
+<div class="modal-bg" id="outputModal">
+  <div class="modal">
+    <h2>✅ File HTML đã sẵn sàng!</h2>
+    <p>Copy toàn bộ code bên dưới → Vào GitHub → Tạo file mới tên <strong id="outputFilename">ten-bai.html</strong> trong folder <strong>/blog/</strong> → Paste vào → Commit.</p>
+    <pre id="outputCode"></pre>
+    <div class="modal-actions">
+      <button class="copy-btn" onclick="copyCode()">📋 Copy toàn bộ code</button>
+      <button class="close-btn" onclick="closeModal()">Đóng</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  // ── MẬT KHẨU — đổi tại đây ──
+  const ADMIN_PASSWORD = 'artio2026';
+
+  // Tags array
+  let tags = [];
+
+  // Set default date
+  document.addEventListener('DOMContentLoaded', () => {
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('postDate').value = today;
+  });
+
+  // LOGIN
+  function doLogin() {
+    const pw = document.getElementById('pwInput').value;
+    if (pw === ADMIN_PASSWORD) {
+      document.getElementById('loginWrap').style.display = 'none';
+      document.getElementById('adminWrap').style.display = 'block';
+    } else {
+      document.getElementById('loginErr').style.display = 'block';
+      document.getElementById('pwInput').value = '';
+      document.getElementById('pwInput').focus();
+    }
+  }
+
+  function doLogout() {
+    document.getElementById('loginWrap').style.display = 'flex';
+    document.getElementById('adminWrap').style.display = 'none';
+    document.getElementById('pwInput').value = '';
+  }
+
+  // FORMAT
+  function fmt(cmd) { document.execCommand(cmd, false, null); }
+
+  function insertBlock(tag) {
+    document.getElementById('editor-content').focus();
+    document.execCommand('formatBlock', false, tag);
+  }
+
+  function insertQuote() {
+    document.getElementById('editor-content').focus();
+    document.execCommand('formatBlock', false, 'blockquote');
+  }
+
+  function insertLink() {
+    const url = prompt('Nhập URL:');
+    if (url) document.execCommand('createLink', false, url);
+  }
+
+  function insertImage() {
+    const url = prompt('Nhập URL ảnh:');
+    if (url) document.execCommand('insertHTML', false, `<img src="${url}" alt="" style="max-width:100%;border-radius:12px;margin:12px 0">`);
+  }
+
+  // AUTO SLUG
+  function autoSlug() {
+    const title = document.getElementById('postTitle').value;
+    const slug = title.toLowerCase()
+      .replace(/[àáạảãâầấậẩẫăằắặẳẵ]/g, 'a')
+      .replace(/[èéẹẻẽêềếệểễ]/g, 'e')
+      .replace(/[ìíịỉĩ]/g, 'i')
+      .replace(/[òóọỏõôồốộổỗơờớợởỡ]/g, 'o')
+      .replace(/[ùúụủũưừứựửữ]/g, 'u')
+      .replace(/[ỳýỵỷỹ]/g, 'y')
+      .replace(/đ/g, 'd')
+      .replace(/[^a-z0-9\s-]/g, '')
+      .trim().replace(/\s+/g, '-');
+    document.getElementById('postSlug').value = slug;
+  }
+
+  // COVER
+  function previewCover(input) {
+    const file = input.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = e => {
+      const img = document.getElementById('coverPreview');
+      img.src = e.target.result;
+      img.style.display = 'block';
+      document.querySelector('.cover-upload-icon').style.display = 'none';
+    };
+    reader.readAsDataURL(file);
+  }
+
+  function previewCoverUrl(url) {
+    if (!url) return;
+    const img = document.getElementById('coverPreview');
+    img.src = url;
+    img.style.display = 'block';
+  }
+
+  // TAGS
+  function addTag(e) {
+    if (e.key === 'Enter' || e.key === ',') {
+      e.preventDefault();
+      const val = document.getElementById('tagInput').value.trim();
+      if (val && !tags.includes(val)) {
+        tags.push(val);
+        renderTags();
+      }
+      document.getElementById('tagInput').value = '';
+    }
+  }
+
+  function removeTag(t) {
+    tags = tags.filter(x => x !== t);
+    renderTags();
+  }
+
+  function renderTags() {
+    const wrap = document.getElementById('tagsWrap');
+    const input = document.getElementById('tagInput');
+    wrap.innerHTML = '';
+    tags.forEach(t => {
+      const chip = document.createElement('span');
+      chip.className = 'tag-chip';
+      chip.innerHTML = `${t}<button onclick="removeTag('${t}')" type="button">×</button>`;
+      wrap.appendChild(chip);
+    });
+    wrap.appendChild(input);
+    input.focus();
+  }
+
+  // FORMAT DATE
+  function formatDate(dateStr) {
+    const d = new Date(dateStr);
+    return d.toLocaleDateString('vi-VN', { day: '2-digit', month: '2-digit', year: 'numeric' });
+  }
+
+  // GENERATE POST
+  function generatePost() {
+    const title = document.getElementById('postTitle').value.trim();
+    const excerpt = document.getElementById('postExcerpt').value.trim();
+    const content = document.getElementById('editor-content').innerHTML;
+    const slug = document.getElementById('postSlug').value.trim() || 'bai-viet';
+    const category = document.getElementById('postCategory').value;
+    const author = document.getElementById('postAuthor').value.trim();
+    const date = document.getElementById('postDate').value;
+    const coverUrl = document.getElementById('coverUrl').value.trim() ||
+                     document.getElementById('coverPreview').src || '';
+
+    if (!title) { showToast('⚠️ Vui lòng nhập tiêu đề!'); return; }
+    if (!excerpt) { showToast('⚠️ Vui lòng nhập mô tả ngắn!'); return; }
+
+    const tagsHtml = tags.map(t => `<span class="post-tag">${t}</span>`).join('');
+    const coverHtml = coverUrl && coverUrl !== window.location.href
+      ? `<div class="post-cover"><img src="${coverUrl}" alt="${title}"></div>` : '';
+
+    const html = `<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>${title} — Artio Media</title>
+<meta name="description" content="${excerpt}">
+<meta property="og:title" content="${title}">
+<meta property="og:description" content="${excerpt}">
+${coverUrl ? `<meta property="og:image" content="${coverUrl}">` : ''}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="../images/favicon.png">
+<style>
+  :root{--bg:#f0ede8;--dark:#111;--white:#fff;--accent:#ff4d00;--accent2:#ffe600;--muted:#888880;--radius:20px}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Be Vietnam Pro',sans-serif;background:var(--bg);color:var(--dark);font-size:16px;line-height:1.6}
+  nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:18px 48px;background:var(--bg);border-bottom:1px solid rgba(0,0,0,.08);backdrop-filter:blur(12px)}
+  .nav-logo{display:flex;align-items:center;text-decoration:none;font-weight:800;font-size:22px;color:var(--dark)}
+  .nav-logo span{color:var(--accent)}
+  .nav-logo img{height:36px;display:block}
+  .nav-links{display:flex;gap:8px;align-items:center}
+  .nav-links a{font-size:14px;font-weight:500;color:var(--dark);text-decoration:none;padding:8px 14px;border-radius:100px;transition:background .2s}
+  .nav-links a:hover{background:rgba(0,0,0,.07)}
+  .btn-primary{background:var(--accent);color:#fff;padding:10px 22px;border-radius:100px;font-size:14px;font-weight:600;text-decoration:none;display:inline-block}
+  .btn-primary:hover{background:var(--dark);color:var(--accent)}
+
+  .post-wrap{max-width:780px;margin:0 auto;padding:60px 24px 100px}
+  .post-back{display:inline-flex;align-items:center;gap:8px;color:var(--muted);text-decoration:none;font-size:14px;font-weight:600;margin-bottom:32px;transition:color .2s}
+  .post-back:hover{color:var(--accent)}
+  .post-category{display:inline-block;background:var(--accent);color:white;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:5px 14px;border-radius:100px;margin-bottom:20px}
+  .post-title{font-family:'Be Vietnam Pro',sans-serif;font-size:clamp(28px,4vw,48px);font-weight:800;letter-spacing:-1.5px;line-height:1.1;margin-bottom:20px}
+  .post-meta{display:flex;align-items:center;gap:16px;font-size:13px;color:var(--muted);margin-bottom:32px;flex-wrap:wrap}
+  .post-meta span{display:flex;align-items:center;gap:6px}
+  .post-cover{margin-bottom:40px;border-radius:var(--radius);overflow:hidden}
+  .post-cover img{width:100%;display:block;max-height:480px;object-fit:cover}
+  .post-content{font-size:17px;line-height:1.85;color:#333}
+  .post-content h2{font-family:'Be Vietnam Pro',sans-serif;font-size:28px;font-weight:800;margin:40px 0 16px;color:var(--dark);letter-spacing:-.5px}
+  .post-content h3{font-family:'Be Vietnam Pro',sans-serif;font-size:20px;font-weight:700;margin:32px 0 12px;color:var(--dark)}
+  .post-content p{margin-bottom:20px}
+  .post-content ul,.post-content ol{margin:16px 0 20px 24px}
+  .post-content li{margin-bottom:8px}
+  .post-content blockquote{border-left:4px solid var(--accent);padding:16px 24px;background:#fff5f2;border-radius:0 12px 12px 0;margin:24px 0;font-style:italic;font-size:18px;color:#444}
+  .post-content img{max-width:100%;border-radius:16px;margin:24px 0;display:block}
+  .post-content a{color:var(--accent);text-decoration:underline}
+  .post-content strong{font-weight:700;color:var(--dark)}
+  .post-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:40px;padding-top:32px;border-top:1px solid rgba(0,0,0,.08)}
+  .post-tag{background:rgba(0,0,0,.07);color:var(--dark);font-size:12px;font-weight:600;padding:5px 12px;border-radius:100px}
+  .post-cta{background:var(--dark);color:white;border-radius:var(--radius);padding:48px 40px;text-align:center;margin-top:60px}
+  .post-cta h3{font-family:'Be Vietnam Pro',sans-serif;font-size:clamp(22px,3vw,32px);font-weight:800;margin-bottom:12px}
+  .post-cta p{color:rgba(255,255,255,.6);margin-bottom:24px;font-size:15px}
+  .post-cta a{background:var(--accent);color:white;padding:14px 32px;border-radius:100px;text-decoration:none;font-weight:700;font-size:15px;display:inline-block;transition:transform .2s}
+  .post-cta a:hover{transform:scale(1.04)}
+  footer{background:#0a0a0a;color:rgba(255,255,255,.35);padding:32px 48px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+  footer a{color:rgba(255,255,255,.35);text-decoration:none;font-size:13px}
+  footer a:hover{color:var(--accent)}
+  .footer-brand{font-weight:800;font-size:18px;color:white}
+  .footer-brand span{color:var(--accent)}
+  @media(max-width:768px){nav{padding:16px 20px}.post-wrap{padding:40px 20px}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="../index.html" class="nav-logo">
+    <img src="../images/Logo.png" alt="Artio Media" onerror="this.style.display='none';this.nextElementSibling.style.display='inline'">
+    <span style="display:none">Artio<span>.</span></span>
+  </a>
+  <div class="nav-links">
+    <a href="../index.html#services">Dịch vụ</a>
+    <a href="../portfolio.html">Portfolio</a>
+    <a href="../blog.html">Blog</a>
+    <a href="../index.html#contact" class="btn-primary">Liên hệ ngay</a>
+  </div>
+</nav>
+
+<div class="post-wrap">
+  <a href="../blog.html" class="post-back">← Quay lại Blog</a>
+  <div class="post-category">${category}</div>
+  <h1 class="post-title">${title}</h1>
+  <div class="post-meta">
+    <span>✍️ ${author}</span>
+    <span>📅 ${formatDate(date)}</span>
+    <span>🏷️ ${category}</span>
+  </div>
+  ${coverHtml}
+  <div class="post-content">${content}</div>
+  ${tags.length ? `<div class="post-tags">${tagsHtml}</div>` : ''}
+  <div class="post-cta">
+    <h3>Bạn cần thiết kế thương hiệu?</h3>
+    <p>Artio Media sẵn sàng biến ý tưởng của bạn thành thương hiệu ấn tượng.</p>
+    <a href="../index.html#contact">Liên hệ tư vấn miễn phí →</a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-brand">Artio<span>.</span></div>
+  <div style="display:flex;gap:24px">
+    <a href="../index.html#services">Dịch vụ</a>
+    <a href="../portfolio.html">Portfolio</a>
+    <a href="../blog.html">Blog</a>
+    <a href="../index.html#contact">Liên hệ</a>
+  </div>
+  <span style="font-size:13px">© 2026 Artio Media — artio.vn</span>
+</footer>
+
+</body>
+</html>`;
+
+    document.getElementById('outputCode').textContent = html;
+    document.getElementById('outputFilename').textContent = slug + '.html';
+    document.getElementById('outputModal').classList.add('show');
+  }
+
+  function copyCode() {
+    const code = document.getElementById('outputCode').textContent;
+    navigator.clipboard.writeText(code).then(() => showToast('✅ Đã copy! Paste vào GitHub.'));
+  }
+
+  function closeModal() {
+    document.getElementById('outputModal').classList.remove('show');
+  }
+
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 3000);
+  }
+</script>
+</body>
+</html>

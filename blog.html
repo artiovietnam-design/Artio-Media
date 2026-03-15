@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog — Artio Media | Kiến thức thiết kế thương hiệu</title>
+<meta name="description" content="Chia sẻ kiến thức thiết kế logo, branding, packaging và xu hướng thương hiệu mới nhất từ Artio Media.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="images/favicon.png">
+<style>
+  :root{--bg:#f0ede8;--dark:#111;--white:#fff;--accent:#ff4d00;--accent2:#ffe600;--accent3:#00c2ff;--muted:#888880;--radius:20px;--radius-lg:28px}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Be Vietnam Pro',sans-serif;background:var(--bg);color:var(--dark);overflow-x:hidden;font-size:16px;line-height:1.6}
+
+  nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:18px 48px;background:var(--bg);border-bottom:1px solid rgba(0,0,0,.08);backdrop-filter:blur(12px)}
+  .nav-logo{display:flex;align-items:center;text-decoration:none;font-weight:800;font-size:22px;color:var(--dark)}
+  .nav-logo span{color:var(--accent)}
+  .nav-logo img{height:36px;display:block}
+  .nav-links{display:flex;gap:8px;align-items:center}
+  .nav-links a{font-size:14px;font-weight:500;color:var(--dark);text-decoration:none;padding:8px 14px;border-radius:100px;transition:background .2s}
+  .nav-links a:hover{background:rgba(0,0,0,.07)}
+  .nav-links a.active{background:var(--dark);color:white}
+  .btn-primary{background:var(--accent);color:#fff;padding:10px 22px;border-radius:100px;font-size:14px;font-weight:600;text-decoration:none;display:inline-block;transition:transform .2s,background .2s}
+  .btn-primary:hover{background:var(--dark);color:var(--accent);transform:scale(1.04)}
+
+  /* HERO */
+  .blog-hero{padding:80px 48px 48px;max-width:1100px;margin:0 auto}
+  .section-label{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+  .blog-hero h1{font-family:'Be Vietnam Pro',sans-serif;font-size:clamp(40px,5vw,64px);font-weight:800;letter-spacing:-2px;line-height:1.05;margin-bottom:16px}
+  .blog-hero h1 em{font-style:italic;color:var(--accent)}
+  .blog-hero p{font-size:17px;color:var(--muted);max-width:520px}
+
+  /* FILTER */
+  .filter-wrap{padding:0 48px 48px;max-width:1100px;margin:0 auto;display:flex;gap:10px;flex-wrap:wrap}
+  .filter-btn{font-size:13px;font-weight:600;padding:8px 18px;border-radius:100px;border:1.5px solid rgba(0,0,0,.12);background:transparent;cursor:pointer;transition:all .2s;font-family:'Be Vietnam Pro',sans-serif;color:var(--dark)}
+  .filter-btn:hover{border-color:var(--accent);color:var(--accent)}
+  .filter-btn.active{background:var(--dark);color:white;border-color:var(--dark)}
+
+  /* FEATURED */
+  .featured-wrap{padding:0 48px 60px;max-width:1100px;margin:0 auto}
+  .featured-card{display:grid;grid-template-columns:1.2fr 1fr;border-radius:var(--radius-lg);overflow:hidden;text-decoration:none;color:inherit;transition:transform .3s;background:var(--dark);color:white}
+  .featured-card:hover{transform:scale(1.01)}
+  .featured-img{position:relative;min-height:320px;background:linear-gradient(135deg,#ff4d00 0%,#111 100%);overflow:hidden}
+  .featured-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s}
+  .featured-card:hover .featured-img img{transform:scale(1.04)}
+  .featured-badge{position:absolute;top:20px;left:20px;background:var(--accent2);color:var(--dark);font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:5px 14px;border-radius:100px}
+  .featured-body{padding:48px 40px;display:flex;flex-direction:column;justify-content:center}
+  .featured-cat{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--accent2);margin-bottom:14px}
+  .featured-body h2{font-family:'Be Vietnam Pro',sans-serif;font-size:clamp(20px,2.5vw,30px);font-weight:800;line-height:1.2;margin-bottom:14px}
+  .featured-body p{font-size:14px;color:rgba(255,255,255,.6);line-height:1.7;margin-bottom:24px;flex:1}
+  .featured-meta{display:flex;align-items:center;gap:12px;font-size:12px;color:rgba(255,255,255,.4)}
+  .read-more{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:white;padding:12px 22px;border-radius:100px;font-size:13px;font-weight:700;text-decoration:none;margin-bottom:20px;transition:transform .2s;width:fit-content}
+  .read-more:hover{transform:scale(1.04)}
+
+  /* GRID */
+  .posts-wrap{padding:0 48px 80px;max-width:1100px;margin:0 auto}
+  .posts-wrap h2{font-family:'Be Vietnam Pro',sans-serif;font-size:24px;font-weight:800;margin-bottom:28px;letter-spacing:-.5px}
+  .posts-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .post-card{background:var(--white);border-radius:var(--radius);overflow:hidden;text-decoration:none;color:inherit;border:1px solid rgba(0,0,0,.06);transition:transform .25s,box-shadow .25s;display:block}
+  .post-card:hover{transform:translateY(-6px);box-shadow:0 20px 50px rgba(0,0,0,.1)}
+  .post-card-img{aspect-ratio:16/9;background:linear-gradient(135deg,#ff4d00,#111);overflow:hidden;position:relative}
+  .post-card-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+  .post-card:hover .post-card-img img{transform:scale(1.06)}
+  .post-card-cat{position:absolute;bottom:12px;left:12px;background:var(--accent);color:white;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:4px 10px;border-radius:100px}
+  .post-card-body{padding:20px}
+  .post-card-body h3{font-family:'Be Vietnam Pro',sans-serif;font-size:16px;font-weight:700;line-height:1.4;margin-bottom:10px;color:var(--dark)}
+  .post-card-body p{font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:14px}
+  .post-card-meta{font-size:12px;color:var(--muted);display:flex;gap:12px}
+
+  /* EMPTY STATE */
+  .empty-state{text-align:center;padding:80px 20px;color:var(--muted)}
+  .empty-state .icon{font-size:48px;margin-bottom:16px}
+  .empty-state h3{font-size:20px;font-weight:700;margin-bottom:8px;color:var(--dark)}
+  .empty-state p{font-size:15px}
+
+  /* CTA */
+  .blog-cta{background:var(--dark);color:white;padding:80px 48px;text-align:center}
+  .blog-cta h2{font-family:'Be Vietnam Pro',sans-serif;font-size:clamp(28px,4vw,44px);font-weight:800;letter-spacing:-1px;margin-bottom:12px}
+  .blog-cta h2 em{font-style:italic;color:var(--accent2)}
+  .blog-cta p{color:rgba(255,255,255,.55);margin-bottom:28px;font-size:16px}
+  .blog-cta a{background:var(--accent);color:white;padding:14px 32px;border-radius:100px;font-weight:700;text-decoration:none;font-size:15px;display:inline-block;transition:transform .2s}
+  .blog-cta a:hover{transform:scale(1.04)}
+
+  footer{background:#0a0a0a;color:rgba(255,255,255,.35);padding:32px 48px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+  footer a{color:rgba(255,255,255,.35);text-decoration:none;font-size:13px}
+  footer a:hover{color:var(--accent)}
+  .footer-brand{font-weight:800;font-size:18px;color:white}
+  .footer-brand span{color:var(--accent)}
+  .footer-links{display:flex;gap:24px}
+
+  .fade-up{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+  .fade-up.visible{opacity:1;transform:translateY(0)}
+
+  @media(max-width:900px){
+    .posts-grid{grid-template-columns:repeat(2,1fr)}
+    .featured-card{grid-template-columns:1fr}
+  }
+  @media(max-width:600px){
+    nav{padding:16px 20px}
+    .blog-hero,.filter-wrap,.featured-wrap,.posts-wrap{padding-left:20px;padding-right:20px}
+    .posts-grid{grid-template-columns:1fr}
+    .featured-body{padding:28px 24px}
+    .blog-cta{padding:60px 20px}
+    footer{padding:24px 20px}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="images/Logo.png" alt="Artio Media" onerror="this.style.display='none';this.nextElementSibling.style.display='inline'">
+    <span style="display:none">Artio<span>.</span></span>
+  </a>
+  <div class="nav-links">
+    <a href="index.html#services">Dịch vụ</a>
+    <a href="portfolio.html">Portfolio</a>
+    <a href="blog.html" class="active">Blog</a>
+    <a href="index.html#contact" class="btn-primary">Liên hệ ngay</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="blog-hero fade-up">
+  <p class="section-label">Artio Media — Blog</p>
+  <h1>Kiến thức<br><em>thiết kế thương hiệu</em></h1>
+  <p>Chia sẻ về branding, logo, packaging và xu hướng thiết kế mới nhất từ đội ngũ Artio Media.</p>
+</div>
+
+<!-- FILTER -->
+<div class="filter-wrap fade-up">
+  <button class="filter-btn active" onclick="filterPosts('all', this)">Tất cả</button>
+  <button class="filter-btn" onclick="filterPosts('Branding', this)">Branding</button>
+  <button class="filter-btn" onclick="filterPosts('Logo Design', this)">Logo Design</button>
+  <button class="filter-btn" onclick="filterPosts('Packaging', this)">Packaging</button>
+  <button class="filter-btn" onclick="filterPosts('Case Study', this)">Case Study</button>
+  <button class="filter-btn" onclick="filterPosts('Kiến thức', this)">Kiến thức</button>
+  <button class="filter-btn" onclick="filterPosts('Xu hướng', this)">Xu hướng</button>
+</div>
+
+<!-- FEATURED -->
+<div class="featured-wrap fade-up" id="featuredWrap">
+  <!-- Bài featured đầu tiên sẽ tự động lấy từ danh sách bên dưới -->
+</div>
+
+<!-- ALL POSTS -->
+<div class="posts-wrap">
+  <h2>Tất cả bài viết</h2>
+  <div class="posts-grid" id="postsGrid">
+    <!-- ================================================================
+         THÊM BÀI VIẾT MỚI VÀO ĐÂY
+         Copy một khối .post-card bên dưới và thay thông tin
+         ================================================================ -->
+
+    <!-- BÀI MẪU 1 -->
+    <a href="blog/5-xu-huong-thiet-ke-logo-2026.html" class="post-card" data-category="Xu hướng">
+      <div class="post-card-img">
+        <img src="images/ArtioLogo/ArtioLogo1.jpg" alt="5 xu hướng thiết kế logo 2026" onerror="this.style.display='none'">
+        <span class="post-card-cat">Xu hướng</span>
+      </div>
+      <div class="post-card-body">
+        <h3>5 Xu hướng thiết kế logo nổi bật năm 2026</h3>
+        <p>Từ minimalism đến kinetic identity — những phong cách thiết kế logo đang thống trị thị trường thương hiệu toàn cầu.</p>
+        <div class="post-card-meta">
+          <span>📅 15/03/2026</span>
+          <span>✍️ Hưng Trần</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- BÀI MẪU 2 -->
+    <a href="blog/bao-bi-giup-tang-doanh-so.html" class="post-card" data-category="Packaging">
+      <div class="post-card-img">
+        <img src="images/ArtioLogo/ArtioLogo2.jpg" alt="Bao bì giúp tăng doanh số" onerror="this.style.display='none'">
+        <span class="post-card-cat">Packaging</span>
+      </div>
+      <div class="post-card-body">
+        <h3>Thiết kế bao bì đẹp có thực sự giúp tăng doanh số?</h3>
+        <p>Nghiên cứu chỉ ra rằng 72% người tiêu dùng quyết định mua hàng dựa trên bao bì. Đây là cách tận dụng điều đó.</p>
+        <div class="post-card-meta">
+          <span>📅 10/03/2026</span>
+          <span>✍️ Hưng Trần</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- BÀI MẪU 3 -->
+    <a href="blog/case-study-giaochi-legend.html" class="post-card" data-category="Case Study">
+      <div class="post-card-img">
+        <img src="images/ArtioLogo/ArtioLogo4.jpg" alt="Case study GiaoChiLegend" onerror="this.style.display='none'">
+        <span class="post-card-cat">Case Study</span>
+      </div>
+      <div class="post-card-body">
+        <h3>Case Study: Xây dựng thương hiệu GiaoChiLegend Spa</h3>
+        <p>Cách Artio Media tạo ra hệ thống nhận diện thương hiệu toàn diện cho chuỗi Spa cao cấp tại Hà Nội.</p>
+        <div class="post-card-meta">
+          <span>📅 05/03/2026</span>
+          <span>✍️ Hưng Trần</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- ================================================================
+         THÊM BÀI VIẾT MỚI Ở TRÊN DÒNG NÀY
+         ================================================================ -->
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="blog-cta">
+  <h2>Bạn cần thiết kế<br><em>thương hiệu?</em></h2>
+  <p>Hãy để Artio Media biến ý tưởng của bạn thành thương hiệu ấn tượng.</p>
+  <a href="index.html#contact">Liên hệ tư vấn miễn phí →</a>
+</div>
+
+<footer>
+  <a href="index.html" class="footer-brand">Artio<span>.</span></a>
+  <div class="footer-links">
+    <a href="index.html#services">Dịch vụ</a>
+    <a href="portfolio.html">Portfolio</a>
+    <a href="blog.html">Blog</a>
+    <a href="index.html#contact">Liên hệ</a>
+  </div>
+  <span style="font-size:13px">© 2026 Artio Media — artio.vn</span>
+</footer>
+
+<script>
+  // FADE UP
+  const faders = document.querySelectorAll('.fade-up');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  faders.forEach(el => observer.observe(el));
+
+  // AUTO FEATURED — lấy bài đầu tiên làm featured
+  window.addEventListener('DOMContentLoaded', () => {
+    const first = document.querySelector('.post-card');
+    if (!first) return;
+    const img = first.querySelector('img');
+    const cat = first.querySelector('.post-card-cat');
+    const h3 = first.querySelector('h3');
+    const p = first.querySelector('p');
+    const meta = first.querySelector('.post-card-meta');
+    const href = first.getAttribute('href');
+
+    document.getElementById('featuredWrap').innerHTML = `
+      <a href="${href}" class="featured-card">
+        <div class="featured-img">
+          ${img ? `<img src="${img.src}" alt="${h3.textContent}" onerror="this.style.display='none'">` : ''}
+          <span class="featured-badge">✦ Bài nổi bật</span>
+        </div>
+        <div class="featured-body">
+          <div class="featured-cat">${cat ? cat.textContent : ''}</div>
+          <h2>${h3.textContent}</h2>
+          <p>${p.textContent}</p>
+          <span class="read-more">Đọc bài viết →</span>
+          <div class="featured-meta">${meta ? meta.innerHTML : ''}</div>
+        </div>
+      </a>`;
+  });
+
+  // FILTER
+  function filterPosts(cat, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.post-card').forEach(card => {
+      const c = card.getAttribute('data-category');
+      card.style.display = (cat === 'all' || c === cat) ? 'block' : 'none';
+    });
+  }
+</script>
+</body>
+</html>
