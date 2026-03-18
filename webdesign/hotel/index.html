@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zen Garden Hotel — Demo by Artio Media</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#f5f2eb;--dark:#1a1a12;--sage:#4a6741;--sage-light:#6b8f62;--sand:#c8b89a;--sand-light:#e8dcc8;--cream:#fdf9f2;--muted:#7a7060;--white:#fff;--accent:#8b6914}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Jost',sans-serif;background:var(--bg);color:var(--dark);overflow-x:hidden}
+
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 60px;display:flex;align-items:center;justify-content:space-between;transition:background .3s,padding .3s}
+  nav.scrolled{background:rgba(245,242,235,.95);backdrop-filter:blur(12px);padding:14px 60px;border-bottom:1px solid rgba(0,0,0,.08)}
+  .nav-brand{font-family:'Cormorant',serif;font-size:24px;font-weight:600;color:white;text-decoration:none;letter-spacing:1px;transition:color .3s}
+  nav.scrolled .nav-brand{color:var(--dark)}
+  .nav-brand em{font-style:italic;color:var(--sand)}
+  nav.scrolled .nav-brand em{color:var(--accent)}
+  .nav-links{display:flex;gap:32px}
+  .nav-links a{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.75);text-decoration:none;font-weight:500;transition:color .2s}
+  nav.scrolled .nav-links a{color:var(--muted)}
+  .nav-links a:hover{color:white}
+  nav.scrolled .nav-links a:hover{color:var(--dark)}
+  .nav-book{background:transparent;border:1px solid rgba(255,255,255,.4);color:white;padding:9px 20px;font-size:11px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;font-family:'Jost',sans-serif;transition:all .3s}
+  nav.scrolled .nav-book{border-color:var(--sage);color:var(--sage)}
+  .nav-book:hover{background:white;color:var(--dark)}
+  nav.scrolled .nav-book:hover{background:var(--sage);color:white;border-color:var(--sage)}
+
+  /* FULLSCREEN HERO */
+  .hero{height:100vh;position:relative;overflow:hidden;display:flex;align-items:center}
+  .hero-bg{position:absolute;inset:0;background:linear-gradient(160deg,#1a2e1a 0%,#2d4a2d 40%,#1a2415 100%)}
+  .hero-bg::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 60% 40%,rgba(107,143,98,.25),transparent 60%)}
+  .hero-overlay{position:absolute;inset:0;background:linear-gradient(to right,rgba(26,26,18,.7) 40%,transparent)}
+  .bamboo{position:absolute;right:0;top:0;bottom:0;width:50%;background:linear-gradient(135deg,#1a3a1a,#2d5a2d);display:flex;align-items:center;justify-content:center;font-size:100px;opacity:.15;letter-spacing:-10px}
+  .hero-content{position:relative;z-index:2;padding:0 60px;max-width:620px}
+  .hero-sup{font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--sand);margin-bottom:24px;display:flex;align-items:center;gap:16px}
+  .hero-sup::before{content:'';width:40px;height:1px;background:var(--sand)}
+  .hero h1{font-family:'Cormorant',serif;font-size:clamp(52px,7vw,84px);font-weight:300;line-height:.95;color:white;margin-bottom:28px;letter-spacing:-1px}
+  .hero h1 em{font-style:italic;color:var(--sand-light)}
+  .hero p{font-size:15px;color:rgba(255,255,255,.6);line-height:1.8;max-width:400px;margin-bottom:48px;font-weight:300}
+  .hero-actions{display:flex;gap:16px;margin-bottom:60px;flex-wrap:wrap}
+  .btn-sand{background:var(--sand);color:var(--dark);padding:16px 36px;font-size:11px;letter-spacing:2px;text-transform:uppercase;border:none;cursor:pointer;font-family:'Jost',sans-serif;font-weight:600;transition:all .3s}
+  .btn-sand:hover{background:var(--sand-light)}
+  .btn-outline-white{background:transparent;color:white;padding:16px 36px;font-size:11px;letter-spacing:2px;text-transform:uppercase;border:1px solid rgba(255,255,255,.3);cursor:pointer;font-family:'Jost',sans-serif;transition:all .3s}
+  .btn-outline-white:hover{border-color:white;background:rgba(255,255,255,.08)}
+  .hero-awards{display:flex;gap:28px;flex-wrap:wrap}
+  .award{text-align:center}
+  .award-icon{font-size:18px;display:block;margin-bottom:4px}
+  .award-text{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.35)}
+  .hero-scroll{position:absolute;bottom:40px;right:60px;writing-mode:vertical-rl;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.3);display:flex;align-items:center;gap:12px}
+  .hero-scroll::after{content:'';height:60px;width:1px;background:rgba(255,255,255,.2)}
+
+  /* BOOK BAR */
+  .book-bar{background:white;padding:28px 60px;box-shadow:0 8px 40px rgba(0,0,0,.08);position:sticky;top:0;z-index:50;border-bottom:1px solid rgba(0,0,0,.06)}
+  .book-bar-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:0}
+  .book-field{flex:1;padding:0 28px;border-right:1px solid rgba(0,0,0,.1)}
+  .book-field:last-of-type{border-right:none}
+  .book-label{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+  .book-input{border:none;font-size:15px;font-family:'Jost',sans-serif;color:var(--dark);width:100%;outline:none;background:transparent;font-weight:500}
+  .book-select{border:none;font-size:15px;font-family:'Jost',sans-serif;color:var(--dark);width:100%;outline:none;background:transparent;cursor:pointer;font-weight:500}
+  .btn-book-now{background:var(--sage);color:white;padding:18px 40px;font-size:11px;letter-spacing:2px;text-transform:uppercase;border:none;cursor:pointer;font-family:'Jost',sans-serif;font-weight:600;white-space:nowrap;transition:background .2s;margin-left:28px}
+  .btn-book-now:hover{background:var(--sage-light)}
+
+  /* ROOMS */
+  .rooms{padding:100px 60px;max-width:1200px;margin:0 auto}
+  .rooms-header{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:end;margin-bottom:60px}
+  .rh-label{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--sage);margin-bottom:14px}
+  .rh-title{font-family:'Cormorant',serif;font-size:clamp(36px,4vw,52px);font-weight:300;line-height:1.1}
+  .rh-title em{font-style:italic;color:var(--accent)}
+  .rh-desc{font-size:14px;color:var(--muted);line-height:1.8}
+  .rooms-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:20px}
+  .room-card{background:white;border-radius:4px;overflow:hidden;cursor:pointer;transition:box-shadow .3s}
+  .room-card:hover{box-shadow:0 20px 60px rgba(0,0,0,.12)}
+  .room-img{position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:60px}
+  .ri-main{height:280px;background:linear-gradient(135deg,#1a2e1a,#2d4a2d)}
+  .ri-sm{height:200px;background:linear-gradient(135deg,#2e1a1a,#4a2d2d)}
+  .ri-sm2{height:200px;background:linear-gradient(135deg,#1a1a2e,#2d2d4a)}
+  .room-badge{position:absolute;top:16px;left:16px;background:var(--sand);color:var(--dark);font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:5px 12px}
+  .room-body{padding:24px}
+  .room-type{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--sage);margin-bottom:8px;font-weight:600}
+  .room-body h3{font-family:'Cormorant',serif;font-size:22px;font-weight:400;margin-bottom:8px;line-height:1.2}
+  .room-body p{font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:16px}
+  .room-amenities{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+  .amenity{font-size:10px;background:var(--bg);padding:4px 10px;border-radius:2px;color:var(--muted)}
+  .room-footer{display:flex;justify-content:space-between;align-items:center;padding-top:16px;border-top:1px solid rgba(0,0,0,.06)}
+  .room-price{font-family:'Cormorant',serif;font-size:26px;font-weight:600;color:var(--dark)}
+  .room-price span{font-size:12px;color:var(--muted);font-family:'Jost',sans-serif;font-weight:400}
+  .btn-book-room{background:transparent;border:1px solid var(--sage);color:var(--sage);padding:9px 18px;font-size:10px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;font-family:'Jost',sans-serif;transition:all .2s}
+  .btn-book-room:hover{background:var(--sage);color:white}
+
+  /* EXPERIENCE */
+  .experience{padding:100px 60px;background:linear-gradient(135deg,#1a2e1a,#1a1a12)}
+  .exp-inner{max-width:1200px;margin:0 auto}
+  .exp-inner .rh-label{color:rgba(200,184,154,.6)}
+  .exp-inner .rh-title{color:white}
+  .exp-inner .rh-title em{color:var(--sand)}
+  .exp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
+  .exp-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:4px;padding:36px 28px;transition:all .3s;cursor:pointer}
+  .exp-card:hover{background:rgba(255,255,255,.08);border-color:var(--sand)}
+  .exp-icon{font-size:36px;margin-bottom:20px;display:block}
+  .exp-card h3{font-family:'Cormorant',serif;font-size:22px;font-weight:400;color:white;margin-bottom:12px}
+  .exp-card p{font-size:13px;color:rgba(255,255,255,.5);line-height:1.7}
+  .exp-price{margin-top:20px;font-size:12px;color:var(--sand);letter-spacing:.5px}
+
+  /* GALLERY */
+  .gallery{padding:100px 60px;max-width:1200px;margin:0 auto}
+  .gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:200px 200px;gap:12px;margin-top:48px}
+  .gal-item{border-radius:4px;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:40px;cursor:pointer;transition:transform .3s;position:relative}
+  .gal-item:hover{transform:scale(1.02)}
+  .gal-item:hover::after{opacity:1}
+  .gal-item::after{content:'Xem ảnh';position:absolute;inset:0;background:rgba(0,0,0,.4);display:flex;align-items:center;justify-content:center;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:white;opacity:0;transition:opacity .3s;font-family:'Jost',sans-serif}
+  .g1{grid-column:1/3;background:linear-gradient(135deg,#1a2e1a,#2d4a2d)}
+  .g2{background:linear-gradient(135deg,#2e2e1a,#4a4a2d)}
+  .g3{background:linear-gradient(135deg,#1a2a2e,#2d404a)}
+  .g4{background:linear-gradient(135deg,#2e1a2a,#4a2d40)}
+  .g5{background:linear-gradient(135deg,#1a1a2e,#2d2d4a)}
+  .g6{grid-column:3/5;background:linear-gradient(135deg,#1a2e20,#2d4a35)}
+
+  footer{background:var(--dark);color:rgba(245,242,235,.35);padding:60px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px}
+  .footer-brand{font-family:'Cormorant',serif;font-size:24px;color:white;letter-spacing:1px}
+  .footer-brand em{font-style:italic;color:var(--sand)}
+  .footer-links{display:flex;gap:24px}
+  .footer-links a{font-size:12px;color:rgba(245,242,235,.35);text-decoration:none;letter-spacing:1px;transition:color .2s}
+  .footer-links a:hover{color:white}
+  .artio-badge{position:fixed;bottom:20px;right:20px;background:var(--sage);padding:10px 16px;font-size:11px;letter-spacing:1px;color:white;z-index:999}
+  @media(max-width:768px){
+    nav{padding:16px 20px}.hero-content{padding:0 20px}
+    .book-bar{padding:16px 20px}.book-bar-inner{flex-direction:column;gap:12px}.book-field{border-right:none;border-bottom:1px solid rgba(0,0,0,.08);padding:0 0 12px}.btn-book-now{margin-left:0;width:100%}
+    .rooms,.experience,.gallery{padding-left:20px;padding-right:20px}.rooms-header,.rooms-grid{grid-template-columns:1fr}
+    .exp-grid{grid-template-columns:1fr}.gallery-grid{grid-template-columns:1fr 1fr;grid-template-rows:repeat(4,160px)}
+    .g1,.g6{grid-column:auto}.nav-links{display:none}footer{padding:40px 20px}
+  }
+</style>
+</head>
+<body>
+
+<nav id="mainNav">
+  <a href="#" class="nav-brand">Zen <em>Garden</em></a>
+  <div class="nav-links">
+    <a href="#rooms">Phòng nghỉ</a><a href="#experience">Trải nghiệm</a><a href="#gallery">Thư viện ảnh</a><a href="#">Về chúng tôi</a>
+  </div>
+  <button class="nav-book">Đặt phòng</button>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="bamboo">🎋🌿🎋🌿🎋</div>
+  <div class="hero-content">
+    <div class="hero-sup">Boutique Hotel · Hội An</div>
+    <h1>Nơi tĩnh lặng<br>tìm về <em>chính mình</em></h1>
+    <p>Ẩn mình trong không gian xanh giữa phố cổ Hội An — nơi kiến trúc Nhật Bản hòa quyện cùng hồn Việt tạo nên trải nghiệm nghỉ dưỡng chưa từng có.</p>
+    <div class="hero-actions">
+      <button class="btn-sand">Đặt phòng ngay</button>
+      <button class="btn-outline-white">Khám phá khách sạn</button>
+    </div>
+    <div class="hero-awards">
+      <div class="award"><span class="award-icon">🏆</span><span class="award-text">Traveler's Choice 2025</span></div>
+      <div class="award"><span class="award-icon">⭐</span><span class="award-text">5 Star Luxury</span></div>
+      <div class="award"><span class="award-icon">🌿</span><span class="award-text">Green Hotel Certified</span></div>
+    </div>
+  </div>
+  <div class="hero-scroll">Cuộn xuống</div>
+</section>
+
+<div class="book-bar">
+  <div class="book-bar-inner">
+    <div class="book-field"><div class="book-label">Ngày nhận phòng</div><input class="book-input" type="date"></div>
+    <div class="book-field"><div class="book-label">Ngày trả phòng</div><input class="book-input" type="date"></div>
+    <div class="book-field"><div class="book-label">Số khách</div><select class="book-select"><option>2 người lớn</option><option>2 NL + 1 trẻ em</option><option>1 người lớn</option></select></div>
+    <div class="book-field"><div class="book-label">Loại phòng</div><select class="book-select"><option>Tất cả loại phòng</option><option>Garden Room</option><option>Zen Suite</option><option>Villa riêng</option></select></div>
+    <button class="btn-book-now">Kiểm tra phòng trống →</button>
+  </div>
+</div>
+
+<section class="rooms" id="rooms">
+  <div class="rooms-header">
+    <div>
+      <div class="rh-label">Chỗ nghỉ</div>
+      <h2 class="rh-title">Không gian <em>thở</em><br>riêng của bạn</h2>
+    </div>
+    <p class="rh-desc">Mỗi phòng là một tác phẩm — thiết kế theo triết lý Wabi-sabi Nhật Bản, sử dụng vật liệu tự nhiên từ địa phương và được bài trí bởi nghệ nhân Hội An.</p>
+  </div>
+  <div class="rooms-grid">
+    <div class="room-card">
+      <div class="room-img ri-main">🌿<span class="room-badge">Phổ biến nhất</span></div>
+      <div class="room-body">
+        <div class="room-type">Garden Suite</div>
+        <h3>Phòng nhìn ra vườn zen</h3>
+        <p>Không gian 65m² với cửa sổ panorama nhìn thẳng vào khu vườn tre, bồn tắm đứng ngoài trời và sàn gỗ teak tự nhiên.</p>
+        <div class="room-amenities"><span class="amenity">🛁 Bồn tắm ngoài trời</span><span class="amenity">🌿 View vườn</span><span class="amenity">🧘 Yoga mat</span></div>
+        <div class="room-footer"><div class="room-price">2.800.000₫ <span>/ đêm</span></div><button class="btn-book-room">Đặt ngay</button></div>
+      </div>
+    </div>
+    <div class="room-card">
+      <div class="room-img ri-sm">🏮</div>
+      <div class="room-body">
+        <div class="room-type">Heritage Room</div>
+        <h3>Phòng phong cách Hội An</h3>
+        <p>Tái hiện không gian nhà cổ Hội An với tranh sơn mài và đèn lồng thủ công.</p>
+        <div class="room-amenities"><span class="amenity">🏮 Đèn lồng</span><span class="amenity">🎋 Sân hiên riêng</span></div>
+        <div class="room-footer"><div class="room-price">1.900.000₫ <span>/ đêm</span></div><button class="btn-book-room">Đặt ngay</button></div>
+      </div>
+    </div>
+    <div class="room-card">
+      <div class="room-img ri-sm2">🌙</div>
+      <div class="room-body">
+        <div class="room-type">Zen Villa</div>
+        <h3>Villa hồ bơi riêng</h3>
+        <p>Biệt thự 120m² với hồ bơi riêng, phòng thiền và butler service 24/7.</p>
+        <div class="room-amenities"><span class="amenity">🏊 Hồ bơi riêng</span><span class="amenity">👨‍🍳 Butler</span></div>
+        <div class="room-footer"><div class="room-price">5.500.000₫ <span>/ đêm</span></div><button class="btn-book-room">Đặt ngay</button></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="experience" id="experience">
+  <div class="exp-inner">
+    <div class="rh-label">Trải nghiệm độc đáo</div>
+    <h2 class="rh-title">Hơn cả một chuyến <em>nghỉ ngơi</em></h2>
+    <div class="exp-grid">
+      <div class="exp-card"><span class="exp-icon">🍵</span><h3>Trà đạo buổi sáng</h3><p>Nghi lễ pha trà Nhật Bản với sencha Kyoto chính gốc, thực hiện bởi tea master được đào tạo tại Nhật.</p><div class="exp-price">350.000₫ / người</div></div>
+      <div class="exp-card"><span class="exp-icon">🚲</span><h3>Đạp xe phố cổ</h3><p>Tour sáng sớm khám phá Hội An trên xe đạp tre thủ công, dẫn đến làng rau Trà Quế.</p><div class="exp-price">250.000₫ / người</div></div>
+      <div class="exp-card"><span class="exp-icon">🎑</span><h3>Ikebana & thiền</h3><p>Buổi chiều cắm hoa theo nghệ thuật Ikebana kết hợp thiền định với thầy giáo người Nhật.</p><div class="exp-price">500.000₫ / người</div></div>
+      <div class="exp-card"><span class="exp-icon">🍜</span><h3>Lớp nấu ăn</h3><p>Học nấu cao lầu, mì Quảng và bánh đập tại khu bếp mở giữa vườn từ đầu bếp địa phương.</p><div class="exp-price">650.000₫ / người</div></div>
+      <div class="exp-card"><span class="exp-icon">🌅</span><h3>Yoga bình minh</h3><p>Lớp yoga hatha trên sân thượng với view toàn bộ phố cổ lúc bình minh, kèm nước ép fresh.</p><div class="exp-price">200.000₫ / người</div></div>
+      <div class="exp-card"><span class="exp-icon">🛶</span><h3>Thuyền rồng sông Hoài</h3><p>Du thuyền chiều tà trên sông Hoài, thưởng thức rượu sakura và xem đèn lồng thả nước.</p><div class="exp-price">800.000₫ / cặp</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="gallery" id="gallery">
+  <div class="rh-label">Thư viện ảnh</div>
+  <h2 class="rh-title">Nhìn qua <em>ống kính</em></h2>
+  <div class="gallery-grid">
+    <div class="gal-item g1">🌿</div>
+    <div class="gal-item g2">🍵</div>
+    <div class="gal-item g3">🌸</div>
+    <div class="gal-item g4">🏮</div>
+    <div class="gal-item g5">🧘</div>
+    <div class="gal-item g6">🌅</div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-brand">Zen <em>Garden</em></div>
+  <div class="footer-links">
+    <a href="#">Phòng nghỉ</a><a href="#">Trải nghiệm</a><a href="#">Nhà hàng</a><a href="#">Spa</a><a href="#">Liên hệ</a>
+  </div>
+  <span style="font-size:12px">© 2026 Zen Garden Hotel · Hội An. Demo by Artio Media</span>
+</footer>
+<a href="../../webdesign.html" style="position:fixed;bottom:20px;right:20px;background:var(--dark, #111);color:white;padding:10px 16px;font-size:11px;letter-spacing:1px;z-index:999;text-decoration:none;border-radius:4px">← Quay lại thư viện</a>
+
+<script>
+  window.addEventListener('scroll', () => {
+    document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 80);
+  });
+</script>
+</body>
+</html>
