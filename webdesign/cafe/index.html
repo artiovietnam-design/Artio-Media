@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mộc Café — Demo by Artio Media</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#faf6f0;--dark:#1c1510;--brown:#6b3f1f;--brown-light:#9c6b3a;
+    --cream:#f5ede0;--warm:#e8d5b7;--muted:#8c7b6a;--accent:#c4522a;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'IBM Plex Sans',sans-serif;background:var(--bg);color:var(--dark);overflow-x:hidden}
+
+  /* NAV */
+  nav{position:sticky;top:0;z-index:100;background:var(--bg);border-bottom:1px solid rgba(107,63,31,.12);padding:0 60px;display:flex;align-items:center;justify-content:space-between;height:72px}
+  .nav-brand{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:var(--dark);text-decoration:none}
+  .nav-brand span{color:var(--accent)}
+  .nav-links{display:flex;gap:28px}
+  .nav-links a{font-size:13px;color:var(--muted);text-decoration:none;font-weight:500;transition:color .2s}
+  .nav-links a:hover{color:var(--brown)}
+  .nav-order{background:var(--accent);color:white;padding:10px 22px;font-size:13px;font-weight:500;border:none;cursor:pointer;font-family:'IBM Plex Sans',sans-serif;border-radius:2px;transition:background .2s}
+  .nav-order:hover{background:var(--brown)}
+
+  /* HERO — editorial split */
+  .hero{display:grid;grid-template-columns:1fr 1fr;min-height:90vh}
+  .hero-left{padding:80px 60px;display:flex;flex-direction:column;justify-content:center;background:var(--bg)}
+  .hero-tag{display:inline-flex;align-items:center;gap:10px;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:32px}
+  .hero-tag::before{content:'';width:32px;height:1px;background:var(--accent)}
+  .hero-left h1{font-family:'Playfair Display',serif;font-size:clamp(48px,5.5vw,72px);font-weight:400;line-height:1.05;letter-spacing:-1px;margin-bottom:24px}
+  .hero-left h1 em{font-style:italic;color:var(--accent)}
+  .hero-left p{font-size:15px;color:var(--muted);line-height:1.8;max-width:380px;margin-bottom:40px}
+  .hero-btns{display:flex;gap:12px}
+  .btn-primary{background:var(--dark);color:white;padding:14px 32px;font-size:13px;font-weight:500;border:none;cursor:pointer;font-family:'IBM Plex Sans',sans-serif;transition:background .2s}
+  .btn-primary:hover{background:var(--brown)}
+  .btn-secondary{background:transparent;color:var(--dark);padding:14px 32px;font-size:13px;font-weight:500;border:1.5px solid rgba(28,21,16,.2);cursor:pointer;font-family:'IBM Plex Sans',sans-serif;transition:all .2s}
+  .btn-secondary:hover{border-color:var(--accent);color:var(--accent)}
+  .hero-stats{display:flex;gap:40px;margin-top:48px;padding-top:48px;border-top:1px solid rgba(107,63,31,.12)}
+  .stat-num{font-family:'Playfair Display',serif;font-size:36px;font-weight:700;color:var(--dark)}
+  .stat-label{font-size:12px;color:var(--muted);margin-top:4px}
+
+  .hero-right{background:var(--cream);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+  .hero-right::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,#c4522a22,#6b3f1f11)}
+  .hero-visual{position:relative;z-index:1;text-align:center}
+  .hero-visual .big-icon{font-size:120px;display:block;margin-bottom:24px;animation:float 4s ease-in-out infinite}
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+  .hero-visual-text{font-family:'Playfair Display',serif;font-size:20px;font-style:italic;color:var(--brown);opacity:.6}
+  .hero-badge{position:absolute;top:40px;right:40px;background:var(--accent);color:white;padding:12px 20px;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:500}
+
+  /* STRIP */
+  .strip{background:var(--dark);padding:18px 60px;display:flex;justify-content:space-between;align-items:center}
+  .strip-item{font-size:12px;letter-spacing:1px;color:rgba(250,246,240,.5);text-transform:uppercase;display:flex;align-items:center;gap:8px}
+  .strip-dot{width:4px;height:4px;border-radius:50%;background:var(--accent)}
+
+  /* MENU */
+  .menu-section{padding:100px 60px;max-width:1200px;margin:0 auto}
+  .menu-header{text-align:center;margin-bottom:64px}
+  .menu-header .tag{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:16px}
+  .menu-header h2{font-family:'Playfair Display',serif;font-size:clamp(36px,4vw,52px);font-weight:400;margin-bottom:16px}
+  .menu-header h2 em{font-style:italic}
+  .menu-header p{font-size:14px;color:var(--muted);max-width:500px;margin:0 auto}
+  .menu-tabs{display:flex;gap:4px;justify-content:center;margin-bottom:48px;background:var(--cream);padding:6px;border-radius:4px;width:fit-content;margin-left:auto;margin-right:auto}
+  .tab{padding:10px 24px;font-size:13px;font-weight:500;cursor:pointer;border-radius:2px;transition:all .2s;font-family:'IBM Plex Sans',sans-serif;border:none;background:transparent;color:var(--muted)}
+  .tab.active{background:var(--dark);color:white}
+  .menu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .menu-card{background:white;border:1px solid rgba(107,63,31,.08);overflow:hidden;transition:box-shadow .3s;cursor:pointer}
+  .menu-card:hover{box-shadow:0 12px 40px rgba(28,21,16,.1)}
+  .menu-img{height:160px;display:flex;align-items:center;justify-content:center;font-size:56px;background:var(--cream);position:relative}
+  .menu-badge{position:absolute;top:12px;right:12px;background:var(--accent);color:white;font-size:10px;letter-spacing:1px;text-transform:uppercase;padding:4px 10px}
+  .menu-body{padding:20px}
+  .menu-body h3{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;margin-bottom:6px}
+  .menu-body p{font-size:12px;color:var(--muted);line-height:1.7;margin-bottom:14px}
+  .menu-footer{display:flex;justify-content:space-between;align-items:center}
+  .menu-price{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--accent)}
+  .add-btn{background:var(--dark);color:white;border:none;width:32px;height:32px;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s}
+  .add-btn:hover{background:var(--accent)}
+
+  /* STORY */
+  .story{padding:100px 60px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;background:var(--cream)}
+  .story-visual{position:relative}
+  .story-big{background:linear-gradient(135deg,var(--warm),var(--cream));height:440px;display:flex;align-items:center;justify-content:center;font-size:100px;border:1px solid rgba(107,63,31,.1)}
+  .story-small{position:absolute;bottom:-30px;right:-30px;width:160px;height:160px;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:48px}
+  .story-content .tag{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:16px}
+  .story-content h2{font-family:'Playfair Display',serif;font-size:clamp(32px,3.5vw,44px);font-weight:400;line-height:1.2;margin-bottom:24px}
+  .story-content h2 em{font-style:italic;color:var(--brown)}
+  .story-content p{font-size:14px;color:var(--muted);line-height:1.9;margin-bottom:16px}
+  .story-sig{font-family:'Playfair Display',serif;font-size:32px;font-style:italic;color:var(--brown-light);margin-top:32px}
+  .story-sig span{display:block;font-family:'IBM Plex Sans',sans-serif;font-size:12px;font-style:normal;color:var(--muted);letter-spacing:1px;margin-top:4px}
+
+  /* LOCATIONS */
+  .locations{padding:80px 60px;max-width:1200px;margin:0 auto}
+  .locations h2{font-family:'Playfair Display',serif;font-size:36px;font-weight:400;text-align:center;margin-bottom:48px}
+  .locations-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .loc-card{background:white;border:1px solid rgba(107,63,31,.08);padding:32px;transition:box-shadow .3s}
+  .loc-card:hover{box-shadow:0 8px 30px rgba(28,21,16,.08)}
+  .loc-icon{font-size:32px;margin-bottom:16px;display:block}
+  .loc-card h3{font-family:'Playfair Display',serif;font-size:18px;margin-bottom:8px}
+  .loc-card p{font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:16px}
+  .loc-hours{font-size:12px;color:var(--accent);font-weight:500}
+
+  /* FOOTER */
+  footer{background:var(--dark);color:rgba(250,246,240,.5);padding:60px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:24px}
+  .footer-brand{font-family:'Playfair Display',serif;font-size:22px;color:white}
+  .footer-brand span{color:var(--accent)}
+  .footer-links{display:flex;gap:24px}
+  .footer-links a{font-size:12px;color:rgba(250,246,240,.4);text-decoration:none;transition:color .2s}
+  .footer-links a:hover{color:white}
+  .footer-copy{font-size:12px}
+
+  .artio-badge{position:fixed;bottom:20px;right:20px;background:var(--dark);border:1px solid rgba(196,82,42,.3);padding:10px 16px;font-size:11px;letter-spacing:1px;color:var(--accent);z-index:999}
+
+  @media(max-width:768px){
+    nav{padding:0 20px}
+    .hero{grid-template-columns:1fr}
+    .hero-right{height:300px}
+    .hero-left,.menu-section,.story,.locations,.strip{padding-left:20px;padding-right:20px}
+    .menu-grid,.locations-grid,.story{grid-template-columns:1fr}
+    .story-small{display:none}
+    .nav-links{display:none}
+    footer{padding:40px 20px}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-brand">Mộc<span>.</span>Café</a>
+  <div class="nav-links">
+    <a href="#menu">Thực đơn</a>
+    <a href="#story">Câu chuyện</a>
+    <a href="#locations">Chi nhánh</a>
+    <a href="#">Liên hệ</a>
+  </div>
+  <button class="nav-order">Đặt hàng online</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-tag">Cà phê rang xay thủ công</div>
+    <h1>Từng giọt<br>cà phê — <em>một<br>câu chuyện</em></h1>
+    <p>Cà phê từ những vùng đất cao nguyên tốt nhất Việt Nam, rang xay thủ công mỗi ngày, pha chế bằng trái tim của những người yêu cà phê thật sự.</p>
+    <div class="hero-btns">
+      <button class="btn-primary">Xem thực đơn</button>
+      <button class="btn-secondary">Tìm chi nhánh</button>
+    </div>
+    <div class="hero-stats">
+      <div><div class="stat-num">2015</div><div class="stat-label">Năm thành lập</div></div>
+      <div><div class="stat-num">12</div><div class="stat-label">Chi nhánh</div></div>
+      <div><div class="stat-num">500+</div><div class="stat-label">Khách mỗi ngày</div></div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-visual">
+      <span class="big-icon">☕</span>
+      <div class="hero-visual-text">Single Origin · Specialty Coffee</div>
+    </div>
+    <div class="hero-badge">Mới · Cold Brew Series</div>
+  </div>
+</section>
+
+<!-- STRIP -->
+<div class="strip">
+  <div class="strip-item"><div class="strip-dot"></div>Arabica Đà Lạt</div>
+  <div class="strip-item"><div class="strip-dot"></div>Robusta Buôn Ma Thuột</div>
+  <div class="strip-item"><div class="strip-dot"></div>Rang xay hàng ngày</div>
+  <div class="strip-item"><div class="strip-dot"></div>Không phẩm màu</div>
+  <div class="strip-item"><div class="strip-dot"></div>WiFi tốc độ cao</div>
+</div>
+
+<!-- MENU -->
+<section class="menu-section" id="menu">
+  <div class="menu-header">
+    <div class="tag">Thực đơn</div>
+    <h2>Chọn theo <em>tâm trạng</em></h2>
+    <p>Từ espresso đậm đà buổi sáng đến trà sữa nhẹ nhàng buổi chiều — chúng tôi có tất cả.</p>
+  </div>
+  <div class="menu-tabs">
+    <button class="tab active">Cà phê</button>
+    <button class="tab">Trà & Trà sữa</button>
+    <button class="tab">Đá xay</button>
+    <button class="tab">Bánh ngọt</button>
+  </div>
+  <div class="menu-grid">
+    <div class="menu-card">
+      <div class="menu-img">☕<div class="menu-badge">Bestseller</div></div>
+      <div class="menu-body">
+        <h3>Cà phê sữa đá</h3>
+        <p>Espresso đậm đà pha với sữa đặc Ngôi Sao Phương Nam, phục vụ với đá viên lớn.</p>
+        <div class="menu-footer">
+          <div class="menu-price">45.000 ₫</div>
+          <button class="add-btn">+</button>
+        </div>
+      </div>
+    </div>
+    <div class="menu-card">
+      <div class="menu-img">🧋</div>
+      <div class="menu-body">
+        <h3>Cold Brew Tonic</h3>
+        <p>Cold brew ủ 18 tiếng kết hợp nước tonic và lát cam tươi. Thanh mát và tỉnh táo.</p>
+        <div class="menu-footer">
+          <div class="menu-price">65.000 ₫</div>
+          <button class="add-btn">+</button>
+        </div>
+      </div>
+    </div>
+    <div class="menu-card">
+      <div class="menu-img">🍵<div class="menu-badge">Mới</div></div>
+      <div class="menu-body">
+        <h3>Matcha Latte</h3>
+        <p>Matcha ceremonial grade Uji Nhật Bản, pha với sữa yến mạch tươi và một chút vanilla.</p>
+        <div class="menu-footer">
+          <div class="menu-price">75.000 ₫</div>
+          <button class="add-btn">+</button>
+        </div>
+      </div>
+    </div>
+    <div class="menu-card">
+      <div class="menu-img">🫖</div>
+      <div class="menu-body">
+        <h3>Bạc xỉu</h3>
+        <p>Tỉ lệ sữa nhiều hơn cà phê — thức uống đặc trưng của người Sài Gòn xưa, ngọt dịu.</p>
+        <div class="menu-footer">
+          <div class="menu-price">40.000 ₫</div>
+          <button class="add-btn">+</button>
+        </div>
+      </div>
+    </div>
+    <div class="menu-card">
+      <div class="menu-img">🍶</div>
+      <div class="menu-body">
+        <h3>Cà phê muối</h3>
+        <p>Xu hướng từ Huế — espresso với kem sữa béo pha một chút muối hồng Himalaya.</p>
+        <div class="menu-footer">
+          <div class="menu-price">55.000 ₫</div>
+          <button class="add-btn">+</button>
+        </div>
+      </div>
+    </div>
+    <div class="menu-card">
+      <div class="menu-img">☁️<div class="menu-badge">Hot</div></div>
+      <div class="menu-body">
+        <h3>Cà phê trứng</h3>
+        <p>Đặc sản Hà Nội — espresso với lớp kem trứng đánh bông mịn, thơm ngậy khó quên.</p>
+        <div class="menu-footer">
+          <div class="menu-price">50.000 ₫</div>
+          <button class="add-btn">+</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STORY -->
+<section class="story" id="story">
+  <div class="story-visual">
+    <div class="story-big">☕</div>
+    <div class="story-small">🌿</div>
+  </div>
+  <div class="story-content">
+    <div class="tag">Câu chuyện của chúng tôi</div>
+    <h2>Sinh ra từ<br>tình yêu <em>cà phê<br>Việt Nam</em></h2>
+    <p>Năm 2015, chúng tôi bắt đầu từ một quán nhỏ ở phố cổ Hà Nội với niềm tin rằng cà phê Việt Nam xứng đáng được thế giới biết đến nhiều hơn.</p>
+    <p>Chúng tôi làm việc trực tiếp với các hộ nông dân trồng cà phê tại Đà Lạt, Buôn Ma Thuột và Sơn La — đảm bảo thu nhập công bằng và chất lượng cà phê tốt nhất.</p>
+    <div class="story-sig">Minh Ngọc
+      <span>Người sáng lập Mộc Café</span>
+    </div>
+  </div>
+</section>
+
+<!-- LOCATIONS -->
+<section class="locations" id="locations">
+  <h2>Tìm chúng tôi</h2>
+  <div class="locations-grid">
+    <div class="loc-card">
+      <span class="loc-icon">📍</span>
+      <h3>Hoàn Kiếm, Hà Nội</h3>
+      <p>25 Hàng Bông, Quận Hoàn Kiếm. Không gian 3 tầng, sân thượng view hồ Gươm.</p>
+      <div class="loc-hours">7:00 — 22:00 hàng ngày</div>
+    </div>
+    <div class="loc-card">
+      <span class="loc-icon">📍</span>
+      <h3>Tây Hồ, Hà Nội</h3>
+      <p>18 Xuân Diệu, Quận Tây Hồ. Cạnh hồ Tây, không gian yên tĩnh để làm việc.</p>
+      <div class="loc-hours">6:30 — 23:00 hàng ngày</div>
+    </div>
+    <div class="loc-card">
+      <span class="loc-icon">📍</span>
+      <h3>Quận 1, TP.HCM</h3>
+      <p>42 Lê Lợi, Quận 1. Trung tâm thành phố, phù hợp buổi sáng trước giờ làm.</p>
+      <div class="loc-hours">6:00 — 22:30 hàng ngày</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-brand">Mộc<span>.</span>Café</div>
+  <div class="footer-links">
+    <a href="#">Thực đơn</a>
+    <a href="#">Câu chuyện</a>
+    <a href="#">Chi nhánh</a>
+    <a href="#">Nhượng quyền</a>
+    <a href="#">Liên hệ</a>
+  </div>
+  <div class="footer-copy">© 2026 Mộc Café. Demo by Artio Media</div>
+</footer>
+
+<a href="../../webdesign.html" style="position:fixed;bottom:20px;right:20px;background:var(--dark, #111);color:white;padding:10px 16px;font-size:11px;letter-spacing:1px;z-index:999;text-decoration:none;border-radius:4px">← Quay lại thư viện</a>
+
+<script>
+  document.querySelectorAll('.tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>
