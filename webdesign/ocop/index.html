@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tây Bắc OCOP — Demo by Artio Media</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,500;0,700;1,300;1,500&family=Nunito:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#f7f3ec;--dark:#1e1a14;--green:#2d5a27;--green-light:#4a8a42;--earth:#8b5e3c;--cream:#fdf8f0;--warm:#e8d4b8;--muted:#7a6e5f;--accent:#c4622a;--leaf:#6b9e5e}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--dark);overflow-x:hidden}
+
+  nav{position:sticky;top:0;z-index:100;background:var(--green);padding:0 60px;height:68px;display:flex;align-items:center;justify-content:space-between}
+  .nav-brand{font-family:'Fraunces',serif;font-size:22px;font-weight:700;color:white;text-decoration:none;display:flex;align-items:center;gap:10px}
+  .brand-badge{background:var(--accent);color:white;font-size:9px;font-weight:700;letter-spacing:1px;padding:3px 8px;border-radius:2px;text-transform:uppercase}
+  .nav-links{display:flex;gap:28px}
+  .nav-links a{font-size:13px;color:rgba(255,255,255,.75);text-decoration:none;font-weight:500;transition:color .2s}
+  .nav-links a:hover{color:white}
+  .nav-cta{background:white;color:var(--green);padding:10px 22px;font-size:13px;font-weight:700;border:none;cursor:pointer;font-family:'Nunito',sans-serif;border-radius:4px;transition:all .2s}
+  .nav-cta:hover{background:var(--warm)}
+
+  /* HERO */
+  .hero{min-height:92vh;display:grid;grid-template-columns:1fr 1fr;position:relative;overflow:hidden}
+  .hero-left{background:linear-gradient(160deg,#1e3d18,#2d5a27,#1a2e15);display:flex;align-items:center;justify-content:center;position:relative;padding:80px 60px}
+  .hero-left::before{content:'🌿';position:absolute;bottom:-20px;right:-20px;font-size:200px;opacity:.06;line-height:1}
+  .hero-left-inner{position:relative;z-index:1}
+  .hero-label{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);padding:8px 16px;border-radius:100px;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.8);margin-bottom:28px}
+  .star-icon{color:#f59e0b}
+  .hero-left h1{font-family:'Fraunces',serif;font-size:clamp(44px,5vw,64px);font-weight:700;line-height:1.05;color:white;margin-bottom:20px}
+  .hero-left h1 em{font-style:italic;color:#a8d4a0;font-weight:300}
+  .hero-left p{font-size:15px;color:rgba(255,255,255,.65);line-height:1.8;max-width:380px;margin-bottom:36px}
+  .hero-btns{display:flex;gap:12px;flex-wrap:wrap}
+  .btn-white{background:white;color:var(--green);padding:14px 28px;font-size:13px;font-weight:700;border:none;cursor:pointer;font-family:'Nunito',sans-serif;border-radius:4px;transition:all .2s}
+  .btn-white:hover{background:var(--warm)}
+  .btn-ghost-white{background:transparent;color:white;padding:14px 28px;font-size:13px;font-weight:600;border:1.5px solid rgba(255,255,255,.3);cursor:pointer;font-family:'Nunito',sans-serif;border-radius:4px;transition:all .2s}
+  .btn-ghost-white:hover{border-color:white;background:rgba(255,255,255,.1)}
+  .hero-badges{display:flex;gap:12px;margin-top:40px;flex-wrap:wrap}
+  .hero-badge{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);padding:10px 14px;border-radius:8px;text-align:center;min-width:90px}
+  .badge-val{font-family:'Fraunces',serif;font-size:22px;font-weight:700;color:white;display:block}
+  .badge-lbl{font-size:10px;color:rgba(255,255,255,.5);letter-spacing:.5px;margin-top:2px}
+
+  .hero-right{background:var(--cream);display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:0}
+  .hero-panel{display:flex;align-items:center;justify-content:center;font-size:52px;border:1px solid rgba(0,0,0,.06);transition:background .3s;cursor:default;position:relative;overflow:hidden}
+  .hero-panel:hover{background:var(--warm)}
+  .hp1{background:#f0ebe0}.hp2{background:#e8f0e0}.hp3{background:#f0e8e0}.hp4{background:#e0ece0}
+  .panel-label{position:absolute;bottom:12px;left:12px;font-size:11px;font-weight:700;color:var(--muted);letter-spacing:.5px}
+  .ocop-star{position:absolute;top:10px;right:10px;background:var(--accent);color:white;font-size:8px;font-weight:700;padding:3px 7px;border-radius:2px;letter-spacing:.5px}
+
+  /* PRODUCTS */
+  .products{padding:100px 60px;max-width:1200px;margin:0 auto}
+  .products-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:56px}
+  .ph-left .tag{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--green);margin-bottom:12px}
+  .ph-left h2{font-family:'Fraunces',serif;font-size:clamp(32px,4vw,48px);font-weight:700;line-height:1.1}
+  .ph-left h2 em{font-style:italic;color:var(--earth);font-weight:300}
+  .view-all{font-size:13px;font-weight:600;color:var(--green);text-decoration:none;display:flex;align-items:center;gap:6px}
+  .products-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+  .product-card{background:white;border-radius:12px;overflow:hidden;transition:transform .3s,box-shadow .3s;cursor:pointer;border:1px solid rgba(0,0,0,.06)}
+  .product-card:hover{transform:translateY(-6px);box-shadow:0 16px 48px rgba(0,0,0,.1)}
+  .product-img{height:180px;display:flex;align-items:center;justify-content:center;font-size:60px;position:relative}
+  .pi1{background:linear-gradient(135deg,#f0ebe0,#e8d4b8)}
+  .pi2{background:linear-gradient(135deg,#e8f0e0,#c8dfc0)}
+  .pi3{background:linear-gradient(135deg,#f0e8e0,#e0c8b0)}
+  .pi4{background:linear-gradient(135deg,#f8f0e0,#ffe8a0)}
+  .product-ocop{position:absolute;top:10px;left:10px;background:var(--accent);color:white;font-size:9px;font-weight:700;letter-spacing:.5px;padding:3px 8px;border-radius:3px}
+  .product-heart{position:absolute;top:10px;right:10px;width:30px;height:30px;background:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;box-shadow:0 2px 8px rgba(0,0,0,.1)}
+  .product-body{padding:16px}
+  .product-region{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--leaf);font-weight:600;margin-bottom:6px}
+  .product-body h3{font-family:'Fraunces',serif;font-size:17px;font-weight:500;margin-bottom:6px;line-height:1.3}
+  .product-body p{font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:14px}
+  .product-footer{display:flex;justify-content:space-between;align-items:center}
+  .product-price{font-family:'Fraunces',serif;font-size:20px;font-weight:700;color:var(--accent)}
+  .product-unit{font-size:11px;color:var(--muted);margin-top:1px}
+  .btn-add{background:var(--green);color:white;border:none;padding:8px 14px;font-size:12px;font-weight:600;cursor:pointer;border-radius:4px;font-family:'Nunito',sans-serif;transition:background .2s}
+  .btn-add:hover{background:var(--green-light)}
+
+  /* ORIGIN */
+  .origin{padding:100px 60px;background:linear-gradient(135deg,#1e3d18,#2d5a27);color:white}
+  .origin-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+  .origin-left .tag{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(168,212,160,.8);margin-bottom:16px}
+  .origin-left h2{font-family:'Fraunces',serif;font-size:clamp(32px,4vw,48px);font-weight:700;line-height:1.1;margin-bottom:24px}
+  .origin-left h2 em{font-style:italic;color:#a8d4a0;font-weight:300}
+  .origin-left p{font-size:14px;color:rgba(255,255,255,.65);line-height:1.9;margin-bottom:28px}
+  .origin-facts{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  .fact-card{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:20px}
+  .fact-icon{font-size:24px;margin-bottom:10px;display:block}
+  .fact-title{font-size:14px;font-weight:700;margin-bottom:4px}
+  .fact-desc{font-size:12px;color:rgba(255,255,255,.5);line-height:1.6}
+  .origin-right{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .origin-img{border-radius:12px;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:52px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1)}
+  .oi1{grid-column:1/-1;height:180px}
+  .oi2,.oi3{height:140px}
+
+  /* CERTIFICATIONS */
+  .certs{padding:80px 60px;max-width:1200px;margin:0 auto;text-align:center}
+  .certs h2{font-family:'Fraunces',serif;font-size:32px;font-weight:700;margin-bottom:40px}
+  .cert-grid{display:flex;gap:24px;justify-content:center;flex-wrap:wrap}
+  .cert-item{background:white;border:1px solid rgba(0,0,0,.08);border-radius:12px;padding:24px 28px;display:flex;align-items:center;gap:14px;transition:box-shadow .2s}
+  .cert-item:hover{box-shadow:0 8px 24px rgba(0,0,0,.08)}
+  .cert-icon{font-size:32px}
+  .cert-name{font-size:14px;font-weight:700;color:var(--dark);text-align:left}
+  .cert-desc{font-size:11px;color:var(--muted);margin-top:2px}
+
+  footer{background:var(--dark);color:rgba(255,255,255,.35);padding:48px 60px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+  .footer-brand{font-family:'Fraunces',serif;font-size:20px;color:white}
+  .footer-links{display:flex;gap:24px}
+  .footer-links a{font-size:12px;color:rgba(255,255,255,.35);text-decoration:none;transition:color .2s}
+  .footer-links a:hover{color:white}
+  .artio-badge{position:fixed;bottom:20px;right:20px;background:var(--green);border:none;padding:10px 16px;font-size:11px;letter-spacing:1px;color:white;z-index:999;border-radius:4px}
+  @media(max-width:768px){
+    nav{padding:0 20px}.hero{grid-template-columns:1fr}.hero-right{display:none}
+    .hero-left{padding:80px 20px 60px}.products,.origin,.certs{padding-left:20px;padding-right:20px}
+    .products-grid{grid-template-columns:1fr 1fr}.origin-inner{grid-template-columns:1fr}.nav-links{display:none}
+    footer{padding:32px 20px}
+  }
+</style>
+</head>
+<body>
+<nav>
+  <a href="#" class="nav-brand">Tây Bắc<span class="brand-badge">OCOP ★★★★</span></a>
+  <div class="nav-links">
+    <a href="#products">Sản phẩm</a><a href="#origin">Nguồn gốc</a><a href="#">Câu chuyện</a><a href="#">Liên hệ</a>
+  </div>
+  <button class="nav-cta">Mua ngay</button>
+</nav>
+
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-left-inner">
+      <div class="hero-label"><span class="star-icon">★★★★</span> Chứng nhận OCOP Quốc gia</div>
+      <h1>Tinh hoa<br><em>đất trời</em><br>Sơn La</h1>
+      <p>Đặc sản thuần tự nhiên từ vùng núi cao Sơn La, Điện Biên, Lào Cai — canh tác theo phương pháp truyền thống, không phân bón hóa học.</p>
+      <div class="hero-btns">
+        <button class="btn-white">Khám phá sản phẩm</button>
+        <button class="btn-ghost-white">Câu chuyện chúng tôi</button>
+      </div>
+      <div class="hero-badges">
+        <div class="hero-badge"><span class="badge-val">100%</span><span class="badge-lbl">Hữu cơ</span></div>
+        <div class="hero-badge"><span class="badge-val">12+</span><span class="badge-lbl">Năm canh tác</span></div>
+        <div class="hero-badge"><span class="badge-val">500+</span><span class="badge-lbl">Hộ nông dân</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-panel hp1"><span>🍵</span><div class="panel-label">Trà Shan Tuyết</div><div class="ocop-star">OCOP</div></div>
+    <div class="hero-panel hp2"><span>🍯</span><div class="panel-label">Mật ong rừng</div><div class="ocop-star">OCOP</div></div>
+    <div class="hero-panel hp3"><span>🌶</span><div class="panel-label">Ớt Mắc Khén</div><div class="ocop-star">OCOP</div></div>
+    <div class="hero-panel hp4"><span>🌾</span><div class="panel-label">Gạo Séng Cù</div><div class="ocop-star">OCOP</div></div>
+  </div>
+</section>
+
+<section class="products" id="products">
+  <div class="products-header">
+    <div class="ph-left">
+      <div class="tag">Đặc sản chọn lọc</div>
+      <h2>Sản phẩm <em>tiêu biểu</em></h2>
+    </div>
+    <a href="#" class="view-all">Xem tất cả →</a>
+  </div>
+  <div class="products-grid">
+    <div class="product-card">
+      <div class="product-img pi1"><span>🍵</span><span class="product-ocop">OCOP ★★★★</span><span class="product-heart">❤️</span></div>
+      <div class="product-body">
+        <div class="product-region">Hà Giang · 1.200m</div>
+        <h3>Trà Shan Tuyết cổ thụ</h3>
+        <p>Búp trà hái từ cây 100-200 năm tuổi trên vùng núi cao, hương thơm tự nhiên.</p>
+        <div class="product-footer">
+          <div><div class="product-price">280.000₫</div><div class="product-unit">100g</div></div>
+          <button class="btn-add">Thêm vào giỏ</button>
+        </div>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="product-img pi4"><span>🍯</span><span class="product-ocop">OCOP ★★★★★</span><span class="product-heart">🤍</span></div>
+      <div class="product-body">
+        <div class="product-region">Điện Biên · Rừng nguyên sinh</div>
+        <h3>Mật ong rừng Điện Biên</h3>
+        <p>Mật ong được thu từ rừng nguyên sinh, không pha tạp, kết tinh tự nhiên.</p>
+        <div class="product-footer">
+          <div><div class="product-price">350.000₫</div><div class="product-unit">500ml</div></div>
+          <button class="btn-add">Thêm vào giỏ</button>
+        </div>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="product-img pi3"><span>🌾</span><span class="product-ocop">OCOP ★★★★</span><span class="product-heart">🤍</span></div>
+      <div class="product-body">
+        <div class="product-region">Mù Cang Chải · Ruộng bậc thang</div>
+        <h3>Gạo Séng Cù đỏ</h3>
+        <p>Giống gạo địa phương canh tác ruộng bậc thang, dẻo thơm đặc trưng vùng núi.</p>
+        <div class="product-footer">
+          <div><div class="product-price">95.000₫</div><div class="product-unit">1kg</div></div>
+          <button class="btn-add">Thêm vào giỏ</button>
+        </div>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="product-img pi2"><span>🌶</span><span class="product-ocop">OCOP ★★★</span><span class="product-heart">🤍</span></div>
+      <div class="product-body">
+        <div class="product-region">Lai Châu · Cao nguyên</div>
+        <h3>Mắc Khén — tiêu rừng</h3>
+        <p>Gia vị đặc trưng của người Thái đen, hương thơm gỗ và hoa nhẹ dịu.</p>
+        <div class="product-footer">
+          <div><div class="product-price">120.000₫</div><div class="product-unit">100g</div></div>
+          <button class="btn-add">Thêm vào giỏ</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="origin" id="origin">
+  <div class="origin-inner">
+    <div class="origin-left">
+      <div class="tag">Nguồn gốc minh bạch</div>
+      <h2>Từ <em>bàn tay</em><br>người nông dân</h2>
+      <p>Chúng tôi làm việc trực tiếp với hơn 500 hộ nông dân tại 6 tỉnh vùng Tây Bắc, đảm bảo giá thu mua công bằng và kỹ thuật canh tác bền vững.</p>
+      <div class="origin-facts">
+        <div class="fact-card"><span class="fact-icon">🌱</span><div class="fact-title">Không hóa chất</div><div class="fact-desc">Canh tác hoàn toàn tự nhiên, không phân bón và thuốc trừ sâu hóa học</div></div>
+        <div class="fact-card"><span class="fact-icon">🤝</span><div class="fact-title">Thương mại công bằng</div><div class="fact-desc">Giá thu mua cao hơn 30-50% so với thị trường cho nông dân</div></div>
+        <div class="fact-card"><span class="fact-icon">📍</span><div class="fact-title">Truy xuất nguồn gốc</div><div class="fact-desc">Quét QR mỗi sản phẩm để xem thông tin vùng canh tác và nông dân</div></div>
+        <div class="fact-card"><span class="fact-icon">🏅</span><div class="fact-title">Chứng nhận OCOP</div><div class="fact-desc">100% sản phẩm đạt tiêu chuẩn OCOP từ 3-5 sao của Bộ NN&PTNT</div></div>
+      </div>
+    </div>
+    <div class="origin-right">
+      <div class="origin-img oi1">🏔️</div>
+      <div class="origin-img oi2">👨‍🌾</div>
+      <div class="origin-img oi3">🌿</div>
+    </div>
+  </div>
+</section>
+
+<section class="certs">
+  <h2>Chứng nhận & Giải thưởng</h2>
+  <div class="cert-grid">
+    <div class="cert-item"><span class="cert-icon">🏅</span><div><div class="cert-name">OCOP ★★★★★</div><div class="cert-desc">Bộ Nông nghiệp & PTNT</div></div></div>
+    <div class="cert-item"><span class="cert-icon">🌱</span><div><div class="cert-name">Organic Certified</div><div class="cert-desc">USDA Organic Standard</div></div></div>
+    <div class="cert-item"><span class="cert-icon">🤝</span><div><div class="cert-name">Fair Trade</div><div class="cert-desc">Fairtrade International</div></div></div>
+    <div class="cert-item"><span class="cert-icon">🔬</span><div><div class="cert-name">VSATTP</div><div class="cert-desc">Bộ Y tế Việt Nam</div></div></div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-brand">Tây Bắc OCOP</div>
+  <div class="footer-links">
+    <a href="#">Sản phẩm</a><a href="#">Câu chuyện</a><a href="#">Đại lý</a><a href="#">Liên hệ</a>
+  </div>
+  <span style="font-size:12px">© 2026 Tây Bắc OCOP. Demo by Artio Media</span>
+</footer>
+<a href="../../webdesign.html" style="position:fixed;bottom:20px;right:20px;background:var(--dark, #111);color:white;padding:10px 16px;font-size:11px;letter-spacing:1px;z-index:999;text-decoration:none;border-radius:4px">← Quay lại thư viện</a>
+</body>
+</html>
