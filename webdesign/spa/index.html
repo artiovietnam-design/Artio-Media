@@ -1,1 +1,329 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Serene Spa & Wellness — Demo by Artio Media</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#f5f0e8;--dark:#0d0d0b;--gold:#c9a96e;--gold-light:#e8d5a3;
+    --muted:#8a8478;--white:#ffffff;--accent:#c9a96e;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'DM Sans',sans-serif;background:var(--dark);color:var(--cream);overflow-x:hidden}
 
+  /* NAV */
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:24px 60px;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(to bottom,rgba(13,13,11,.9),transparent);backdrop-filter:blur(8px)}
+  .nav-brand{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;letter-spacing:4px;text-transform:uppercase;color:var(--gold-light);text-decoration:none}
+  .nav-brand span{color:var(--gold)}
+  .nav-links{display:flex;gap:32px;align-items:center}
+  .nav-links a{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:rgba(245,240,232,.6);text-decoration:none;transition:color .3s}
+  .nav-links a:hover{color:var(--gold-light)}
+  .nav-cta{background:transparent;border:1px solid var(--gold);color:var(--gold);padding:10px 24px;font-size:11px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all .3s;font-family:'DM Sans',sans-serif}
+  .nav-cta:hover{background:var(--gold);color:var(--dark)}
+
+  /* HERO */
+  .hero{height:100vh;position:relative;display:flex;align-items:center;overflow:hidden}
+  .hero-bg{position:absolute;inset:0;background:linear-gradient(135deg,#0d0d0b 0%,#1a1208 40%,#0d0d0b 100%)}
+  .hero-bg::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 70% 50%,rgba(201,169,110,.12) 0%,transparent 60%)}
+  .hero-orb{position:absolute;right:-100px;top:50%;transform:translateY(-50%);width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(201,169,110,.15) 0%,transparent 70%);animation:pulse 6s ease-in-out infinite}
+  @keyframes pulse{0%,100%{transform:translateY(-50%) scale(1);opacity:.6}50%{transform:translateY(-50%) scale(1.1);opacity:1}}
+  .hero-content{position:relative;z-index:2;padding:0 60px;max-width:700px}
+  .hero-label{font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:24px;display:flex;align-items:center;gap:12px}
+  .hero-label::before{content:'';width:40px;height:1px;background:var(--gold)}
+  .hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(52px,7vw,88px);font-weight:300;line-height:1;letter-spacing:-1px;margin-bottom:28px}
+  .hero h1 em{font-style:italic;color:var(--gold-light)}
+  .hero p{font-size:15px;color:rgba(245,240,232,.55);line-height:1.8;max-width:400px;margin-bottom:48px;font-weight:300}
+  .hero-btns{display:flex;gap:16px;align-items:center}
+  .btn-gold{background:var(--gold);color:var(--dark);padding:16px 36px;font-size:12px;letter-spacing:2px;text-transform:uppercase;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:500;transition:all .3s}
+  .btn-gold:hover{background:var(--gold-light)}
+  .btn-ghost{background:transparent;color:var(--cream);padding:16px 36px;font-size:12px;letter-spacing:2px;text-transform:uppercase;border:1px solid rgba(245,240,232,.2);cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .3s}
+  .btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+  .hero-scroll{position:absolute;bottom:40px;left:60px;display:flex;align-items:center;gap:12px;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(245,240,232,.3)}
+  .hero-scroll::after{content:'';width:60px;height:1px;background:rgba(245,240,232,.2)}
+
+  /* MARQUEE */
+  .marquee-wrap{border-top:1px solid rgba(201,169,110,.15);border-bottom:1px solid rgba(201,169,110,.15);padding:18px 0;overflow:hidden;background:rgba(201,169,110,.04)}
+  .marquee-inner{display:flex;gap:48px;width:max-content;animation:scrollX 20s linear infinite}
+  @keyframes scrollX{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+  .marquee-item{font-family:'Cormorant Garamond',serif;font-size:14px;letter-spacing:3px;text-transform:uppercase;color:rgba(201,169,110,.5);white-space:nowrap;display:flex;align-items:center;gap:24px}
+  .marquee-dot{width:4px;height:4px;border-radius:50%;background:var(--gold);opacity:.4}
+
+  /* SERVICES */
+  .services{padding:120px 60px;max-width:1200px;margin:0 auto}
+  .section-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:72px}
+  .section-label{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+  .section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,4vw,52px);font-weight:300;line-height:1.1}
+  .section-title em{font-style:italic;color:var(--gold-light)}
+  .section-desc{max-width:280px;font-size:13px;color:var(--muted);line-height:1.8}
+  .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(201,169,110,.1)}
+  .service-card{background:var(--dark);padding:48px 40px;position:relative;overflow:hidden;transition:background .4s}
+  .service-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(201,169,110,.06),transparent);opacity:0;transition:opacity .4s}
+  .service-card:hover{background:#111108}
+  .service-card:hover::before{opacity:1}
+  .service-num{font-family:'Cormorant Garamond',serif;font-size:13px;color:rgba(201,169,110,.3);letter-spacing:2px;margin-bottom:28px}
+  .service-icon{font-size:32px;margin-bottom:20px;display:block}
+  .service-card h3{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:400;margin-bottom:14px;color:var(--cream)}
+  .service-card p{font-size:13px;color:var(--muted);line-height:1.8}
+  .service-price{margin-top:28px;font-size:12px;letter-spacing:1px;color:var(--gold)}
+
+  /* BOOKING */
+  .booking{padding:120px 60px;background:linear-gradient(135deg,#0a0a08,#1a1208)}
+  .booking-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+  .booking-left .section-label{margin-bottom:16px}
+  .booking-left h2{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,4vw,52px);font-weight:300;line-height:1.1;margin-bottom:24px}
+  .booking-left h2 em{font-style:italic;color:var(--gold-light)}
+  .booking-left p{font-size:14px;color:var(--muted);line-height:1.8;margin-bottom:40px}
+  .booking-perks{display:flex;flex-direction:column;gap:16px}
+  .perk{display:flex;align-items:center;gap:16px;font-size:13px;color:rgba(245,240,232,.7)}
+  .perk-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);flex-shrink:0}
+  .booking-form{background:rgba(245,240,232,.04);border:1px solid rgba(201,169,110,.15);padding:48px 40px}
+  .form-title{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:300;margin-bottom:32px;color:var(--gold-light)}
+  .form-group{margin-bottom:20px}
+  .form-group label{display:block;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+  .form-group input,.form-group select{width:100%;background:rgba(245,240,232,.04);border:1px solid rgba(201,169,110,.15);padding:14px 16px;color:var(--cream);font-size:14px;font-family:'DM Sans',sans-serif;outline:none;transition:border .3s}
+  .form-group input:focus,.form-group select:focus{border-color:var(--gold)}
+  .form-group select option{background:var(--dark)}
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .btn-submit{width:100%;background:var(--gold);color:var(--dark);border:none;padding:16px;font-size:12px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:500;margin-top:8px;transition:all .3s}
+  .btn-submit:hover{background:var(--gold-light)}
+
+  /* GALLERY */
+  .gallery{padding:120px 60px;max-width:1400px;margin:0 auto}
+  .gallery-grid{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:280px 280px;gap:12px;margin-top:60px}
+  .gallery-item{background:linear-gradient(135deg,#1a1208,#0d0d0b);overflow:hidden;position:relative}
+  .gallery-item:first-child{grid-row:1/3}
+  .gallery-item::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(13,13,11,.6),transparent)}
+  .gallery-item .g-label{position:absolute;bottom:20px;left:20px;z-index:2;font-family:'Cormorant Garamond',serif;font-size:16px;font-style:italic;color:rgba(245,240,232,.8)}
+  .g1{background:linear-gradient(135deg,#2d1f0a,#1a0f05)}
+  .g2{background:linear-gradient(135deg,#0a1a2d,#05100f)}
+  .g3{background:linear-gradient(135deg,#1a0a1a,#0d0508)}
+  .g4{background:linear-gradient(135deg,#0a1a0a,#05100a)}
+  .g5{background:linear-gradient(135deg,#1a1a0a,#0d0d05)}
+  /* Visual elements inside gallery */
+  .g-visual{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:64px;opacity:.15}
+
+  /* TESTIMONIAL */
+  .testimonial{padding:100px 60px;text-align:center;position:relative;overflow:hidden}
+  .testimonial::before{content:'"';position:absolute;top:-20px;left:50%;transform:translateX(-50%);font-family:'Cormorant Garamond',serif;font-size:280px;color:rgba(201,169,110,.04);line-height:1;pointer-events:none}
+  .testi-inner{max-width:700px;margin:0 auto;position:relative;z-index:1}
+  .testi-stars{color:var(--gold);font-size:18px;letter-spacing:4px;margin-bottom:32px}
+  .testi-quote{font-family:'Cormorant Garamond',serif;font-size:clamp(22px,3vw,32px);font-weight:300;font-style:italic;line-height:1.5;color:var(--cream);margin-bottom:32px}
+  .testi-author{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--gold)}
+
+  /* FOOTER */
+  footer{padding:60px;border-top:1px solid rgba(201,169,110,.12);display:flex;justify-content:space-between;align-items:center}
+  .footer-brand{font-family:'Cormorant Garamond',serif;font-size:20px;letter-spacing:3px;text-transform:uppercase;color:var(--gold-light)}
+  .footer-links{display:flex;gap:32px}
+  .footer-links a{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .3s}
+  .footer-links a:hover{color:var(--gold)}
+  .footer-copy{font-size:12px;color:rgba(138,132,120,.4)}
+
+  /* ARTIO BADGE */
+  .artio-badge{position:fixed;bottom:20px;right:20px;background:rgba(13,13,11,.95);border:1px solid rgba(201,169,110,.3);padding:10px 16px;font-size:11px;letter-spacing:1px;color:var(--gold);z-index:999;backdrop-filter:blur(8px)}
+
+  @media(max-width:768px){
+    nav{padding:20px 24px}
+    .hero-content,.services,.booking,.gallery,.testimonial,footer{padding-left:24px;padding-right:24px}
+    .services-grid,.booking-inner,.gallery-grid,.form-row{grid-template-columns:1fr}
+    .gallery-item:first-child{grid-row:auto}
+    .section-header{flex-direction:column;align-items:flex-start;gap:16px}
+    .nav-links{display:none}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-brand">Serene<span>.</span></a>
+  <div class="nav-links">
+    <a href="#services">Dịch vụ</a>
+    <a href="#booking">Đặt lịch</a>
+    <a href="#gallery">Không gian</a>
+    <a href="#contact">Liên hệ</a>
+  </div>
+  <button class="nav-cta">Đặt lịch ngay</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-orb"></div>
+  <div class="hero-content">
+    <div class="hero-label">Luxury Spa & Wellness</div>
+    <h1>Nghỉ ngơi<br>trong <em>tĩnh lặng</em><br>tuyệt đối</h1>
+    <p>Trải nghiệm liệu pháp spa cao cấp — nơi mọi căng thẳng được buông bỏ, tâm hồn được tái sinh trong không gian thuần khiết nhất.</p>
+    <div class="hero-btns">
+      <button class="btn-gold">Đặt lịch ngay</button>
+      <button class="btn-ghost">Khám phá dịch vụ</button>
+    </div>
+  </div>
+  <div class="hero-scroll">Cuộn xuống</div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-inner">
+    <span class="marquee-item">Liệu pháp đá nóng<div class="marquee-dot"></div></span>
+    <span class="marquee-item">Massage trị liệu<div class="marquee-dot"></div></span>
+    <span class="marquee-item">Chăm sóc da mặt<div class="marquee-dot"></div></span>
+    <span class="marquee-item">Tắm thảo dược<div class="marquee-dot"></div></span>
+    <span class="marquee-item">Yoga & Thiền<div class="marquee-dot"></div></span>
+    <span class="marquee-item">Gói VIP trọn ngày<div class="marquee-dot"></div></span>
+    <span class="marquee-item">Liệu pháp đá nóng<div class="marquee-dot"></div></span>
+    <span class="marquee-item">Massage trị liệu<div class="marquee-dot"></div></span>
+    <span class="marquee-item">Chăm sóc da mặt<div class="marquee-dot"></div></span>
+    <span class="marquee-item">Tắm thảo dược<div class="marquee-dot"></div></span>
+    <span class="marquee-item">Yoga & Thiền<div class="marquee-dot"></div></span>
+    <span class="marquee-item">Gói VIP trọn ngày<div class="marquee-dot"></div></span>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="section-header">
+    <div>
+      <div class="section-label">Dịch vụ</div>
+      <h2 class="section-title">Liệu pháp<br><em>thuần khiết</em></h2>
+    </div>
+    <p class="section-desc">Mỗi liệu trình được thiết kế riêng biệt, sử dụng nguyên liệu thiên nhiên cao cấp từ khắp nơi trên thế giới.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-num">01</div>
+      <span class="service-icon">🪨</span>
+      <h3>Liệu pháp đá nóng</h3>
+      <p>Đá basalt nung nóng đặt trên các huyệt đạo, giải phóng căng thẳng cơ sâu, cải thiện tuần hoàn máu toàn thân.</p>
+      <div class="service-price">Từ 850.000 ₫ / 90 phút</div>
+    </div>
+    <div class="service-card">
+      <div class="service-num">02</div>
+      <span class="service-icon">🌸</span>
+      <h3>Chăm sóc da mặt</h3>
+      <p>Phác đồ chăm sóc chuyên sâu với serum vàng 24K và chiết xuất hoa sen trắng, trẻ hoá làn da tức thì.</p>
+      <div class="service-price">Từ 1.200.000 ₫ / 75 phút</div>
+    </div>
+    <div class="service-card">
+      <div class="service-num">03</div>
+      <span class="service-icon">🌿</span>
+      <h3>Tắm thảo dược</h3>
+      <p>Ngâm mình trong bồn tắm thảo dược tuyển chọn từ vùng núi Tây Bắc, thải độc và phục hồi năng lượng.</p>
+      <div class="service-price">Từ 650.000 ₫ / 60 phút</div>
+    </div>
+    <div class="service-card">
+      <div class="service-num">04</div>
+      <span class="service-icon">💆</span>
+      <h3>Massage trị liệu</h3>
+      <p>Kỹ thuật kết hợp Shiatsu Nhật Bản và Lomi Lomi Hawaii, mang lại sự thư giãn sâu nhất cho cơ thể và tâm trí.</p>
+      <div class="service-price">Từ 750.000 ₫ / 60 phút</div>
+    </div>
+    <div class="service-card">
+      <div class="service-num">05</div>
+      <span class="service-icon">🧘</span>
+      <h3>Yoga & Thiền định</h3>
+      <p>Lớp học nhỏ không quá 6 người với huấn luyện viên chứng nhận quốc tế, trong không gian thiền yên tĩnh tuyệt đối.</p>
+      <div class="service-price">Từ 450.000 ₫ / buổi</div>
+    </div>
+    <div class="service-card">
+      <div class="service-num">06</div>
+      <span class="service-icon">✨</span>
+      <h3>Gói VIP trọn ngày</h3>
+      <p>Trải nghiệm đầy đủ 8 tiếng gồm tất cả liệu pháp, bữa trưa chay thanh lọc và dịch vụ xe đưa đón riêng.</p>
+      <div class="service-price">Từ 4.500.000 ₫ / ngày</div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section class="booking" id="booking">
+  <div class="booking-inner">
+    <div class="booking-left">
+      <div class="section-label">Đặt lịch online</div>
+      <h2>Dành riêng<br><em>khoảnh khắc</em><br>cho bạn</h2>
+      <p>Đặt lịch trực tuyến dễ dàng — xác nhận ngay lập tức qua email và Zalo. Thanh toán cọc 30% để giữ chỗ.</p>
+      <div class="booking-perks">
+        <div class="perk"><div class="perk-dot"></div>Xác nhận lịch trong vòng 15 phút</div>
+        <div class="perk"><div class="perk-dot"></div>Miễn phí hủy trước 24 giờ</div>
+        <div class="perk"><div class="perk-dot"></div>Xe đưa đón cho gói VIP</div>
+        <div class="perk"><div class="perk-dot"></div>Tặng trà thảo mộc & trái cây tươi</div>
+      </div>
+    </div>
+    <div class="booking-form">
+      <div class="form-title">Đặt lịch ngay</div>
+      <div class="form-group">
+        <label>Họ và tên</label>
+        <input type="text" placeholder="Nguyễn Thị Lan">
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Số điện thoại</label>
+          <input type="tel" placeholder="0901 234 567">
+        </div>
+        <div class="form-group">
+          <label>Ngày đặt lịch</label>
+          <input type="date">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Dịch vụ</label>
+          <select>
+            <option>Liệu pháp đá nóng</option>
+            <option>Chăm sóc da mặt</option>
+            <option>Tắm thảo dược</option>
+            <option>Massage trị liệu</option>
+            <option>Gói VIP trọn ngày</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Giờ</label>
+          <select>
+            <option>09:00</option><option>10:00</option><option>11:00</option>
+            <option>14:00</option><option>15:00</option><option>16:00</option>
+          </select>
+        </div>
+      </div>
+      <button class="btn-submit">Xác nhận đặt lịch →</button>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery">
+  <div class="section-label">Không gian</div>
+  <h2 class="section-title">Kiến trúc của <em>sự tĩnh lặng</em></h2>
+  <div class="gallery-grid">
+    <div class="gallery-item g1"><div class="g-visual">🕯️</div><div class="g-label">Phòng Thiền</div></div>
+    <div class="gallery-item g2"><div class="g-visual">💧</div><div class="g-label">Bồn ngâm</div></div>
+    <div class="gallery-item g3"><div class="g-visual">🌸</div><div class="g-label">Phòng VIP</div></div>
+    <div class="gallery-item g4"><div class="g-visual">🧖</div><div class="g-label">Phòng massage</div></div>
+    <div class="gallery-item g5"><div class="g-visual">🌿</div><div class="g-label">Vườn thảo dược</div></div>
+  </div>
+</section>
+
+<!-- TESTIMONIAL -->
+<section class="testimonial">
+  <div class="testi-inner">
+    <div class="testi-stars">★★★★★</div>
+    <div class="testi-quote">"Không gian ở đây khiến tôi quên đi mọi áp lực công việc. Liệu pháp đá nóng và massage kết hợp đã giúp tôi ngủ ngon lại sau nhiều tháng mất ngủ kinh niên."</div>
+    <div class="testi-author">Nguyễn Minh Châu — Giám đốc Marketing</div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-brand">Serene Spa</div>
+  <div class="footer-links">
+    <a href="#">Dịch vụ</a>
+    <a href="#">Đặt lịch</a>
+    <a href="#">Không gian</a>
+    <a href="#">Liên hệ</a>
+  </div>
+  <div class="footer-copy">© 2026 Serene Spa. Demo by Artio Media</div>
+</footer>
+
+<a href="../../webdesign.html" style="position:fixed;bottom:20px;right:20px;background:var(--dark, #111);color:white;padding:10px 16px;font-size:11px;letter-spacing:1px;z-index:999;text-decoration:none;border-radius:4px">← Quay lại thư viện</a>
+
+</body>
+</html>
