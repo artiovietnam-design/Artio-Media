@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StyleViet Magazine — Demo by Artio Media</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#fafafa;--dark:#111;--red:#dc2626;--muted:#6b7280;--warm-gray:#f3f1ee;--border:#e5e5e5;--white:#fff}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--dark);overflow-x:hidden}
+
+  /* TOP TICKER */
+  .ticker{background:var(--dark);color:white;padding:8px 0;overflow:hidden}
+  .ticker-inner{display:flex;gap:60px;width:max-content;animation:tick 30s linear infinite;font-size:12px;font-weight:500;letter-spacing:.5px}
+  @keyframes tick{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+  .ticker-item{white-space:nowrap;display:flex;align-items:center;gap:16px}
+  .ticker-dot{width:4px;height:4px;border-radius:50%;background:var(--red);flex-shrink:0}
+
+  /* NAV */
+  nav{background:white;border-bottom:3px solid var(--dark);position:sticky;top:0;z-index:100}
+  .nav-top{padding:16px 60px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border)}
+  .nav-brand{font-family:'Libre Baskerville',serif;font-size:32px;font-weight:700;color:var(--dark);text-decoration:none;letter-spacing:-1px}
+  .nav-brand span{color:var(--red)}
+  .nav-meta{display:flex;align-items:center;gap:20px;font-size:11px;color:var(--muted)}
+  .nav-subscribe{background:var(--red);color:white;padding:9px 18px;font-size:12px;font-weight:600;border:none;cursor:pointer;font-family:'Inter',sans-serif;letter-spacing:.5px;transition:background .2s}
+  .nav-subscribe:hover{background:#b91c1c}
+  .nav-bottom{padding:0 60px;display:flex;gap:0}
+  .nav-cat{padding:12px 20px;font-size:13px;font-weight:600;color:var(--dark);text-decoration:none;border-bottom:3px solid transparent;transition:all .2s;margin-bottom:-3px}
+  .nav-cat:hover,.nav-cat.active{color:var(--red);border-bottom-color:var(--red)}
+
+  /* HERO EDITORIAL */
+  .hero{display:grid;grid-template-columns:2fr 1fr;border-bottom:2px solid var(--dark);max-height:600px;overflow:hidden}
+  .hero-main{position:relative;overflow:hidden;cursor:pointer}
+  .hero-main-bg{height:100%;background:linear-gradient(135deg,#1a1a2e,#2d1b69,#1a0a0a);display:flex;align-items:flex-end;padding:40px;position:relative;min-height:500px}
+  .hero-main-bg::before{content:'📰';position:absolute;top:50%;left:50%;transform:translate(-50%,-60%);font-size:150px;opacity:.06}
+  .hero-category{background:var(--red);color:white;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:4px 10px;display:inline-block;margin-bottom:16px}
+  .hero-main h1{font-family:'Libre Baskerville',serif;font-size:clamp(28px,3.5vw,42px);font-weight:700;color:white;line-height:1.2;margin-bottom:14px}
+  .hero-main h1 em{font-style:italic;color:#fca5a5}
+  .hero-main p{font-size:14px;color:rgba(255,255,255,.65);line-height:1.7;max-width:440px;margin-bottom:20px}
+  .article-meta{display:flex;align-items:center;gap:16px;font-size:12px;color:rgba(255,255,255,.5)}
+  .author-dot{width:4px;height:4px;border-radius:50%;background:rgba(255,255,255,.4)}
+  .hero-sidebar{border-left:1px solid var(--border);display:flex;flex-direction:column}
+  .hero-sidebar-item{padding:20px 24px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .2s;flex:1;display:flex;flex-direction:column;justify-content:center}
+  .hero-sidebar-item:hover{background:var(--warm-gray)}
+  .hsi-cat{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--red);margin-bottom:8px}
+  .hsi-title{font-family:'Libre Baskerville',serif;font-size:15px;font-weight:700;line-height:1.35;margin-bottom:8px}
+  .hsi-meta{font-size:11px;color:var(--muted)}
+
+  /* MAIN CONTENT */
+  .content-wrap{max-width:1280px;margin:0 auto;padding:48px 60px;display:grid;grid-template-columns:1fr 320px;gap:48px}
+
+  /* ARTICLES */
+  .articles-section h2{font-family:'Libre Baskerville',serif;font-size:18px;font-weight:700;border-bottom:3px solid var(--dark);padding-bottom:10px;margin-bottom:28px;display:flex;align-items:center;gap:12px}
+  .section-line{flex:1;height:1px;background:var(--border)}
+  .articles-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:28px;margin-bottom:48px}
+  .article-card{cursor:pointer;border-bottom:1px solid var(--border);padding-bottom:20px}
+  .article-img{height:180px;background:var(--warm-gray);border-radius:4px;margin-bottom:14px;display:flex;align-items:center;justify-content:center;font-size:48px;overflow:hidden;position:relative}
+  .ai1{background:linear-gradient(135deg,#fef3c7,#fde68a)}
+  .ai2{background:linear-gradient(135deg,#dbeafe,#bfdbfe)}
+  .ai3{background:linear-gradient(135deg,#d1fae5,#a7f3d0)}
+  .ai4{background:linear-gradient(135deg,#fce7f3,#fbcfe8)}
+  .ai5{background:linear-gradient(135deg,#ede9fe,#ddd6fe)}
+  .ai6{background:linear-gradient(135deg,#ffedd5,#fed7aa)}
+  .article-cat{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--red);margin-bottom:8px}
+  .article-card h3{font-family:'Libre Baskerville',serif;font-size:17px;font-weight:700;line-height:1.4;margin-bottom:8px;transition:color .2s}
+  .article-card:hover h3{color:var(--red)}
+  .article-card p{font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:12px}
+  .article-footer{display:flex;justify-content:space-between;align-items:center;font-size:11px;color:var(--muted)}
+  .read-time{background:var(--warm-gray);padding:3px 8px;border-radius:2px;font-weight:500}
+
+  /* LIST ARTICLES */
+  .list-articles{display:flex;flex-direction:column;gap:0}
+  .list-item{display:grid;grid-template-columns:100px 1fr;gap:16px;padding:16px 0;border-bottom:1px solid var(--border);cursor:pointer;transition:background .15s}
+  .list-item:hover .list-title{color:var(--red)}
+  .list-thumb{border-radius:4px;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:24px;height:70px}
+  .list-cat{font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--red);margin-bottom:5px}
+  .list-title{font-family:'Libre Baskerville',serif;font-size:14px;font-weight:700;line-height:1.4;margin-bottom:6px;transition:color .2s}
+  .list-meta{font-size:11px;color:var(--muted)}
+
+  /* SIDEBAR */
+  .sidebar-widget{margin-bottom:36px}
+  .widget-title{font-family:'Libre Baskerville',serif;font-size:16px;font-weight:700;border-bottom:3px solid var(--dark);padding-bottom:10px;margin-bottom:20px}
+  .newsletter-box{background:var(--dark);padding:24px;border-radius:4px;text-align:center}
+  .newsletter-box h3{font-family:'Libre Baskerville',serif;font-size:18px;color:white;margin-bottom:8px}
+  .newsletter-box p{font-size:12px;color:rgba(255,255,255,.55);margin-bottom:16px;line-height:1.6}
+  .newsletter-input{width:100%;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);padding:11px 14px;color:white;font-size:13px;font-family:'Inter',sans-serif;outline:none;margin-bottom:10px;border-radius:4px}
+  .newsletter-btn{width:100%;background:var(--red);color:white;border:none;padding:11px;font-size:13px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;border-radius:4px;transition:background .2s}
+  .newsletter-btn:hover{background:#b91c1c}
+  .trending-list{display:flex;flex-direction:column;gap:0}
+  .trending-item{display:flex;align-items:flex-start;gap:14px;padding:14px 0;border-bottom:1px solid var(--border);cursor:pointer}
+  .trending-num{font-family:'Libre Baskerville',serif;font-size:28px;font-weight:700;color:var(--border);line-height:1;flex-shrink:0;width:32px}
+  .trending-cat{font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--red);margin-bottom:4px}
+  .trending-title{font-size:13px;font-weight:600;line-height:1.4;transition:color .2s}
+  .trending-item:hover .trending-title{color:var(--red)}
+  .tags-cloud{display:flex;flex-wrap:wrap;gap:8px}
+  .tag-pill{font-size:11px;padding:5px 12px;border:1px solid var(--border);color:var(--muted);cursor:pointer;transition:all .2s;border-radius:2px}
+  .tag-pill:hover{background:var(--dark);color:white;border-color:var(--dark)}
+
+  footer{background:var(--dark);color:rgba(255,255,255,.4);padding:48px 60px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;margin-top:40px}
+  .footer-brand{font-family:'Libre Baskerville',serif;font-size:24px;font-weight:700;color:white}
+  .footer-brand span{color:var(--red)}
+  .footer-links{display:flex;gap:20px}
+  .footer-links a{font-size:12px;color:rgba(255,255,255,.35);text-decoration:none;transition:color .2s}
+  .footer-links a:hover{color:white}
+  .artio-badge{position:fixed;bottom:20px;right:20px;background:var(--red);padding:10px 16px;font-size:11px;letter-spacing:1px;color:white;z-index:999}
+  @media(max-width:768px){
+    .ticker{display:none}.nav-top{padding:12px 20px}.nav-bottom{padding:0 20px;overflow-x:auto}
+    .hero{grid-template-columns:1fr;max-height:none}.hero-sidebar{display:none}
+    .content-wrap{grid-template-columns:1fr;padding:32px 20px}.articles-grid{grid-template-columns:1fr}
+    footer{padding:32px 20px}
+  }
+</style>
+</head>
+<body>
+
+<div class="ticker">
+  <div class="ticker-inner">
+    <span class="ticker-item"><span class="ticker-dot"></span>BREAKING: Xu hướng thời trang Thu Đông 2026 — Tối giản và bền vững lên ngôi</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Triển lãm nghệ thuật đương đại lớn nhất Đông Nam Á khai mạc tại Hà Nội</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Làng nghề dệt lụa Vạn Phúc: Hành trình số hóa 1.000 năm truyền thống</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>BREAKING: Xu hướng thời trang Thu Đông 2026 — Tối giản và bền vững lên ngôi</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Triển lãm nghệ thuật đương đại lớn nhất Đông Nam Á khai mạc tại Hà Nội</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Làng nghề dệt lụa Vạn Phúc: Hành trình số hóa 1.000 năm truyền thống</span>
+  </div>
+</div>
+
+<nav>
+  <div class="nav-top">
+    <a href="#" class="nav-brand">Style<span>Viet</span></a>
+    <div class="nav-meta">
+      <span>Thứ Tư, 18/03/2026</span>
+      <span>|</span>
+      <span>Hà Nội · 28°C ⛅</span>
+    </div>
+    <button class="nav-subscribe">ĐĂNG KÝ ĐỌC</button>
+  </div>
+  <div class="nav-bottom">
+    <a href="#" class="nav-cat active">Thời trang</a>
+    <a href="#" class="nav-cat">Lifestyle</a>
+    <a href="#" class="nav-cat">Làm đẹp</a>
+    <a href="#" class="nav-cat">Ẩm thực</a>
+    <a href="#" class="nav-cat">Du lịch</a>
+    <a href="#" class="nav-cat">Văn hóa</a>
+    <a href="#" class="nav-cat">Nghệ thuật</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-main">
+    <div class="hero-main-bg">
+      <div>
+        <div class="hero-category">Thời trang</div>
+        <h1>Tối giản Việt — Khi <em>áo dài</em> gặp streetwear thế kỷ 21</h1>
+        <p>Thế hệ designer trẻ đang táo bạo tái định nghĩa thời trang truyền thống, tạo ra ngôn ngữ thẩm mỹ mới cho người Việt hiện đại.</p>
+        <div class="article-meta">
+          <span>Bởi Minh Châu Nguyễn</span>
+          <div class="author-dot"></div>
+          <span>18/03/2026</span>
+          <div class="author-dot"></div>
+          <span>8 phút đọc</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-sidebar">
+    <div class="hero-sidebar-item">
+      <div class="hsi-cat">Làm đẹp</div>
+      <div class="hsi-title">5 routine chăm sóc da của phụ nữ Hà Nội — Bí quyết đến từ bà ngoại</div>
+      <div class="hsi-meta">Lan Anh · 6 phút đọc</div>
+    </div>
+    <div class="hero-sidebar-item">
+      <div class="hsi-cat">Du lịch</div>
+      <div class="hsi-title">Làng cổ Đường Lâm mùa hoa gạo — Bình yên giữa lòng thủ đô</div>
+      <div class="hsi-meta">Hải Yến · 5 phút đọc</div>
+    </div>
+    <div class="hero-sidebar-item">
+      <div class="hsi-cat">Ẩm thực</div>
+      <div class="hsi-title">Phở fusion và cuộc tranh luận về bản sắc ẩm thực Việt</div>
+      <div class="hsi-meta">Tuấn Kiệt · 7 phút đọc</div>
+    </div>
+    <div class="hero-sidebar-item">
+      <div class="hsi-cat">Văn hóa</div>
+      <div class="hsi-title">Nghệ nhân cuối cùng làm nón lá Huế truyền thống — Câu chuyện còn lại</div>
+      <div class="hsi-meta">Thu Trang · 10 phút đọc</div>
+    </div>
+  </div>
+</section>
+
+<div class="content-wrap">
+  <div>
+    <div class="articles-section">
+      <h2>Mới nhất <div class="section-line"></div></h2>
+      <div class="articles-grid">
+        <div class="article-card"><div class="article-img ai1">👗</div><div class="article-cat">Thời trang</div><h3>Sustainable fashion: Khi người Việt mua đồ cũ không còn là điều đáng ngại</h3><p>Thị trường đồ secondhand tại TP.HCM và Hà Nội đang bùng nổ với thế hệ Z...</p><div class="article-footer"><span>Minh Châu · 18/03</span><span class="read-time">5 phút</span></div></div>
+        <div class="article-card"><div class="article-img ai2">💄</div><div class="article-cat">Làm đẹp</div><h3>Skinimalism — Xu hướng dưỡng da tối giản đang thay thế 10-step routine</h3><p>Thay vì chồng chất nhiều lớp sản phẩm, phụ nữ Việt Nam đang quay về...</p><div class="article-footer"><span>Thu Hà · 17/03</span><span class="read-time">4 phút</span></div></div>
+        <div class="article-card"><div class="article-img ai3">🍜</div><div class="article-cat">Ẩm thực</div><h3>Bún bò Huế và hành trình chinh phục thực khách châu Âu</h3><p>Những tô bún bò đang xuất hiện ngày càng nhiều tại các con phố ẩm thực London, Paris...</p><div class="article-footer"><span>Thanh Trúc · 17/03</span><span class="read-time">6 phút</span></div></div>
+        <div class="article-card"><div class="article-img ai4">🎨</div><div class="article-cat">Nghệ thuật</div><h3>NFT Art Việt Nam: Từ viral internet đến triển lãm quốc tế</h3><p>Các nghệ sĩ digital art Việt đang tìm thấy khán giả toàn cầu thông qua nền tảng Web3...</p><div class="article-footer"><span>Đức Anh · 16/03</span><span class="read-time">8 phút</span></div></div>
+      </div>
+    </div>
+    <div class="articles-section">
+      <h2>Lifestyle <div class="section-line"></div></h2>
+      <div class="list-articles">
+        <div class="list-item"><div class="list-thumb ai5">🏡</div><div><div class="list-cat">Lifestyle</div><div class="list-title">Căn hộ 30m² Sài Gòn và nghệ thuật sống tối giản của cặp đôi trẻ</div><div class="list-meta">Hoài An · 15/03 · 5 phút đọc</div></div></div>
+        <div class="list-item"><div class="list-thumb ai6">🌿</div><div><div class="list-cat">Wellness</div><div class="list-title">Vì sao người Hà Nội đang đổ xô học thiền định và breathwork</div><div class="list-meta">Minh Thu · 15/03 · 7 phút đọc</div></div></div>
+        <div class="list-item"><div class="list-thumb ai1">✈️</div><div><div class="list-cat">Du lịch</div><div class="list-title">Slow travel: Trào lưu du lịch chậm của thế hệ millennial Việt</div><div class="list-meta">Khánh Linh · 14/03 · 6 phút đọc</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div class="sidebar-widget">
+      <div class="newsletter-box">
+        <h3>Đọc thông minh hơn</h3>
+        <p>Nhận bản tóm tắt các bài hay nhất mỗi sáng thứ Hai qua email.</p>
+        <input class="newsletter-input" type="email" placeholder="email@cuaban.com">
+        <button class="newsletter-btn">Đăng ký miễn phí →</button>
+      </div>
+    </div>
+    <div class="sidebar-widget">
+      <div class="widget-title">Đang được đọc nhiều</div>
+      <div class="trending-list">
+        <div class="trending-item"><div class="trending-num">01</div><div><div class="trending-cat">Thời trang</div><div class="trending-title">Áo dài cách tân — 10 thiết kế đẹp nhất 2026</div></div></div>
+        <div class="trending-item"><div class="trending-num">02</div><div><div class="trending-cat">Làm đẹp</div><div class="trending-title">Review: Serum vitamin C của thương hiệu Việt</div></div></div>
+        <div class="trending-item"><div class="trending-num">03</div><div><div class="trending-cat">Ẩm thực</div><div class="trending-title">Cà phê Việt nơi nào ngon nhất thế giới?</div></div></div>
+        <div class="trending-item"><div class="trending-num">04</div><div><div class="trending-cat">Văn hóa</div><div class="trending-title">Thế hệ Z và tình yêu với văn hóa dân gian</div></div></div>
+      </div>
+    </div>
+    <div class="sidebar-widget">
+      <div class="widget-title">Chủ đề hot</div>
+      <div class="tags-cloud">
+        <span class="tag-pill">Áo dài</span><span class="tag-pill">Skincare</span><span class="tag-pill">OCOP</span><span class="tag-pill">Ẩm thực đường phố</span><span class="tag-pill">Minimalism</span><span class="tag-pill">Sustainable</span><span class="tag-pill">Gen Z</span><span class="tag-pill">Digital Art</span><span class="tag-pill">Hà Nội cổ</span><span class="tag-pill">Cà phê</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-brand">Style<span>Viet</span></div>
+  <div class="footer-links">
+    <a href="#">Thời trang</a><a href="#">Lifestyle</a><a href="#">Quảng cáo</a><a href="#">Viết cho chúng tôi</a><a href="#">Liên hệ</a>
+  </div>
+  <span style="font-size:12px">© 2026 StyleViet Magazine. Demo by Artio Media</span>
+</footer>
+<a href="../../webdesign.html" style="position:fixed;bottom:20px;right:20px;background:var(--dark, #111);color:white;padding:10px 16px;font-size:11px;letter-spacing:1px;z-index:999;text-decoration:none;border-radius:4px">← Quay lại thư viện</a>
+</body>
+</html>
