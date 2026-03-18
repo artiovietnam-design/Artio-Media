@@ -62,6 +62,26 @@
     .portfolio-cta{padding:48px 20px}
   }
   @media(max-width:480px){.portfolio-grid{grid-template-columns:1fr}}
+
+  /* ── HAMBURGER + MOBILE MENU ── */
+  .nav-hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;width:36px;height:36px;background:none;border:none;cursor:pointer;padding:4px;border-radius:8px}
+  .nav-hamburger span{display:block;width:22px;height:2px;background:var(--dark);border-radius:2px;transition:all .3s;transform-origin:center}
+  .nav-hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  .nav-hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+  .nav-hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+  .mobile-menu{display:none;position:fixed;inset:0;background:var(--bg);z-index:99;flex-direction:column;padding:80px 28px 40px;overflow-y:auto}
+  .mobile-menu.open{display:flex}
+  .mobile-menu a{font-size:26px;font-weight:800;color:var(--dark);text-decoration:none;padding:16px 0;border-bottom:1px solid rgba(0,0,0,.07);display:flex;align-items:center;justify-content:space-between;letter-spacing:-.5px;transition:color .2s}
+  .mobile-menu a::after{content:'\2192';font-size:18px;opacity:.3;font-weight:400}
+  .mobile-menu a:hover{color:var(--accent)}
+  .mobile-menu .mobile-cta{margin-top:32px;background:var(--accent);color:white;padding:18px 28px;border-radius:100px;font-size:17px;font-weight:700;text-align:center;display:block;width:100%}
+  .mobile-menu .mobile-cta::after{display:none}
+  .mobile-menu-foot{margin-top:auto;padding-top:32px;font-size:13px;color:var(--muted)}
+  @media(max-width:768px){
+    nav{padding:14px 20px !important}
+    .nav-links{display:none !important}
+    .nav-hamburger{display:flex}
+  }
 </style>
 </head>
 <body>
@@ -77,7 +97,21 @@
     <a href="index.html#pricing">Bảng giá</a>
     <a href="index.html#contact" class="btn-primary">Liên hệ ngay</a>
   </div>
+  <button class="nav-hamburger" id="hamburger" aria-label="Menu" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html#services" onclick="closeMenu()">Dịch vụ</a>
+  <a href="portfolio.html" onclick="closeMenu()">Portfolio</a>
+  <a href="blog.html" onclick="closeMenu()">Blog</a>
+  <a href="webdesign.html" onclick="closeMenu()">Thiết kế Web</a>
+  <a href="index.html#pricing" onclick="closeMenu()">Bảng giá</a>
+  <a href="index.html#contact" class="mobile-cta" onclick="closeMenu()">Liên hệ ngay →</a>
+  <div class="mobile-menu-foot">© 2026 Artio Media · artio.vn</div>
+</div>
 
 <div class="portfolio-hero fade-up">
   <p class="section-label">Artio Media — Portfolio</p>
@@ -235,6 +269,19 @@
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
   }, { threshold: 0.08 });
   faders.forEach(el => observer.observe(el));
+
+  function toggleMenu() {
+    const menu = document.getElementById('mobileMenu');
+    const btn = document.getElementById('hamburger');
+    const isOpen = menu.classList.toggle('open');
+    btn.classList.toggle('open');
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  }
+  function closeMenu() {
+    document.getElementById('mobileMenu').classList.remove('open');
+    document.getElementById('hamburger').classList.remove('open');
+    document.body.style.overflow = '';
+  }
 </script>
 </body>
 </html>
