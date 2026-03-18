@@ -82,6 +82,7 @@
   .ta1{background:var(--accent3);color:white}.ta2{background:var(--accent);color:white}
   .testi-author-info strong{display:block;font-weight:700;font-size:14px}
   .testi-author-info span{font-size:13px;color:var(--muted)}
+  /* MARQUEE */
   .marquee-section{padding:48px 0;overflow:hidden;background:var(--bg);border-top:1px solid rgba(0,0,0,.07);border-bottom:1px solid rgba(0,0,0,.07)}
   .marquee-label{text-align:center;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:24px}
   .marquee-track{display:flex;gap:16px;width:max-content;animation:marqueeScroll 50s linear infinite}
@@ -90,6 +91,7 @@
   .marquee-item{flex-shrink:0;width:180px;height:120px;border-radius:16px;overflow:hidden;background:#fff;border:1px solid rgba(0,0,0,.06);box-shadow:0 4px 16px rgba(0,0,0,.06);transition:transform .25s,box-shadow .25s}
   .marquee-item:hover{transform:scale(1.06);box-shadow:0 12px 32px rgba(0,0,0,.14)}
   .marquee-item img{width:100%;height:100%;object-fit:cover;display:block}
+  /* WORK */
   .work{padding:80px 48px;max-width:1100px;margin:0 auto}
   .work-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:40px}
   .work-header h2{font-family:'Be Vietnam Pro',sans-serif;font-size:36px;font-weight:800;letter-spacing:-1px}
@@ -166,13 +168,65 @@
   .footer-links{display:flex;gap:24px}
   .fade-up{opacity:0;transform:translateY(30px);transition:opacity .6s ease,transform .6s ease}
   .fade-up.visible{opacity:1;transform:translateY(0)}
+
+  /* ── HAMBURGER ── */
+  .nav-hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;width:36px;height:36px;background:none;border:none;cursor:pointer;padding:4px;border-radius:8px}
+  .nav-hamburger span{display:block;width:22px;height:2px;background:var(--dark);border-radius:2px;transition:all .3s;transform-origin:center}
+  .nav-hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  .nav-hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+  .nav-hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+  /* ── MOBILE MENU DRAWER ── */
+  .mobile-menu{display:none;position:fixed;inset:0;background:var(--bg);z-index:99;flex-direction:column;padding:80px 28px 40px;overflow-y:auto}
+  .mobile-menu.open{display:flex}
+  .mobile-menu a{font-size:26px;font-weight:800;color:var(--dark);text-decoration:none;padding:16px 0;border-bottom:1px solid rgba(0,0,0,.07);display:flex;align-items:center;justify-content:space-between;letter-spacing:-.5px;transition:color .2s}
+  .mobile-menu a::after{content:'→';font-size:18px;opacity:.3;font-weight:400}
+  .mobile-menu a:hover{color:var(--accent)}
+  .mobile-menu .mobile-cta{margin-top:32px;background:var(--accent);color:white;padding:18px 28px;border-radius:100px;font-size:17px;font-weight:700;text-align:center;display:block;width:100%}
+  .mobile-menu .mobile-cta::after{display:none}
+  .mobile-menu-foot{margin-top:auto;padding-top:32px;font-size:13px;color:var(--muted)}
+
+  /* ── MOBILE RESPONSIVE ── */
   @media(max-width:768px){
-    nav{padding:16px 20px}
-    .hero,.steps,.benefits-grid,.work-grid,.pricing-grid,.faq,.footer-cta-inner,.testimonials{grid-template-columns:1fr}
-    .hero,.how,.benefits,.work,.pricing,.faq{padding:48px 20px}
-    .footer-cta{padding:60px 20px}
-    .logo-bar{gap:20px;padding:20px}
+    nav{padding:14px 20px}
+    .nav-links{display:none}
+    .nav-hamburger{display:flex}
+    .hero{grid-template-columns:1fr;padding:36px 20px 32px;gap:28px}
+    .hero-text h1{font-size:clamp(34px,9vw,48px);letter-spacing:-1px}
+    .hero-text p{font-size:14px;max-width:100%}
+    .hero-card{padding:24px 20px}
+    .hero-card h2{font-size:22px}
+    .hero-card p{font-size:12px;margin-bottom:20px}
+    .logo-bar{gap:12px;padding:16px 20px;justify-content:flex-start;overflow-x:auto;flex-wrap:nowrap;-webkit-overflow-scrolling:touch}
+    .logo-bar span{font-size:11px;white-space:nowrap;flex-shrink:0}
+    .how{padding:48px 20px}
+    .how h2{font-size:clamp(24px,7vw,32px);margin-bottom:32px}
+    .steps{grid-template-columns:1fr}
+    .step-card{padding:24px 20px}
+    .about{padding:48px 20px}
+    .about p{font-size:15px}
+    .tagline-section{padding:48px 20px}
+    .tagline-section h2{font-size:clamp(20px,6vw,28px)}
+    .benefits{padding:48px 20px}
+    .benefits-grid{grid-template-columns:1fr;margin-top:28px}
+    .testimonials{grid-template-columns:1fr;padding:48px 20px}
+    .testi-card blockquote{font-size:16px}
     .marquee-item{width:140px;height:95px}
+    .work{padding:48px 20px}
+    .work-header{flex-direction:column;align-items:flex-start;gap:12px}
+    .work-header h2{font-size:24px}
+    .work-grid{grid-template-columns:1fr}
+    .pricing{padding:48px 20px}
+    .pricing-grid{grid-template-columns:1fr}
+    .price-card{padding:28px 22px}
+    .price-amount{font-size:40px}
+    .pricing-note{flex-direction:column;gap:12px;align-items:center}
+    .faq{grid-template-columns:1fr;padding:48px 20px;gap:32px}
+    .footer-cta{padding:48px 20px}
+    .footer-cta-inner{grid-template-columns:1fr;gap:36px}
+    .footer-cta h2{font-size:clamp(24px,7vw,32px)}
+    footer{padding:24px 20px;flex-direction:column;align-items:flex-start;gap:20px}
+    .footer-links{flex-wrap:wrap;gap:12px}
   }
 </style>
 </head>
@@ -191,7 +245,21 @@
     <a href="#pricing">Bảng giá</a>
     <a href="#contact" class="btn-primary">Liên hệ ngay</a>
   </div>
+  <button class="nav-hamburger" id="hamburger" aria-label="Menu" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#services" onclick="closeMenu()">Dịch vụ</a>
+  <a href="portfolio.html" onclick="closeMenu()">Portfolio</a>
+  <a href="blog.html" onclick="closeMenu()">Blog</a>
+  <a href="webdesign.html" onclick="closeMenu()">Thiết kế Web</a>
+  <a href="#pricing" onclick="closeMenu()">Bảng giá</a>
+  <a href="#contact" class="mobile-cta" onclick="closeMenu()">Liên hệ ngay →</a>
+  <div class="mobile-menu-foot">© 2026 Artio Media · artio.vn</div>
+</div>
 
 <section>
   <div class="hero">
@@ -471,6 +539,20 @@
       if (!wasOpen) item.classList.add('open');
     });
   });
+
+  function toggleMenu() {
+    const menu = document.getElementById('mobileMenu');
+    const btn = document.getElementById('hamburger');
+    const isOpen = menu.classList.toggle('open');
+    btn.classList.toggle('open');
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  }
+
+  function closeMenu() {
+    document.getElementById('mobileMenu').classList.remove('open');
+    document.getElementById('hamburger').classList.remove('open');
+    document.body.style.overflow = '';
+  }
 </script>
 </body>
 </html>
