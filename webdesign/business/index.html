@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VietCore Solutions — Demo by Artio Media</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#f8f9fc;--dark:#0f1623;--blue:#1a56db;--blue-light:#3b82f6;--blue-pale:#eff6ff;--muted:#6b7280;--border:#e5e7eb;--white:#fff}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Sora',sans-serif;background:var(--bg);color:var(--dark);overflow-x:hidden}
+
+  nav{position:sticky;top:0;z-index:100;background:white;border-bottom:1px solid var(--border);padding:0 64px;height:68px;display:flex;align-items:center;justify-content:space-between}
+  .nav-brand{font-size:20px;font-weight:800;color:var(--dark);text-decoration:none;display:flex;align-items:center;gap:10px}
+  .brand-dot{width:8px;height:8px;background:var(--blue);border-radius:50%}
+  .nav-links{display:flex;gap:32px}
+  .nav-links a{font-size:13px;color:var(--muted);text-decoration:none;font-weight:500;transition:color .2s}
+  .nav-links a:hover{color:var(--dark)}
+  .nav-right{display:flex;gap:10px}
+  .btn-ghost{background:transparent;color:var(--dark);padding:9px 20px;font-size:13px;font-weight:600;border:1.5px solid var(--border);cursor:pointer;font-family:'Sora',sans-serif;border-radius:8px;transition:all .2s}
+  .btn-ghost:hover{border-color:var(--blue);color:var(--blue)}
+  .btn-blue{background:var(--blue);color:white;padding:9px 20px;font-size:13px;font-weight:600;border:none;cursor:pointer;font-family:'Sora',sans-serif;border-radius:8px;transition:background .2s}
+  .btn-blue:hover{background:var(--blue-light)}
+
+  /* HERO */
+  .hero{padding:100px 64px 80px;max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1.1fr 1fr;gap:80px;align-items:center}
+  .hero-tag{display:inline-flex;align-items:center;gap:8px;background:var(--blue-pale);border:1px solid rgba(59,130,246,.2);padding:7px 14px;border-radius:100px;font-size:12px;color:var(--blue);font-weight:600;margin-bottom:24px}
+  .tag-dot{width:6px;height:6px;border-radius:50%;background:var(--blue-light)}
+  .hero h1{font-size:clamp(40px,5vw,60px);font-weight:800;line-height:1.05;letter-spacing:-2px;margin-bottom:20px}
+  .hero h1 span{color:var(--blue)}
+  .hero p{font-size:16px;color:var(--muted);line-height:1.75;max-width:440px;margin-bottom:36px}
+  .hero-actions{display:flex;gap:12px;align-items:center;margin-bottom:52px}
+  .btn-hero{background:var(--blue);color:white;padding:14px 28px;font-size:14px;font-weight:700;border:none;cursor:pointer;font-family:'Sora',sans-serif;border-radius:10px;transition:background .2s}
+  .btn-hero:hover{background:var(--blue-light)}
+  .btn-hero-ghost{background:transparent;color:var(--dark);padding:14px 24px;font-size:14px;font-weight:600;border:1.5px solid var(--border);cursor:pointer;font-family:'Sora',sans-serif;border-radius:10px;display:flex;align-items:center;gap:8px;transition:all .2s}
+  .btn-hero-ghost:hover{border-color:var(--blue);color:var(--blue)}
+  .hero-trust{display:flex;align-items:center;gap:16px;font-size:13px;color:var(--muted)}
+  .trust-avatars{display:flex}
+  .trust-avatar{width:32px;height:32px;border-radius:50%;border:2px solid white;margin-left:-8px;display:flex;align-items:center;justify-content:center;font-size:14px}
+  .ta1{background:#fef3c7;margin-left:0}.ta2{background:#dbeafe}.ta3{background:#d1fae5}.ta4{background:#fce7f3}
+  .hero-visual{position:relative}
+  .hero-card-main{background:white;border:1px solid var(--border);border-radius:16px;padding:28px;box-shadow:0 4px 24px rgba(0,0,0,.06)}
+  .card-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+  .card-title{font-size:14px;font-weight:700}
+  .card-period{font-size:12px;color:var(--muted);background:var(--bg);padding:4px 10px;border-radius:100px}
+  .chart-bars{display:flex;align-items:flex-end;gap:8px;height:80px;margin-bottom:16px}
+  .bar{border-radius:4px 4px 0 0;transition:height .3s}
+  .b1{width:18px;height:40%;background:#bfdbfe}
+  .b2{width:18px;height:60%;background:#93c5fd}
+  .b3{width:18px;height:50%;background:#bfdbfe}
+  .b4{width:18px;height:75%;background:#3b82f6}
+  .b5{width:18px;height:90%;background:#1a56db}
+  .b6{width:18px;height:70%;background:#3b82f6}
+  .b7{width:18px;height:85%;background:#1a56db}
+  .card-stat{display:flex;justify-content:space-between}
+  .stat-item .sv{font-size:22px;font-weight:800;color:var(--dark)}
+  .stat-item .sl{font-size:11px;color:var(--muted);margin-top:2px}
+  .stat-up{color:#10b981;font-size:12px;font-weight:600}
+  .hero-card-small{position:absolute;bottom:-20px;left:-24px;background:white;border:1px solid var(--border);border-radius:12px;padding:16px 20px;box-shadow:0 8px 32px rgba(0,0,0,.08);display:flex;align-items:center;gap:12px}
+  .hcs-icon{width:40px;height:40px;background:var(--blue-pale);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px}
+  .hcs-val{font-size:18px;font-weight:800}
+  .hcs-lbl{font-size:11px;color:var(--muted)}
+
+  /* CLIENTS */
+  .clients{border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:28px 64px;display:flex;align-items:center;gap:48px;overflow:hidden}
+  .clients-label{font-size:12px;font-weight:600;color:var(--muted);white-space:nowrap;letter-spacing:.5px}
+  .clients-logos{display:flex;gap:48px;align-items:center;flex:1}
+  .client-logo{font-size:13px;font-weight:700;color:rgba(15,22,35,.25);letter-spacing:.5px;white-space:nowrap;transition:color .2s;cursor:default}
+  .client-logo:hover{color:rgba(15,22,35,.6)}
+
+  /* SERVICES */
+  .services{padding:100px 64px;max-width:1280px;margin:0 auto}
+  .services-header{text-align:center;margin-bottom:64px}
+  .section-tag{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--blue);font-weight:700;margin-bottom:14px}
+  .services-header h2{font-size:clamp(32px,4vw,44px);font-weight:800;letter-spacing:-1px;margin-bottom:14px}
+  .services-header p{font-size:15px;color:var(--muted);max-width:480px;margin:0 auto}
+  .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .service-card{background:white;border:1px solid var(--border);border-radius:16px;padding:32px 28px;transition:all .3s;cursor:pointer}
+  .service-card:hover{border-color:var(--blue);box-shadow:0 12px 40px rgba(26,86,219,.08);transform:translateY(-4px)}
+  .service-icon-wrap{width:52px;height:52px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:20px}
+  .si1{background:#eff6ff}.si2{background:#f0fdf4}.si3{background:#fef3c7}.si4{background:#fdf4ff}.si5{background:#fff1f2}.si6{background:#f0fdfa}
+  .service-card h3{font-size:17px;font-weight:700;margin-bottom:10px}
+  .service-card p{font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:20px}
+  .service-link{font-size:13px;font-weight:600;color:var(--blue);display:flex;align-items:center;gap:6px}
+
+  /* STATS */
+  .stats-band{background:var(--dark);padding:80px 64px}
+  .stats-inner{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:48px;text-align:center}
+  .stat-big .num{font-size:52px;font-weight:800;background:linear-gradient(135deg,white,#93c5fd);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1}
+  .stat-big .lbl{font-size:14px;color:rgba(255,255,255,.5);margin-top:10px}
+  .stat-big .desc{font-size:12px;color:rgba(255,255,255,.3);margin-top:6px;line-height:1.5}
+
+  /* TEAM */
+  .team{padding:100px 64px;max-width:1280px;margin:0 auto}
+  .team-header{text-align:center;margin-bottom:56px}
+  .team-header h2{font-size:clamp(28px,3.5vw,40px);font-weight:800;letter-spacing:-1px;margin-bottom:12px}
+  .team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+  .team-card{background:white;border:1px solid var(--border);border-radius:16px;padding:28px 24px;text-align:center;transition:all .3s}
+  .team-card:hover{border-color:var(--blue);transform:translateY(-4px)}
+  .team-avatar{width:72px;height:72px;border-radius:50%;margin:0 auto 16px;display:flex;align-items:center;justify-content:center;font-size:32px;border:3px solid var(--bg)}
+  .av1{background:#dbeafe}.av2{background:#dcfce7}.av3{background:#fef9c3}.av4{background:#fce7f3}
+  .team-card h3{font-size:15px;font-weight:700;margin-bottom:4px}
+  .team-role{font-size:12px;color:var(--blue);font-weight:600;margin-bottom:10px}
+  .team-bio{font-size:12px;color:var(--muted);line-height:1.6}
+
+  /* CTA */
+  .cta-section{margin:0 64px 80px;background:linear-gradient(135deg,var(--dark),#1e2d4a);border-radius:20px;padding:72px 80px;display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center}
+  .cta-section h2{font-size:clamp(28px,3.5vw,40px);font-weight:800;color:white;letter-spacing:-1px;margin-bottom:12px}
+  .cta-section p{font-size:15px;color:rgba(255,255,255,.55)}
+  .cta-btns{display:flex;gap:12px;flex-shrink:0}
+  .btn-cta-white{background:white;color:var(--dark);padding:14px 28px;font-size:14px;font-weight:700;border:none;cursor:pointer;font-family:'Sora',sans-serif;border-radius:10px;white-space:nowrap;transition:all .2s}
+  .btn-cta-white:hover{background:var(--bg)}
+  .btn-cta-ghost{background:transparent;color:white;padding:14px 28px;font-size:14px;font-weight:600;border:1.5px solid rgba(255,255,255,.25);cursor:pointer;font-family:'Sora',sans-serif;border-radius:10px;white-space:nowrap;transition:all .2s}
+  .btn-cta-ghost:hover{border-color:white}
+
+  footer{background:white;border-top:1px solid var(--border);padding:40px 64px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+  .footer-brand{font-size:18px;font-weight:800;color:var(--dark)}
+  .footer-brand span{color:var(--blue)}
+  .footer-links{display:flex;gap:24px}
+  .footer-links a{font-size:12px;color:var(--muted);text-decoration:none;transition:color .2s}
+  .footer-links a:hover{color:var(--dark)}
+
+  .artio-badge{position:fixed;bottom:20px;right:20px;background:var(--dark);padding:10px 16px;font-size:11px;letter-spacing:1px;color:white;z-index:999;border-radius:8px}
+  @media(max-width:768px){
+    nav{padding:0 20px}.hero,.services,.stats-band,.team{padding-left:20px;padding-right:20px}
+    .hero{grid-template-columns:1fr}.hero-visual{display:none}
+    .services-grid,.team-grid{grid-template-columns:1fr 1fr}.stats-inner{grid-template-columns:1fr 1fr}
+    .clients{padding:20px}.cta-section{margin:0 20px 60px;padding:40px 28px;grid-template-columns:1fr}
+    .nav-links{display:none}footer{padding:32px 20px}
+  }
+</style>
+</head>
+<body>
+<nav>
+  <a href="#" class="nav-brand"><div class="brand-dot"></div>VietCore</a>
+  <div class="nav-links">
+    <a href="#services">Dịch vụ</a><a href="#team">Đội ngũ</a><a href="#">Dự án</a><a href="#">Blog</a><a href="#">Liên hệ</a>
+  </div>
+  <div class="nav-right">
+    <button class="btn-ghost">Đăng nhập</button>
+    <button class="btn-blue">Tư vấn miễn phí</button>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-tag"><div class="tag-dot"></div>Top 10 IT Company Việt Nam 2025</div>
+    <h1>Giải pháp <span>công nghệ</span> cho doanh nghiệp hiện đại</h1>
+    <p>VietCore cung cấp giải pháp chuyển đổi số toàn diện — từ phần mềm quản lý đến hạ tầng cloud, giúp doanh nghiệp tăng trưởng bền vững.</p>
+    <div class="hero-actions">
+      <button class="btn-hero">Tư vấn miễn phí →</button>
+      <button class="btn-hero-ghost">▶ Xem case study</button>
+    </div>
+    <div class="hero-trust">
+      <div class="trust-avatars">
+        <div class="trust-avatar ta1">😊</div>
+        <div class="trust-avatar ta2">🧑</div>
+        <div class="trust-avatar ta3">👩</div>
+        <div class="trust-avatar ta4">🧑</div>
+      </div>
+      <span>Tin dùng bởi <strong>500+</strong> doanh nghiệp Việt Nam</span>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-card-main">
+      <div class="card-header"><span class="card-title">Hiệu suất hệ thống</span><span class="card-period">6 tháng qua</span></div>
+      <div class="chart-bars">
+        <div class="bar b1"></div><div class="bar b2"></div><div class="bar b3"></div>
+        <div class="bar b4"></div><div class="bar b5"></div><div class="bar b6"></div><div class="bar b7"></div>
+      </div>
+      <div class="card-stat">
+        <div class="stat-item"><div class="sv">99.9%</div><div class="sl">Uptime <span class="stat-up">↑ 0.2%</span></div></div>
+        <div class="stat-item"><div class="sv">0.3s</div><div class="sl">Response time</div></div>
+        <div class="stat-item"><div class="sv">2.4M</div><div class="sl">Requests/ngày</div></div>
+      </div>
+    </div>
+    <div class="hero-card-small">
+      <div class="hcs-icon">🚀</div>
+      <div><div class="hcs-val">+127%</div><div class="hcs-lbl">Tăng trưởng Q3</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="clients">
+  <span class="clients-label">ĐỐI TÁC & KHÁCH HÀNG</span>
+  <div class="clients-logos">
+    <span class="client-logo">VINGROUP</span>
+    <span class="client-logo">MB BANK</span>
+    <span class="client-logo">VIETTEL</span>
+    <span class="client-logo">FPT SOFTWARE</span>
+    <span class="client-logo">MASAN GROUP</span>
+    <span class="client-logo">TECHCOMBANK</span>
+  </div>
+</div>
+
+<section class="services" id="services">
+  <div class="services-header">
+    <div class="section-tag">Dịch vụ</div>
+    <h2>Giải pháp toàn diện cho mọi quy mô</h2>
+    <p>Từ startup đến tập đoàn — chúng tôi có giải pháp phù hợp cho từng giai đoạn phát triển.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card"><div class="service-icon-wrap si1">💻</div><h3>Phát triển phần mềm</h3><p>ERP, CRM, HRM tùy chỉnh theo quy trình doanh nghiệp. Tích hợp API và migration dữ liệu.</p><div class="service-link">Tìm hiểu thêm →</div></div>
+    <div class="service-card"><div class="service-icon-wrap si2">☁️</div><h3>Cloud & DevOps</h3><p>Triển khai hạ tầng AWS/GCP/Azure, CI/CD pipeline, monitoring và bảo mật 24/7.</p><div class="service-link">Tìm hiểu thêm →</div></div>
+    <div class="service-card"><div class="service-icon-wrap si3">📱</div><h3>Mobile App</h3><p>iOS và Android native hoặc React Native cross-platform. UX tối ưu và performance cao.</p><div class="service-link">Tìm hiểu thêm →</div></div>
+    <div class="service-card"><div class="service-icon-wrap si4">🤖</div><h3>AI & Data Analytics</h3><p>Machine learning models, data pipeline, dashboard real-time và dự báo xu hướng kinh doanh.</p><div class="service-link">Tìm hiểu thêm →</div></div>
+    <div class="service-card"><div class="service-icon-wrap si5">🔒</div><h3>Cybersecurity</h3><p>Penetration testing, SOC monitoring, compliance ISO 27001 và đào tạo bảo mật cho đội ngũ.</p><div class="service-link">Tìm hiểu thêm →</div></div>
+    <div class="service-card"><div class="service-icon-wrap si6">🔄</div><h3>Chuyển đổi số</h3><p>Tư vấn chiến lược, roadmap kỹ thuật và triển khai từng bước theo phương pháp Agile.</p><div class="service-link">Tìm hiểu thêm →</div></div>
+  </div>
+</section>
+
+<div class="stats-band">
+  <div class="stats-inner">
+    <div class="stat-big"><div class="num">500+</div><div class="lbl">Dự án hoàn thành</div><div class="desc">Trên 15 lĩnh vực khác nhau trong 10 năm qua</div></div>
+    <div class="stat-big"><div class="num">99.9%</div><div class="lbl">Uptime SLA</div><div class="desc">Cam kết hoạt động liên tục cho hệ thống production</div></div>
+    <div class="stat-big"><div class="num">48h</div><div class="lbl">Phản hồi sự cố</div><div class="desc">Support 24/7 với thời gian phản hồi tối đa 2 tiếng</div></div>
+    <div class="stat-big"><div class="num">10+</div><div class="lbl">Năm kinh nghiệm</div><div class="desc">Đội ngũ senior engineers với chứng chỉ quốc tế</div></div>
+  </div>
+</div>
+
+<section class="team" id="team">
+  <div class="team-header">
+    <div class="section-tag">Đội ngũ</div>
+    <h2>Con người là tài sản lớn nhất</h2>
+  </div>
+  <div class="team-grid">
+    <div class="team-card"><div class="team-avatar av1">👨‍💼</div><h3>Nguyễn Văn Minh</h3><div class="team-role">CEO & Co-founder</div><div class="team-bio">15 năm kinh nghiệm IT, cựu CTO FPT Software, MBA Harvard Business School.</div></div>
+    <div class="team-card"><div class="team-avatar av2">👩‍💻</div><h3>Trần Thị Lan</h3><div class="team-role">CTO</div><div class="team-bio">Ex-Google Engineer, chuyên gia distributed systems, AWS & GCP certified.</div></div>
+    <div class="team-card"><div class="team-avatar av3">👨‍🎨</div><h3>Lê Hoàng Nam</h3><div class="team-role">Head of Product</div><div class="team-bio">10 năm UX/Product, từng xây dựng sản phẩm phục vụ 5 triệu người dùng.</div></div>
+    <div class="team-card"><div class="team-avatar av4">👩‍🔬</div><h3>Phạm Thu Hà</h3><div class="team-role">Head of AI/ML</div><div class="team-bio">PhD Computer Science, chuyên gia NLP và Computer Vision ứng dụng trong doanh nghiệp.</div></div>
+  </div>
+</section>
+
+<div class="cta-section">
+  <div>
+    <h2>Sẵn sàng chuyển đổi số doanh nghiệp?</h2>
+    <p>Đặt lịch tư vấn 30 phút miễn phí với chuyên gia của chúng tôi.</p>
+  </div>
+  <div class="cta-btns">
+    <button class="btn-cta-white">Đặt lịch tư vấn →</button>
+    <button class="btn-cta-ghost">Xem portfolio</button>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-brand">Viet<span>Core</span></div>
+  <div class="footer-links">
+    <a href="#">Dịch vụ</a><a href="#">Dự án</a><a href="#">Đội ngũ</a><a href="#">Blog</a><a href="#">Tuyển dụng</a><a href="#">Liên hệ</a>
+  </div>
+  <span style="font-size:12px;color:var(--muted)">© 2026 VietCore Solutions. Demo by Artio Media</span>
+</footer>
+<a href="../../webdesign.html" style="position:fixed;bottom:20px;right:20px;background:var(--dark, #111);color:white;padding:10px 16px;font-size:11px;letter-spacing:1px;z-index:999;text-decoration:none;border-radius:4px">← Quay lại thư viện</a>
+</body>
+</html>
