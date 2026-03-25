@@ -1,1 +1,670 @@
 
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Branding Bệnh viện — Artio Media | Thiết kế nhận diện y tế chuyên nghiệp</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f4f6f9;--white:#ffffff;--dark:#0a1628;--dark2:#1a2d4a;
+  --blue:#1a56db;--blue-light:#3b82f6;--blue-pale:#e8f0ff;
+  --teal:#0d9488;--teal-light:#ccfbf1;
+  --red:#dc2626;--red-light:#fee2e2;
+  --green:#16a34a;--green-light:#dcfce7;
+  --amber:#d97706;--amber-light:#fef3c7;
+  --muted:#64748b;--border:#e2e8f0;
+  --wave:#1a56db;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Be Vietnam Pro',sans-serif;background:var(--bg);color:var(--dark);overflow-x:hidden}
+
+/* ── NAV ── */
+nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:14px 48px;background:rgba(255,255,255,.96);border-bottom:1px solid var(--border);backdrop-filter:blur(12px)}
+.nav-logo{font-weight:800;font-size:20px;color:var(--dark);text-decoration:none}
+.nav-logo span{color:#ff4d00}
+.nav-links{display:flex;gap:8px;align-items:center}
+.nav-links a{font-size:13px;font-weight:500;color:var(--muted);text-decoration:none;padding:7px 14px;border-radius:100px;transition:all .2s}
+.nav-links a:hover{background:var(--bg);color:var(--dark)}
+.nav-cta{background:#ff4d00;color:white;padding:9px 20px;border-radius:100px;font-size:13px;font-weight:700;text-decoration:none;transition:all .2s}
+.nav-cta:hover{background:var(--dark)}
+
+/* ── HERO ── */
+.hero{background:var(--dark);color:white;padding:0;overflow:hidden;position:relative;min-height:560px;display:flex;align-items:center}
+.hero-wave{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.hero-wave svg{position:absolute;bottom:-1px;left:0;width:100%;opacity:.12}
+.hero-pulse{position:absolute;right:0;top:0;bottom:0;width:55%;opacity:.08}
+.hero-pulse svg{width:100%;height:100%}
+.hero-content{position:relative;z-index:2;padding:80px 48px;max-width:1100px;margin:0 auto;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.hero-left{}
+.hero-eyebrow{font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(59,130,246,.8);margin-bottom:20px;display:flex;align-items:center;gap:12px}
+.hero-eyebrow::before{content:'';width:32px;height:1px;background:rgba(59,130,246,.6)}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(40px,5vw,62px);font-weight:300;line-height:1.05;margin-bottom:20px}
+.hero h1 em{font-style:italic;color:#60a5fa}
+.hero-desc{font-size:15px;color:rgba(255,255,255,.6);line-height:1.8;max-width:440px;margin-bottom:36px}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn-hero-blue{background:var(--blue);color:white;padding:13px 28px;border-radius:100px;font-size:14px;font-weight:700;text-decoration:none;transition:all .2s}
+.btn-hero-blue:hover{background:var(--blue-light)}
+.btn-hero-ghost{background:rgba(255,255,255,.08);color:white;padding:13px 28px;border-radius:100px;font-size:14px;font-weight:500;text-decoration:none;border:1px solid rgba(255,255,255,.15);transition:all .2s}
+.btn-hero-ghost:hover{background:rgba(255,255,255,.15)}
+.hero-right{}
+/* ECG CARD */
+.ecg-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:28px;backdrop-filter:blur(8px)}
+.ecg-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:20px}
+.ecg-line{width:100%;height:60px;margin-bottom:20px}
+.ecg-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.ecg-stat{text-align:center}
+.ecg-stat-num{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:600;color:white;line-height:1}
+.ecg-stat-num span{color:#60a5fa}
+.ecg-stat-lbl{font-size:10px;color:rgba(255,255,255,.35);margin-top:4px;letter-spacing:.5px}
+.hero-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}
+.hero-tag{font-size:11px;font-weight:600;padding:5px 12px;border-radius:100px;background:rgba(59,130,246,.15);color:#93c5fd;border:1px solid rgba(59,130,246,.25)}
+
+/* ── CONCEPT SECTION ── */
+.concept{padding:80px 48px;max-width:1100px;margin:0 auto}
+.section-eyebrow{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--blue);margin-bottom:14px}
+.section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,4vw,48px);font-weight:300;line-height:1.1;margin-bottom:40px}
+.section-title em{font-style:italic;color:var(--blue)}
+.concept-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.concept-card{background:white;border-radius:16px;padding:28px;border:1px solid var(--border);transition:all .3s;position:relative;overflow:hidden}
+.concept-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:16px 16px 0 0}
+.concept-card.c-blue::before{background:var(--blue)}
+.concept-card.c-teal::before{background:var(--teal)}
+.concept-card.c-red::before{background:var(--red)}
+.concept-card:hover{transform:translateY(-4px);box-shadow:0 16px 48px rgba(0,0,0,.08)}
+.cc-icon{font-size:32px;margin-bottom:16px;display:block}
+.cc-title{font-size:16px;font-weight:700;margin-bottom:8px}
+.cc-desc{font-size:13px;color:var(--muted);line-height:1.7}
+.cc-badge{display:inline-block;margin-top:14px;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:4px 10px;border-radius:4px}
+.badge-blue{background:var(--blue-pale);color:var(--blue)}
+.badge-teal{background:var(--teal-light);color:var(--teal)}
+.badge-red{background:var(--red-light);color:var(--red)}
+
+/* ── CATEGORIES ── */
+.categories{padding:0 48px 80px;max-width:1100px;margin:0 auto}
+.cat-group{margin-bottom:56px}
+.cat-group-header{display:flex;align-items:center;gap:16px;margin-bottom:24px;padding-bottom:16px;border-bottom:2px solid var(--border)}
+.cat-group-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.gi-blue{background:var(--blue-pale)}
+.gi-teal{background:var(--teal-light)}
+.gi-amber{background:var(--amber-light)}
+.gi-green{background:var(--green-light)}
+.gi-red{background:var(--red-light)}
+.gi-dark{background:#e2e8f0}
+.cat-group-title{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600}
+.cat-group-count{margin-left:auto;font-size:12px;font-weight:700;color:var(--muted);background:var(--bg);padding:4px 12px;border-radius:100px;border:1px solid var(--border)}
+.items-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.item-card{background:white;border:1px solid var(--border);border-radius:12px;padding:20px 18px;transition:all .25s;cursor:default;position:relative}
+.item-card:hover{border-color:var(--blue);box-shadow:0 8px 24px rgba(26,86,219,.08);transform:translateY(-2px)}
+.item-card.featured{border-color:var(--blue);background:linear-gradient(135deg,#f0f5ff,white)}
+.item-card.featured::after{content:'Quan trọng';position:absolute;top:12px;right:12px;font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;background:var(--blue);color:white;padding:3px 8px;border-radius:4px}
+.item-num{font-size:11px;font-weight:700;color:var(--muted);margin-bottom:8px;font-family:'Be Vietnam Pro',sans-serif}
+.item-title{font-size:14px;font-weight:700;color:var(--dark);margin-bottom:6px;line-height:1.35}
+.item-desc{font-size:12px;color:var(--muted);line-height:1.6}
+.item-tags{display:flex;gap:4px;flex-wrap:wrap;margin-top:10px}
+.item-tag{font-size:10px;padding:2px 8px;border-radius:3px;font-weight:600}
+.tag-print{background:#fef3c7;color:#92400e}
+.tag-digital{background:#dbeafe;color:#1e40af}
+.tag-signage{background:#d1fae5;color:#065f46}
+.tag-uniform{background:#ede9fe;color:#5b21b6}
+.tag-doc{background:#fce7f3;color:#9d174d}
+
+/* ── PRICING BAND ── */
+.pricing-band{background:var(--dark);color:white;padding:72px 48px;margin:0}
+.pricing-inner{max-width:1100px;margin:0 auto}
+.pricing-inner .section-eyebrow{color:rgba(96,165,250,.8)}
+.pricing-inner .section-title{color:white}
+.pricing-inner .section-title em{color:#60a5fa}
+.pricing-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:40px}
+.pricing-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:28px;transition:all .3s}
+.pricing-card.featured-plan{background:var(--blue);border-color:var(--blue);position:relative}
+.pricing-card.featured-plan::before{content:'Phổ biến nhất';position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:#ffe600;color:#111;font-size:10px;font-weight:800;letter-spacing:1px;padding:4px 14px;border-radius:100px;white-space:nowrap}
+.pc-name{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:12px}
+.pc-price{font-family:'Cormorant Garamond',serif;font-size:42px;font-weight:600;color:white;line-height:1;margin-bottom:6px}
+.pc-price sup{font-size:18px;vertical-align:top;margin-top:8px}
+.pc-note{font-size:12px;color:rgba(255,255,255,.4);margin-bottom:20px}
+.pc-items{list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:24px}
+.pc-items li{font-size:13px;color:rgba(255,255,255,.75);display:flex;align-items:flex-start;gap:8px}
+.pc-items li::before{content:'✓';color:#60a5fa;font-weight:700;flex-shrink:0;margin-top:1px}
+.featured-plan .pc-items li::before{color:#ffe600}
+.pc-cta{display:block;text-align:center;padding:12px;border-radius:10px;font-size:13px;font-weight:700;text-decoration:none;transition:all .2s}
+.pc-cta-ghost{background:rgba(255,255,255,.1);color:white;border:1px solid rgba(255,255,255,.2)}
+.pc-cta-ghost:hover{background:rgba(255,255,255,.2)}
+.pc-cta-solid{background:white;color:var(--blue)}
+.pc-cta-solid:hover{background:#f0f5ff}
+
+/* ── WHY ARTIO ── */
+.why{padding:80px 48px;max-width:1100px;margin:0 auto}
+.why-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+.why-left .section-title{margin-bottom:20px}
+.why-left p{font-size:15px;color:var(--muted);line-height:1.8;margin-bottom:28px}
+.why-features{display:flex;flex-direction:column;gap:14px}
+.why-feat{display:flex;align-items:flex-start;gap:14px}
+.wf-icon{width:40px;height:40px;border-radius:10px;background:var(--blue-pale);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.wf-title{font-size:14px;font-weight:700;margin-bottom:3px}
+.wf-desc{font-size:12px;color:var(--muted);line-height:1.6}
+.why-right{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.ref-card{background:white;border:1px solid var(--border);border-radius:12px;padding:18px;text-align:center}
+.ref-icon{font-size:28px;margin-bottom:10px;display:block}
+.ref-name{font-size:13px;font-weight:700;margin-bottom:4px}
+.ref-type{font-size:11px;color:var(--muted)}
+
+/* ── PROCESS ── */
+.process{background:white;padding:80px 48px;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.process-inner{max-width:1100px;margin:0 auto}
+.process-steps{display:grid;grid-template-columns:repeat(5,1fr);gap:0;margin-top:48px;position:relative}
+.process-steps::before{content:'';position:absolute;top:28px;left:10%;right:10%;height:1px;background:linear-gradient(90deg,var(--blue),var(--teal));opacity:.2;z-index:0}
+.step{text-align:center;position:relative;z-index:1}
+.step-num{width:56px;height:56px;border-radius:50%;background:white;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;margin:0 auto 16px;transition:all .3s}
+.step:hover .step-num{background:var(--blue);color:white;border-color:var(--blue)}
+.step-title{font-size:13px;font-weight:700;margin-bottom:6px}
+.step-desc{font-size:11px;color:var(--muted);line-height:1.5;max-width:120px;margin:0 auto}
+
+/* ── CTA ── */
+.cta-section{background:linear-gradient(135deg,var(--dark),#0f2d5e);padding:80px 48px;text-align:center}
+.cta-section h2{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,4vw,48px);font-weight:300;color:white;line-height:1.2;margin-bottom:14px}
+.cta-section h2 em{font-style:italic;color:#60a5fa}
+.cta-section p{font-size:15px;color:rgba(255,255,255,.5);max-width:480px;margin:0 auto 36px;line-height:1.7}
+.cta-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn-cta-main{background:#ff4d00;color:white;padding:14px 32px;border-radius:100px;font-size:15px;font-weight:700;text-decoration:none;transition:all .2s}
+.btn-cta-main:hover{background:#e03d00;transform:scale(1.04)}
+.btn-cta-sec{background:rgba(255,255,255,.1);color:white;padding:14px 32px;border-radius:100px;font-size:15px;font-weight:500;text-decoration:none;border:1px solid rgba(255,255,255,.2);transition:all .2s}
+.btn-cta-sec:hover{background:rgba(255,255,255,.18)}
+
+footer{background:#060d1a;color:rgba(255,255,255,.3);padding:24px 48px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;font-size:13px}
+.footer-logo{font-weight:800;font-size:17px;color:white}
+.footer-logo span{color:#ff4d00}
+.footer-links{display:flex;gap:20px}
+.footer-links a{color:rgba(255,255,255,.3);text-decoration:none;transition:color .2s}
+.footer-links a:hover{color:#ff4d00}
+
+.fade-up{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+.fade-up.visible{opacity:1;transform:translateY(0)}
+
+@media(max-width:960px){
+  .concept-grid,.items-grid,.pricing-cards{grid-template-columns:1fr 1fr}
+  .process-steps{grid-template-columns:1fr}
+  .process-steps::before{display:none}
+  .why-grid{grid-template-columns:1fr}
+}
+@media(max-width:768px){
+  nav{padding:12px 20px}.nav-links{display:none}
+  .hero-content{grid-template-columns:1fr;padding:60px 20px;gap:32px}
+  .hero-right{display:none}
+  .concept,.categories,.why,.process,.pricing-band,.cta-section{padding-left:20px;padding-right:20px}
+  .concept-grid,.items-grid,.why-right{grid-template-columns:1fr}
+  .pricing-cards{grid-template-columns:1fr}
+  footer{padding:20px}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="https://artio.vn" class="nav-logo">Artio<span>.</span></a>
+  <div class="nav-links">
+    <a href="https://artio.vn#services">Dịch vụ</a>
+    <a href="https://artio.vn/portfolio.html">Portfolio</a>
+    <a href="https://artio.vn/webdesign/">Thiết kế Web</a>
+    <a href="https://artio.vn#pricing">Bảng giá</a>
+    <a href="https://artio.vn#contact" class="nav-cta">Liên hệ ngay</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-wave">
+    <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <path d="M0,60 L40,45 L80,75 L120,30 L160,80 L200,40 L240,70 L280,25 L320,65 L360,35 L400,70 L440,45 L480,80 L520,30 L560,65 L600,40 L640,75 L680,20 L720,60 L760,35 L800,70 L840,45 L880,80 L920,25 L960,65 L1000,40 L1040,70 L1080,30 L1120,60 L1160,45 L1200,75 L1240,35 L1280,65 L1320,50 L1360,70 L1400,45 L1440,60 L1440,120 L0,120 Z" fill="white"/>
+    </svg>
+  </div>
+  <div class="hero-pulse">
+    <svg viewBox="0 0 600 560" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <polyline points="0,280 80,280 120,100 160,460 200,180 240,380 270,280 300,280 340,280 380,280 420,150 460,410 500,220 540,340 600,280" stroke="#60a5fa" stroke-width="2.5" fill="none" opacity="0.8">
+        <animate attributeName="stroke-dashoffset" from="2000" to="0" dur="3s" fill="freeze"/>
+      </polyline>
+    </svg>
+  </div>
+  <div class="hero-content">
+    <div class="hero-left fade-up">
+      <div class="hero-eyebrow">Artio Media — Ngành Y tế</div>
+      <h1>Bộ nhận diện<br>thương hiệu<br><em>bệnh viện</em></h1>
+      <p class="hero-desc">Thiết kế hệ thống nhận diện chuyên nghiệp cho bệnh viện, phòng khám và cơ sở y tế — từ logo đến toàn bộ ứng dụng đồng bộ, truyền tải uy tín và sự tin cậy.</p>
+      <div class="hero-btns">
+        <a href="https://artio.vn#contact" class="btn-hero-blue">Tư vấn miễn phí →</a>
+        <a href="#categories" class="btn-hero-ghost">Xem danh mục ↓</a>
+      </div>
+      <div class="hero-tags" style="margin-top:28px">
+        <span class="hero-tag">🏥 Bệnh viện đa khoa</span>
+        <span class="hero-tag">🦷 Phòng khám nha</span>
+        <span class="hero-tag">👁 Mắt & Thẩm mỹ</span>
+        <span class="hero-tag">🧬 Xét nghiệm</span>
+      </div>
+    </div>
+    <div class="hero-right fade-up" style="transition-delay:.15s">
+      <div class="ecg-card">
+        <div class="ecg-label">Bộ nhận diện y tế — Artio Media</div>
+        <svg class="ecg-line" viewBox="0 0 400 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <polyline points="0,30 50,30 70,10 90,50 105,15 120,45 135,30 200,30 220,30 240,8 260,52 275,18 290,42 310,30 400,30" stroke="#60a5fa" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <animate attributeName="stroke-dasharray" from="0 1000" to="1000 0" dur="2.5s" fill="freeze"/>
+          </polyline>
+        </svg>
+        <div class="ecg-stats">
+          <div class="ecg-stat"><div class="ecg-stat-num">30<span>+</span></div><div class="ecg-stat-lbl">Hạng mục</div></div>
+          <div class="ecg-stat"><div class="ecg-stat-num">7<span>–</span>14</div><div class="ecg-stat-lbl">Ngày bàn giao</div></div>
+          <div class="ecg-stat"><div class="ecg-stat-num">100<span>%</span></div><div class="ecg-stat-lbl">File gốc</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONCEPT -->
+<section class="concept fade-up">
+  <div class="section-eyebrow">Định hướng thiết kế</div>
+  <h2 class="section-title">Ngôn ngữ hình ảnh<br><em>truyền tải uy tín y tế</em></h2>
+  <div class="concept-grid">
+    <div class="concept-card c-blue">
+      <span class="cc-icon">〰️</span>
+      <div class="cc-title">Nhịp sống — Đường sóng</div>
+      <div class="cc-desc">Lấy cảm hứng từ nhịp tim ECG và đường song song kiến trúc bệnh viện — biểu tượng của sự phục hồi, chuyển động và sức sống mạnh mẽ. Tạo cảm giác chuyên nghiệp và đáng tin cậy.</div>
+      <span class="cc-badge badge-blue">Hình ảnh chủ đạo</span>
+    </div>
+    <div class="concept-card c-teal">
+      <span class="cc-icon">🎨</span>
+      <div class="cc-title">Màu sắc — Chuyên nghiệp & An tâm</div>
+      <div class="cc-desc">Hệ màu xanh y tế (#1a56db) kết hợp trắng tinh khiết và teal (#0d9488) — truyền tải sự chuyên nghiệp, an toàn và vệ sinh. Phù hợp đại đa số bệnh nhân, dễ nhận diện trên mọi ứng dụng.</div>
+      <span class="cc-badge badge-teal">Bảng màu chuẩn</span>
+    </div>
+    <div class="concept-card c-red">
+      <span class="cc-icon">🔤</span>
+      <div class="cc-title">Typography — Hiện đại & Kế thừa</div>
+      <div class="cc-desc">Kết hợp serif trang trọng (tên thương hiệu) với sans-serif hiện đại (thông tin ứng dụng) — cân bằng giữa tính lâu đời, uy tín và sự tiện ích, dễ đọc trong môi trường y tế.</div>
+      <span class="cc-badge badge-red">Hệ thống chữ</span>
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORIES -->
+<section class="categories" id="categories">
+  <div class="section-eyebrow fade-up">Danh mục thiết kế</div>
+  <h2 class="section-title fade-up">Bộ nhận diện <em>toàn diện</em><br>cho cơ sở y tế</h2>
+
+  <!-- GROUP 1: NHẬN DIỆN CỐT LÕI -->
+  <div class="cat-group fade-up">
+    <div class="cat-group-header">
+      <div class="cat-group-icon gi-blue">🎯</div>
+      <h3 class="cat-group-title">I. Nhận diện cốt lõi</h3>
+      <span class="cat-group-count">6 hạng mục</span>
+    </div>
+    <div class="items-grid">
+      <div class="item-card featured">
+        <div class="item-num">01</div>
+        <div class="item-title">Logo chính — Bộ logo đầy đủ</div>
+        <div class="item-desc">Logo ngang, logo đứng, logo icon đơn, logo trắng/đen/màu. File AI, EPS, SVG, PNG trong suốt. Chuẩn in ấn và kỹ thuật số.</div>
+        <div class="item-tags"><span class="item-tag tag-print">In ấn</span><span class="item-tag tag-digital">Kỹ thuật số</span></div>
+      </div>
+      <div class="item-card featured">
+        <div class="item-num">02</div>
+        <div class="item-title">Bộ màu & Typography chuẩn</div>
+        <div class="item-desc">Bảng màu chính thức (CMYK, RGB, HEX, Pantone), hệ thống font chữ, kích thước chuẩn, khoảng cách và quy tắc sử dụng.</div>
+        <div class="item-tags"><span class="item-tag tag-print">In ấn</span><span class="item-tag tag-digital">Kỹ thuật số</span></div>
+      </div>
+      <div class="item-card">
+        <div class="item-num">03</div>
+        <div class="item-title">Brand Guidelines — Sách hướng dẫn</div>
+        <div class="item-desc">Tài liệu PDF đầy đủ hướng dẫn sử dụng thương hiệu: logo clearspace, màu sắc, font, ứng dụng đúng/sai, tone of voice.</div>
+        <div class="item-tags"><span class="item-tag tag-doc">Tài liệu</span></div>
+      </div>
+      <div class="item-card">
+        <div class="item-num">04</div>
+        <div class="item-title">Họa tiết & Pattern thương hiệu</div>
+        <div class="item-desc">Họa tiết đường sóng/nhịp tim, pattern trang trí đồng nhất cho nền in ấn, backdrop, bao bì và nội thất.</div>
+        <div class="item-tags"><span class="item-tag tag-print">In ấn</span><span class="item-tag tag-digital">Kỹ thuật số</span></div>
+      </div>
+      <div class="item-card">
+        <div class="item-num">05</div>
+        <div class="item-title">Icon System — Bộ biểu tượng chuyên khoa</div>
+        <div class="item-desc">Bộ icon các chuyên khoa (nội, ngoại, sản, nhi...), icon dịch vụ, icon signage — đồng bộ phong cách, dùng cho web và biển hiệu.</div>
+        <div class="item-tags"><span class="item-tag tag-digital">Kỹ thuật số</span><span class="item-tag tag-signage">Signage</span></div>
+      </div>
+      <div class="item-card">
+        <div class="item-num">06</div>
+        <div class="item-title">Màu sắc phân khoa — Color Coding</div>
+        <div class="item-desc">Hệ màu phân biệt từng khoa/tầng: Nội (xanh lam), Ngoại (xanh lá), Sản (hồng), Cấp cứu (đỏ) — giúp bệnh nhân định hướng nhanh.</div>
+        <div class="item-tags"><span class="item-tag tag-signage">Signage</span><span class="item-tag tag-digital">Kỹ thuật số</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GROUP 2: VĂN PHÒNG PHẨM -->
+  <div class="cat-group fade-up">
+    <div class="cat-group-header">
+      <div class="cat-group-icon gi-amber">📋</div>
+      <h3 class="cat-group-title">II. Văn phòng phẩm & Giấy tờ y tế</h3>
+      <span class="cat-group-count">8 hạng mục</span>
+    </div>
+    <div class="items-grid">
+      <div class="item-card">
+        <div class="item-num">07</div>
+        <div class="item-title">Danh thiếp — Name card bác sĩ/nhân viên</div>
+        <div class="item-desc">2 mặt, kích thước chuẩn 90×54mm. Phân biệt theo cấp độ: Bác sĩ, Điều dưỡng, Hành chính, Ban Giám đốc.</div>
+        <div class="item-tags"><span class="item-tag tag-print">In ấn</span></div>
+      </div>
+      <div class="item-card">
+        <div class="item-num">08</div>
+        <div class="item-title">Giấy tiêu đề — Letterhead A4</div>
+        <div class="item-desc">Mẫu công văn, thư viện, giấy giới thiệu. Phiên bản in và Word template để nhân viên tự soạn thảo văn bản.</div>
+        <div class="item-tags"><span class="item-tag tag-print">In ấn</span><span class="item-tag tag-doc">Tài liệu</span></div>
+      </div>
+      <div class="item-card">
+        <div class="item-num">09</div>
+        <div class="item-title">Bìa hồ sơ bệnh án</div>
+        <div class="item-desc">Bìa đựng hồ sơ bệnh nhân, phong bì y tế, nhãn dán phân loại hồ sơ theo khoa — đồng nhất nhận diện trong toàn bệnh viện.</div>
+        <div class="item-tags"><span class="item-tag tag-print">In ấn</span></div>
+      </div>
+      <div class="item-card">
+        <div class="item-num">10</div>
+        <div class="item-title">Phiếu khám bệnh & Đơn thuốc</div>
+        <div class="item-desc">Mẫu phiếu khám, đơn thuốc, phiếu kết quả xét nghiệm, phiếu chỉ định — thiết kế chuẩn nghề nghiệp, rõ ràng và dễ điền.</div>
+        <div class="item-tags"><span class="item-tag tag-print">In ấn</span><span class="item-tag tag-doc">Tài liệu</span></div>
+      </div>
+      <div class="item-card">
+        <div class="item-num">11</div>
+        <div class="item-title">Phong bì thư — Envelope</div>
+        <div class="item-desc">Phong bì C4, C5, DL đầy đủ kích thước cho các loại thư viện, giấy tờ y tế gửi bệnh nhân và cơ quan.</div>
+        <div class="item-tags"><span class="item-tag tag-print">In ấn</span></div>
+      </div>
+      <div class="item-card">
+        <div class="item-num">12</div>
+        <div class="item-title">Sổ tay nội bộ & Tập ghi chép</div>
+        <div class="item-desc">Sổ tay cho bác sĩ, điều dưỡng. Bìa cứng in logo, giấy lót họa tiết thương hiệu. Dùng cho hội nghị, đào tạo nội bộ.</div>
+        <div class="item-tags"><span class="item-tag tag-print">In ấn</span></div>
+      </div>
+      <div class="item-card">
+        <div class="item-num">13</div>
+        <div class="item-title">Tem nhãn & Sticker phân loại</div>
+        <div class="item-desc">Tem nhãn dược phẩm, sticker phân loại mẫu bệnh phẩm, nhãn dán trang thiết bị y tế — đồng nhất hệ màu phân khoa.</div>
+        <div class="item-tags"><span class="item-tag tag-print">In ấn</span></div>
+      </div>
+      <div class="item-card">
+        <div class="item-num">14</div>
+        <div class="item-title">Bảng tên nhân viên — ID Badge</div>
+        <div class="item-desc">Thẻ nhân viên, dây đeo thẻ thương hiệu. Phân màu theo bộ phận. Có QR code xác minh danh tính tùy chọn.</div>
+        <div class="item-tags"><span class="item-tag tag-print">In ấn</span><span class="item-tag tag-uniform">Đồng phục</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GROUP 3: ĐỒNG PHỤC -->
+  <div class="cat-group fade-up">
+    <div class="cat-group-header">
+      <div class="cat-group-icon gi-teal">👔</div>
+      <h3 class="cat-group-title">III. Đồng phục & Trang phục y tế</h3>
+      <span class="cat-group-count">5 hạng mục</span>
+    </div>
+    <div class="items-grid">
+      <div class="item-card featured">
+        <div class="item-num">15</div>
+        <div class="item-title">Áo blouse bác sĩ — Thiết kế & Thêu logo</div>
+        <div class="item-desc">Áo blouse trắng nam/nữ, vị trí thêu logo ngực trái, tên bác sĩ. Phân biệt cấp độ theo màu viền cổ/tay. File thiết kế giao xưởng may.</div>
+        <div class="item-tags"><span class="item-tag tag-uniform">Đồng phục</span></div>
+      </div>
+      <div class="item-card">
+        <div class="item-num">16</div>
+        <div class="item-title">Scrubs — Đồng phục điều dưỡng</div>
+        <div class="item-desc">Bộ scrubs theo màu phân khoa (xanh teal, xanh lam, xanh lá). Logo thêu ngực, tên khoa thêu sau lưng. Nam/Nữ đầy đủ.</div>
+        <div class="item-tags"><span class="item-tag tag-uniform">Đồng phục</span></div>
+      </div>
+      <div class="item-card">
+        <div class="item-num">17</div>
+        <div class="item-title">Đồng phục hành chính & Lễ tân</div>
+        <div class="item-desc">Áo vest/sơ mi đồng phục cho bộ phận hành chính, lễ tân, bảo vệ. Đồng nhất màu thương hiệu, thêu logo vị trí chuẩn.</div>
+        <div class="item-tags"><span class="item-tag tag-uniform">Đồng phục</span></div>
+      </div>
+      <div class="item-card">
+        <div class="item-num">18</div>
+        <div class="item-title">Nón/Mũ & Phụ kiện y tế</div>
+        <div class="item-desc">Mũ phẫu thuật, khẩu trang in logo, túi đựng đồ bệnh nhân. Thiết kế đồng bộ, in ấn số lượng lớn tiết kiệm chi phí.</div>
+        <div class="item-tags"><span class="item-tag tag-uniform">Đồng phục</span><span class="item-tag tag-print">In ấn</span></div>
+      </div>
+      <div class="item-card">
+        <div class="item-num">19</div>
+        <div class="item-title">Đồng phục tình nguyện viên</div>
+        <div class="item-desc">Áo phông tình nguyện màu nổi bật, dễ nhận diện trong đám đông. In logo + slogan mặt sau, số điện thoại hỗ trợ.</div>
+        <div class="item-tags"><span class="item-tag tag-uniform">Đồng phục</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GROUP 4: SIGNAGE -->
+  <div class="cat-group fade-up">
+    <div class="cat-group-header">
+      <div class="cat-group-icon gi-green">🪧</div>
+      <h3 class="cat-group-title">IV. Signage — Hệ thống biển hiệu & Chỉ dẫn</h3>
+      <span class="cat-group-count">7 hạng mục</span>
+    </div>
+    <div class="items-grid">
+      <div class="item-card featured">
+        <div class="item-num">20</div>
+        <div class="item-title">Biển hiệu chính — Mặt tiền bệnh viện</div>
+        <div class="item-desc">Biển tên bệnh viện mặt tiền: chữ nổi inox, hộp đèn, backlit. Bản vẽ kỹ thuật thi công, file AI xuất xưởng, mock-up phối cảnh thực tế.</div>
+        <div class="item-tags"><span class="item-tag tag-signage">Signage</span></div>
+      </div>
+      <div class="item-card featured">
+        <div class="item-num">21</div>
+        <div class="item-title">Hệ thống biển chỉ dẫn nội thất</div>
+        <div class="item-desc">Biển tên khoa/phòng, biển chỉ hướng tầng/hành lang, biển cấm/quy định, biển thoát hiểm. Thiết kế đồng bộ hệ màu phân khoa.</div>
+        <div class="item-tags"><span class="item-tag tag-signage">Signage</span></div>
+      </div>
+      <div class="item-card">
+        <div class="item-num">22</div>
+        <div class="item-title">Bản đồ sơ đồ tầng — Wayfinding Map</div>
+        <div class="item-desc">Sơ đồ mặt bằng từng tầng, bản đồ tổng thể khuôn viên, QR dẫn đến bản đồ kỹ thuật số. In canvas treo tường và PDF tải về.</div>
+        <div class="item-tags"><span class="item-tag tag-signage">Signage</span><span class="item-tag tag-digital">Kỹ thuật số</span></div>
+      </div>
+      <div class="item-card">
+        <div class="item-num">23</div>
+        <div class="item-title">Biển xe & Bãi đậu xe</div>
+        <div class="item-desc">Biển số xe cho nhân viên, biển chỉ dẫn bãi đậu xe, biển phân khu (xe máy/ô tô/cấp cứu). Màu sắc tương phản cao, dễ đọc từ xa.</div>
+        <div class="item-tags"><span class="item-tag tag-signage">Signage</span></div>
+      </div>
+      <div class="item-card">
+        <div class="item-num">24</div>
+        <div class="item-title">Pano quảng bá dịch vụ</div>
+        <div class="item-desc">Pano A0, A1 giới thiệu dịch vụ đặc biệt, chương trình khám sức khỏe, gói combo. Đặt tại sảnh chờ và hành lang.</div>
+        <div class="item-tags"><span class="item-tag tag-print">In ấn</span><span class="item-tag tag-signage">Signage</span></div>
+      </div>
+      <div class="item-card">
+        <div class="item-num">25</div>
+        <div class="item-title">Xe cứu thương — Vehicle Branding</div>
+        <div class="item-desc">Thiết kế dán decal xe cứu thương, xe đưa đón bệnh nhân. Logo + số điện thoại cấp cứu nổi bật, đồng nhất nhận diện đội xe.</div>
+        <div class="item-tags"><span class="item-tag tag-signage">Signage</span><span class="item-tag tag-print">In ấn</span></div>
+      </div>
+      <div class="item-card">
+        <div class="item-num">26</div>
+        <div class="item-title">Backdrop & Banner sự kiện</div>
+        <div class="item-desc">Backdrop hội thảo y tế, banner khai trương, roll-up giới thiệu chuyên khoa. Kích thước đa dạng, in hiflex cao cấp.</div>
+        <div class="item-tags"><span class="item-tag tag-print">In ấn</span><span class="item-tag tag-signage">Signage</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GROUP 5: KỸ THUẬT SỐ -->
+  <div class="cat-group fade-up">
+    <div class="cat-group-header">
+      <div class="cat-group-icon gi-dark">💻</div>
+      <h3 class="cat-group-title">V. Kỹ thuật số & Truyền thông</h3>
+      <span class="cat-group-count">6 hạng mục</span>
+    </div>
+    <div class="items-grid">
+      <div class="item-card featured">
+        <div class="item-num">27</div>
+        <div class="item-title">Website — Giao diện UI/UX</div>
+        <div class="item-desc">Thiết kế giao diện website bệnh viện: trang chủ, danh sách bác sĩ, đặt lịch khám online, kết quả xét nghiệm, tin tức y tế. Responsive mobile.</div>
+        <div class="item-tags"><span class="item-tag tag-digital">Kỹ thuật số</span></div>
+      </div>
+      <div class="item-card">
+        <div class="item-num">28</div>
+        <div class="item-title">Bộ template mạng xã hội</div>
+        <div class="item-desc">Template Facebook/Zalo/Instagram: avatar, ảnh bìa, bộ post thông báo, infographic sức khỏe, minigame. Canva template dễ chỉnh sửa.</div>
+        <div class="item-tags"><span class="item-tag tag-digital">Kỹ thuật số</span></div>
+      </div>
+      <div class="item-card">
+        <div class="item-num">29</div>
+        <div class="item-title">Email template & Zalo OA</div>
+        <div class="item-desc">Mẫu email thông báo lịch khám, nhắc nhở tái khám, kết quả xét nghiệm. Template Zalo OA đồng bộ nhận diện thương hiệu.</div>
+        <div class="item-tags"><span class="item-tag tag-digital">Kỹ thuật số</span></div>
+      </div>
+      <div class="item-card">
+        <div class="item-num">30</div>
+        <div class="item-title">Màn hình số — Digital Signage</div>
+        <div class="item-desc">Thiết kế UI màn hình LED sảnh chờ: số thứ tự, thông tin bác sĩ trực, tin tức y tế, quảng bá dịch vụ. Motion template đơn giản.</div>
+        <div class="item-tags"><span class="item-tag tag-digital">Kỹ thuật số</span><span class="item-tag tag-signage">Signage</span></div>
+      </div>
+      <div class="item-card">
+        <div class="item-num">31</div>
+        <div class="item-title">Brochure & Tờ rơi dịch vụ</div>
+        <div class="item-desc">Brochure A4 gấp đôi/gấp ba giới thiệu chuyên khoa, tờ rơi gói khám sức khỏe, sách nhỏ hướng dẫn bệnh nhân mới nhập viện.</div>
+        <div class="item-tags"><span class="item-tag tag-print">In ấn</span><span class="item-tag tag-digital">Kỹ thuật số</span></div>
+      </div>
+      <div class="item-card">
+        <div class="item-num">32</div>
+        <div class="item-title">Quà tặng & Merchandising</div>
+        <div class="item-desc">Thiết kế in logo lên quà tặng: túi vải, bình nước, bút, sổ tay, khẩu trang thương hiệu. Dùng cho sự kiện, quà cho bệnh nhân VIP.</div>
+        <div class="item-tags"><span class="item-tag tag-print">In ấn</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing-band">
+  <div class="pricing-inner">
+    <div class="section-eyebrow">Bảng giá tham khảo</div>
+    <h2 class="section-title">Gói thiết kế <em>phù hợp quy mô</em></h2>
+    <div class="pricing-cards">
+      <div class="pricing-card">
+        <div class="pc-name">Gói Phòng khám</div>
+        <div class="pc-price"><sup>₫</sup>15–25<span style="font-size:18px">tr</span></div>
+        <div class="pc-note">Phòng khám tư, nha khoa, thẩm mỹ nhỏ</div>
+        <ul class="pc-items">
+          <li>Logo + bộ màu + typography</li>
+          <li>Danh thiếp, giấy tiêu đề, phong bì</li>
+          <li>Phiếu khám, đơn thuốc</li>
+          <li>Biển hiệu phòng khám (1 mặt)</li>
+          <li>Template mạng xã hội (5 mẫu)</li>
+          <li>Brand guidelines cơ bản</li>
+        </ul>
+        <a href="https://artio.vn#contact" class="pc-cta pc-cta-ghost">Tư vấn ngay →</a>
+      </div>
+      <div class="pricing-card featured-plan">
+        <div class="pc-name">Gói Bệnh viện vừa</div>
+        <div class="pc-price"><sup>₫</sup>45–80<span style="font-size:18px">tr</span></div>
+        <div class="pc-note">Bệnh viện tư nhân, phòng khám đa khoa</div>
+        <ul class="pc-items">
+          <li>Toàn bộ nhận diện cốt lõi (hạng mục I)</li>
+          <li>Văn phòng phẩm đầy đủ (hạng mục II)</li>
+          <li>Đồng phục 3 loại (Bác sĩ, Điều dưỡng, HC)</li>
+          <li>Hệ thống signage nội ngoại thất</li>
+          <li>Website UI + mạng xã hội</li>
+          <li>Brand guidelines chi tiết 50+ trang</li>
+        </ul>
+        <a href="https://artio.vn#contact" class="pc-cta pc-cta-solid">Tư vấn ngay →</a>
+      </div>
+      <div class="pricing-card">
+        <div class="pc-name">Gói Bệnh viện lớn</div>
+        <div class="pc-price"><sup>₫</sup>Liên hệ</div>
+        <div class="pc-note">Bệnh viện đa khoa, tập đoàn y tế</div>
+        <ul class="pc-items">
+          <li>Toàn bộ 32+ hạng mục thiết kế</li>
+          <li>Color coding đầy đủ theo khoa</li>
+          <li>Hệ thống wayfinding tổng thể</li>
+          <li>Vehicle branding đội xe</li>
+          <li>Digital signage & motion</li>
+          <li>Hỗ trợ triển khai thi công</li>
+        </ul>
+        <a href="https://artio.vn#contact" class="pc-cta pc-cta-ghost">Liên hệ tư vấn →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY ARTIO -->
+<section class="why fade-up">
+  <div class="why-grid">
+    <div class="why-left">
+      <div class="section-eyebrow">Tại sao chọn Artio Media</div>
+      <h2 class="section-title">Chuyên sâu<br><em>ngành y tế</em></h2>
+      <p>Artio Media hiểu rằng branding bệnh viện không chỉ là đẹp — mà phải truyền tải uy tín, an toàn và sự chuyên nghiệp. Chúng tôi làm việc theo quy trình nghiêm ngặt, đảm bảo hệ thống nhận diện hoạt động hoàn hảo trong môi trường y tế thực tế.</p>
+      <div class="why-features">
+        <div class="why-feat">
+          <div class="wf-icon">🎯</div>
+          <div><div class="wf-title">Nghiên cứu chuyên sâu trước khi thiết kế</div><div class="wf-desc">Tìm hiểu giá trị cốt lõi, đối tượng bệnh nhân, cạnh tranh thị trường và yêu cầu pháp lý ngành y tế.</div></div>
+        </div>
+        <div class="why-feat">
+          <div class="wf-icon">🔄</div>
+          <div><div class="wf-title">Chỉnh sửa không giới hạn đến khi hài lòng</div><div class="wf-desc">Quy trình phê duyệt rõ ràng. Tối đa 3 vòng chỉnh sửa lớn, chỉnh nhỏ không giới hạn cho đến khi hoàn hảo.</div></div>
+        </div>
+        <div class="why-feat">
+          <div class="wf-icon">📦</div>
+          <div><div class="wf-title">Bàn giao file gốc 100%, sẵn sàng thi công</div><div class="wf-desc">Tất cả file AI, PSD, EPS chuẩn in ấn. Hướng dẫn thi công cụ thể cho từng hạng mục biển hiệu.</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="why-right">
+      <div class="ref-card"><span class="ref-icon">🏥</span><div class="ref-name">Phòng khám Shinbi Dental</div><div class="ref-type">Nha khoa thẩm mỹ</div></div>
+      <div class="ref-card"><span class="ref-icon">💆</span><div class="ref-name">GiaoChiLegend Spa</div><div class="ref-type">Wellness & Y học cổ truyền</div></div>
+      <div class="ref-card"><span class="ref-icon">🧬</span><div class="ref-name">Dự án OCOP Y tế</div><div class="ref-type">Sản phẩm dược thảo</div></div>
+      <div class="ref-card"><span class="ref-icon">✨</span><div class="ref-name">Dự án sắp ra mắt</div><div class="ref-type">Bệnh viện thẩm mỹ TP.HCM</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process fade-up">
+  <div class="process-inner">
+    <div class="section-eyebrow">Quy trình làm việc</div>
+    <h2 class="section-title">5 bước từ <em>brief đến bàn giao</em></h2>
+    <div class="process-steps">
+      <div class="step"><div class="step-num">01</div><div class="step-title">Khảo sát & Brief</div><div class="step-desc">Tìm hiểu thương hiệu, mục tiêu và đối tượng bệnh nhân. 1–2 ngày.</div></div>
+      <div class="step"><div class="step-num">02</div><div class="step-title">Định hướng sáng tạo</div><div class="step-desc">Concept board, bảng màu, typography. Phê duyệt trước khi thiết kế. 2–3 ngày.</div></div>
+      <div class="step"><div class="step-num">03</div><div class="step-title">Thiết kế logo & cốt lõi</div><div class="step-desc">3–5 phương án logo, chọn lọc và tinh chỉnh đến phiên bản final. 5–7 ngày.</div></div>
+      <div class="step"><div class="step-num">04</div><div class="step-title">Triển khai ứng dụng</div><div class="step-desc">Thiết kế toàn bộ hạng mục theo gói đã chọn. Song song, phê duyệt liên tục. 7–14 ngày.</div></div>
+      <div class="step"><div class="step-num">05</div><div class="step-title">Bàn giao & Hỗ trợ</div><div class="step-desc">File gốc, brand guidelines, hỗ trợ triển khai thi công 30 ngày sau bàn giao.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-section">
+  <h2>Bắt đầu xây dựng<br><em>thương hiệu y tế uy tín</em></h2>
+  <p>Tư vấn miễn phí 30 phút với Artio Media — phân tích thương hiệu hiện tại và đề xuất giải pháp phù hợp nhất cho cơ sở y tế của bạn.</p>
+  <div class="cta-btns">
+    <a href="https://artio.vn#contact" class="btn-cta-main">💬 Tư vấn miễn phí →</a>
+    <a href="https://artio.vn/portfolio.html" class="btn-cta-sec">Xem portfolio thực tế</a>
+  </div>
+</div>
+
+<footer>
+  <span class="footer-logo">Artio<span>.</span></span>
+  <div class="footer-links">
+    <a href="https://artio.vn#services">Dịch vụ</a>
+    <a href="https://artio.vn/portfolio.html">Portfolio</a>
+    <a href="https://artio.vn/webdesign/">Thiết kế Web</a>
+    <a href="https://artio.vn#contact">Liên hệ</a>
+  </div>
+  <span>© 2026 Artio Media — artio.vn</span>
+</footer>
+
+<script>
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, {threshold:0.08});
+document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
