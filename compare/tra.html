@@ -1,1 +1,981 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Web Tĩnh vs Web AI — Artio Media | Tư vấn thiết kế website</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1208;
+    --ink-soft: #3d3122;
+    --ink-muted: #7a6a52;
+    --cream: #f7f3ec;
+    --cream-deep: #ede6d8;
+    --cream-border: #d9cfbc;
+    --tea-green: #4a6741;
+    --tea-green-light: #d4e5d0;
+    --tea-amber: #b5651d;
+    --tea-amber-light: #f5e6d3;
+    --ai-indigo: #2d3a5e;
+    --ai-indigo-light: #e8ecf5;
+    --gold: #c9a84c;
+    --gold-light: #f9f0dc;
+  }
 
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Be Vietnam Pro', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Decorative background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(ellipse 80% 50% at 20% 20%, rgba(74,103,65,0.06) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 40% at 80% 80%, rgba(45,58,94,0.06) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .wrapper {
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+  }
+
+  /* ─── HEADER ─── */
+  header {
+    text-align: center;
+    padding: 64px 0 48px;
+    animation: fadeUp 0.8s ease both;
+  }
+
+  .eyebrow {
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--tea-amber);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+  }
+
+  .eyebrow::before, .eyebrow::after {
+    content: '';
+    width: 40px;
+    height: 1px;
+    background: var(--tea-amber);
+    opacity: 0.5;
+  }
+
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 5vw, 60px);
+    font-weight: 300;
+    line-height: 1.15;
+    color: var(--ink);
+    margin-bottom: 12px;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--tea-amber);
+  }
+
+  .subtitle {
+    font-size: 15px;
+    color: var(--ink-muted);
+    font-weight: 300;
+    line-height: 1.6;
+    max-width: 540px;
+    margin: 0 auto;
+  }
+
+  /* ─── LEGEND PILLS ─── */
+  .legend {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin: 32px 0 48px;
+    flex-wrap: wrap;
+    animation: fadeUp 0.8s 0.15s ease both;
+  }
+
+  .pill {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 18px;
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 500;
+    border: 1px solid;
+  }
+
+  .pill-static {
+    background: var(--cream-deep);
+    border-color: var(--cream-border);
+    color: var(--ink-soft);
+  }
+
+  .pill-ai {
+    background: var(--ai-indigo);
+    border-color: var(--ai-indigo);
+    color: #fff;
+  }
+
+  .pill-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+
+  .pill-static .pill-dot { background: var(--ink-muted); }
+  .pill-ai .pill-dot { background: var(--gold); }
+
+  /* ─── COMPARISON GRID ─── */
+  .compare-grid {
+    display: grid;
+    gap: 20px;
+  }
+
+  .compare-row {
+    display: grid;
+    grid-template-columns: 200px 1fr 1fr;
+    gap: 0;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--cream-border);
+    background: white;
+    animation: fadeUp 0.6s ease both;
+    transition: box-shadow 0.3s;
+  }
+
+  .compare-row:hover {
+    box-shadow: 0 8px 32px rgba(26,18,8,0.1);
+  }
+
+  .compare-row:nth-child(1) { animation-delay: 0.1s; }
+  .compare-row:nth-child(2) { animation-delay: 0.18s; }
+  .compare-row:nth-child(3) { animation-delay: 0.26s; }
+  .compare-row:nth-child(4) { animation-delay: 0.34s; }
+  .compare-row:nth-child(5) { animation-delay: 0.42s; }
+  .compare-row:nth-child(6) { animation-delay: 0.50s; }
+  .compare-row:nth-child(7) { animation-delay: 0.58s; }
+  .compare-row:nth-child(8) { animation-delay: 0.66s; }
+
+  /* Category label */
+  .cat-label {
+    padding: 28px 20px;
+    background: var(--cream);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    border-right: 1px solid var(--cream-border);
+    gap: 6px;
+  }
+
+  .cat-icon {
+    font-size: 22px;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .cat-name {
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+  }
+
+  /* Cells */
+  .cell {
+    padding: 28px 28px;
+    border-right: 1px solid var(--cream-border);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: relative;
+  }
+
+  .cell:last-child { border-right: none; }
+
+  .cell-static {
+    background: white;
+  }
+
+  .cell-ai {
+    background: linear-gradient(135deg, #f8f9fd 0%, #f0f3fa 100%);
+  }
+
+  .cell-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 4px;
+  }
+
+  .col-badge {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 100px;
+  }
+
+  .badge-static {
+    background: var(--cream-deep);
+    color: var(--ink-muted);
+    border: 1px solid var(--cream-border);
+  }
+
+  .badge-ai {
+    background: var(--ai-indigo);
+    color: #e8d99a;
+  }
+
+  .cell-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.3;
+  }
+
+  .cell-desc {
+    font-size: 13.5px;
+    font-weight: 300;
+    color: var(--ink-soft);
+    line-height: 1.7;
+  }
+
+  .cell-desc strong {
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  /* Feature list */
+  .feature-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 4px;
+  }
+
+  .feature-list li {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--ink-soft);
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    line-height: 1.5;
+  }
+
+  .feature-list li::before {
+    content: '';
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    margin-top: 6px;
+    flex-shrink: 0;
+  }
+
+  .cell-static .feature-list li::before {
+    background: var(--ink-muted);
+    opacity: 0.5;
+  }
+
+  .cell-ai .feature-list li::before {
+    background: var(--ai-indigo);
+  }
+
+  /* Rating bar */
+  .rating-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 8px;
+  }
+
+  .rating-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: var(--ink-muted);
+    text-transform: uppercase;
+    min-width: 64px;
+  }
+
+  .rating-bar-track {
+    flex: 1;
+    height: 4px;
+    background: var(--cream-deep);
+    border-radius: 100px;
+    overflow: hidden;
+  }
+
+  .rating-bar-fill {
+    height: 100%;
+    border-radius: 100px;
+    transition: width 1s ease;
+  }
+
+  .fill-static { background: var(--ink-muted); }
+  .fill-ai { background: linear-gradient(90deg, var(--ai-indigo), var(--gold)); }
+
+  .rating-value {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--ink-soft);
+    min-width: 28px;
+    text-align: right;
+  }
+
+  /* Verdict tag */
+  .verdict {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 6px;
+    margin-top: 6px;
+    align-self: flex-start;
+  }
+
+  .verdict-low { background: #fef3f2; color: #b42318; }
+  .verdict-mid { background: #fffaeb; color: #b54708; }
+  .verdict-high { background: #ecfdf3; color: #027a48; }
+
+  /* ─── HEADER ROW (sticky column titles) ─── */
+  .header-row {
+    display: grid;
+    grid-template-columns: 200px 1fr 1fr;
+    gap: 0;
+    margin-bottom: 12px;
+    padding: 0 4px;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .header-cell {
+    padding: 0 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .header-cell:first-child { padding-left: 0; }
+
+  .col-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .col-subtitle {
+    font-size: 12px;
+    color: var(--ink-muted);
+    font-weight: 300;
+  }
+
+  /* ─── SUMMARY BANNER ─── */
+  .summary {
+    margin-top: 40px;
+    border-radius: 20px;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border: 1px solid var(--cream-border);
+    animation: fadeUp 0.7s 0.7s ease both;
+  }
+
+  .sum-panel {
+    padding: 40px;
+  }
+
+  .sum-static {
+    background: var(--cream-deep);
+    border-right: 1px solid var(--cream-border);
+  }
+
+  .sum-ai {
+    background: var(--ai-indigo);
+    color: white;
+  }
+
+  .sum-eyebrow {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    opacity: 0.6;
+  }
+
+  .sum-ai .sum-eyebrow { color: var(--gold); opacity: 1; }
+
+  .sum-heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    line-height: 1.2;
+  }
+
+  .sum-static .sum-heading { color: var(--ink); }
+  .sum-ai .sum-heading { color: white; }
+
+  .sum-text {
+    font-size: 13.5px;
+    font-weight: 300;
+    line-height: 1.8;
+  }
+
+  .sum-static .sum-text { color: var(--ink-soft); }
+  .sum-ai .sum-text { color: rgba(255,255,255,0.75); }
+
+  .sum-best-for {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid;
+  }
+
+  .sum-static .sum-best-for { border-color: var(--cream-border); }
+  .sum-ai .sum-best-for { border-color: rgba(255,255,255,0.15); }
+
+  .sum-best-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .sum-static .sum-best-label { color: var(--ink-muted); }
+  .sum-ai .sum-best-label { color: var(--gold); }
+
+  .sum-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .sum-tag {
+    font-size: 12px;
+    font-weight: 500;
+    padding: 4px 12px;
+    border-radius: 100px;
+  }
+
+  .sum-static .sum-tag {
+    background: white;
+    color: var(--ink-soft);
+    border: 1px solid var(--cream-border);
+  }
+
+  .sum-ai .sum-tag {
+    background: rgba(255,255,255,0.12);
+    color: white;
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 768px) {
+    .compare-row, .header-row {
+      grid-template-columns: 1fr;
+    }
+    .cat-label {
+      flex-direction: row;
+      align-items: center;
+      border-right: none;
+      border-bottom: 1px solid var(--cream-border);
+      padding: 16px 20px;
+    }
+    .cell { border-right: none; border-bottom: 1px solid var(--cream-border); }
+    .cell:last-child { border-bottom: none; }
+    .summary { grid-template-columns: 1fr; }
+    .sum-static { border-right: none; border-bottom: 1px solid var(--cream-border); }
+    .header-row { display: none; }
+  }
+</style>
+<meta property="og:title" content="Web Tĩnh vs Web AI — So sánh thực tế cho thương hiệu trà">
+<meta property="og:description" content="Phân tích chi tiết 8 tiêu chí: UX, SEO, bán hàng, chi phí... Artio Media tư vấn giải pháp phù hợp nhất cho doanh nghiệp của bạn.">
+<meta property="og:image" content="https://artio.vn/images/og-thumbnail.jpg">
+<meta property="og:url" content="https://artio.vn/compare/tra.html">
+</head>
+<body>
+<!-- ARTIO NAV -->
+<nav style="position:sticky;top:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:14px 48px;background:rgba(247,243,236,.95);border-bottom:1px solid rgba(0,0,0,.08);backdrop-filter:blur(12px);font-family:'Be Vietnam Pro',sans-serif">
+  <a href="https://artio.vn" style="font-weight:800;font-size:20px;color:#111;text-decoration:none">Artio<span style="color:#ff4d00">.</span></a>
+  <div style="display:flex;gap:8px;align-items:center">
+    <a href="https://artio.vn#services" style="font-size:13px;font-weight:500;color:#111;text-decoration:none;padding:8px 14px;border-radius:100px;transition:background .2s">Dịch vụ</a>
+    <a href="https://artio.vn/webdesign/" style="font-size:13px;font-weight:500;color:#111;text-decoration:none;padding:8px 14px;border-radius:100px;transition:background .2s">Thiết kế Web</a>
+    <a href="https://artio.vn/portfolio.html" style="font-size:13px;font-weight:500;color:#111;text-decoration:none;padding:8px 14px;border-radius:100px;transition:background .2s">Portfolio</a>
+    <a href="https://artio.vn#contact" style="background:#ff4d00;color:white;padding:10px 22px;border-radius:100px;font-size:13px;font-weight:600;text-decoration:none">Liên hệ ngay</a>
+  </div>
+</nav>
+
+
+<div class="wrapper">
+
+  <!-- HEADER -->
+  <header>
+    <div class="eyebrow">So sánh mô hình website</div>
+    <h1>Web Tĩnh <em>vs</em> Web AI<br>cho trà Thái Nguyên</h1>
+    <p class="subtitle">Phân tích chi tiết sự khác biệt giữa website giới thiệu truyền thống và website tích hợp trí tuệ nhân tạo</p>
+  </header>
+
+  <div class="legend">
+    <div class="pill pill-static"><span class="pill-dot"></span> Website tĩnh truyền thống</div>
+    <div class="pill pill-ai"><span class="pill-dot"></span> Website tích hợp AI</div>
+  </div>
+
+  <!-- COLUMN HEADERS -->
+  <div class="header-row">
+    <div class="header-cell"></div>
+    <div class="header-cell">
+      <span class="col-badge badge-static">Web truyền thống</span>
+      <div class="col-title">Website tĩnh</div>
+      <div class="col-subtitle">Brochure kỹ thuật số</div>
+    </div>
+    <div class="header-cell">
+      <span class="col-badge badge-ai">AI-Powered</span>
+      <div class="col-title">Website AI</div>
+      <div class="col-subtitle">Trải nghiệm thông minh</div>
+    </div>
+  </div>
+
+  <!-- COMPARISON ROWS -->
+  <div class="compare-grid">
+
+    <!-- 1. Trưng bày sản phẩm -->
+    <div class="compare-row">
+      <div class="cat-label">
+        <div class="cat-icon">🍃</div>
+        <div class="cat-name">Sản phẩm</div>
+      </div>
+      <div class="cell cell-static">
+        <div class="cell-header"><span class="col-badge badge-static">Tĩnh</span></div>
+        <div class="cell-title">Danh mục cố định</div>
+        <div class="cell-desc">Hình ảnh và mô tả sản phẩm được viết tay, cập nhật thủ công. Mọi khách hàng thấy <strong>cùng một nội dung</strong>.</div>
+        <ul class="feature-list">
+          <li>Ảnh sản phẩm tĩnh, mô tả chung chung</li>
+          <li>Cần lập trình viên để thêm sản phẩm mới</li>
+          <li>Không phân biệt được đối tượng khách</li>
+        </ul>
+        <div class="rating-row">
+          <span class="rating-label">Hiệu quả</span>
+          <div class="rating-bar-track"><div class="rating-bar-fill fill-static" style="width:30%"></div></div>
+          <span class="rating-value">3/10</span>
+        </div>
+        <span class="verdict verdict-low">Cơ bản</span>
+      </div>
+      <div class="cell cell-ai">
+        <div class="cell-header"><span class="col-badge badge-ai">AI</span></div>
+        <div class="cell-title">Giới thiệu cá nhân hóa</div>
+        <div class="cell-desc">AI phân tích hành vi, tự động viết mô tả theo <strong>mùa thu hái, vùng trồng</strong> và sở thích từng khách hàng.</div>
+        <ul class="feature-list">
+          <li>Mô tả sản phẩm tự sinh theo ngữ cảnh</li>
+          <li>Gợi ý "trà phù hợp với bạn" theo lịch sử mua</li>
+          <li>Flavor profile trực quan: hậu ngọt, mùi hoa, v.v.</li>
+        </ul>
+        <div class="rating-row">
+          <span class="rating-label">Hiệu quả</span>
+          <div class="rating-bar-track"><div class="rating-bar-fill fill-ai" style="width:90%"></div></div>
+          <span class="rating-value">9/10</span>
+        </div>
+        <span class="verdict verdict-high">Vượt trội</span>
+      </div>
+    </div>
+
+    <!-- 2. Tư vấn khách hàng -->
+    <div class="compare-row">
+      <div class="cat-label">
+        <div class="cat-icon">💬</div>
+        <div class="cat-name">Tư vấn</div>
+      </div>
+      <div class="cell cell-static">
+        <div class="cell-header"><span class="col-badge badge-static">Tĩnh</span></div>
+        <div class="cell-title">Form liên hệ thụ động</div>
+        <div class="cell-desc">Khách gửi câu hỏi qua form, <strong>chờ 1–2 ngày</strong> mới nhận phản hồi qua email hoặc điện thoại.</div>
+        <ul class="feature-list">
+          <li>Không có hỗ trợ ngoài giờ hành chính</li>
+          <li>Cần nhân viên trực tiếp trả lời</li>
+          <li>Khách thường bỏ giỏ hàng vì không có ai tư vấn</li>
+        </ul>
+        <div class="rating-row">
+          <span class="rating-label">Phản hồi</span>
+          <div class="rating-bar-track"><div class="rating-bar-fill fill-static" style="width:20%"></div></div>
+          <span class="rating-value">2/10</span>
+        </div>
+        <span class="verdict verdict-low">Chậm</span>
+      </div>
+      <div class="cell cell-ai">
+        <div class="cell-header"><span class="col-badge badge-ai">AI</span></div>
+        <div class="cell-title">Chatbot trà chuyên nghiệp</div>
+        <div class="cell-desc">AI hiểu sâu về trà, tư vấn <strong>24/7</strong> — từ loại trà phù hợp, cách pha, đến gợi ý quà tặng.</div>
+        <ul class="feature-list">
+          <li>"Trà nào hợp người hay bị đầy bụng?" → trả lời ngay</li>
+          <li>Hỗ trợ đặt hàng, kiểm tra đơn, gợi ý upsell</li>
+          <li>Nhớ lịch sử mua để tư vấn cá nhân hoá</li>
+        </ul>
+        <div class="rating-row">
+          <span class="rating-label">Phản hồi</span>
+          <div class="rating-bar-track"><div class="rating-bar-fill fill-ai" style="width:95%"></div></div>
+          <span class="rating-value">9.5/10</span>
+        </div>
+        <span class="verdict verdict-high">Tức thì 24/7</span>
+      </div>
+    </div>
+
+    <!-- 3. Marketing & SEO -->
+    <div class="compare-row">
+      <div class="cat-label">
+        <div class="cat-icon">📣</div>
+        <div class="cat-name">Marketing</div>
+      </div>
+      <div class="cell cell-static">
+        <div class="cell-header"><span class="col-badge badge-static">Tĩnh</span></div>
+        <div class="cell-title">SEO thủ công & blog tĩnh</div>
+        <div class="cell-desc">Nội dung SEO viết một lần, <strong>không cập nhật</strong> theo xu hướng tìm kiếm. Blog cần người viết thường xuyên.</div>
+        <ul class="feature-list">
+          <li>Từ khóa cố định, dễ bị tụt hạng theo mùa</li>
+          <li>Không có email cá nhân hóa tự động</li>
+          <li>Chi phí content marketing cao</li>
+        </ul>
+        <div class="rating-row">
+          <span class="rating-label">Tăng trưởng</span>
+          <div class="rating-bar-track"><div class="rating-bar-fill fill-static" style="width:35%"></div></div>
+          <span class="rating-value">3.5/10</span>
+        </div>
+        <span class="verdict verdict-low">Hạn chế</span>
+      </div>
+      <div class="cell cell-ai">
+        <div class="cell-header"><span class="col-badge badge-ai">AI</span></div>
+        <div class="cell-title">Marketing thông minh tự động</div>
+        <div class="cell-desc">AI tự tạo nội dung blog, email theo <strong>mùa vụ & hành vi khách hàng</strong>, tối ưu SEO liên tục.</div>
+        <ul class="feature-list">
+          <li>Tự viết bài "Trà mùa xuân Thái Nguyên 2025"</li>
+          <li>Email nhắc nhở khách sắp hết hàng quen dùng</li>
+          <li>A/B test tiêu đề, hình ảnh tự động</li>
+        </ul>
+        <div class="rating-row">
+          <span class="rating-label">Tăng trưởng</span>
+          <div class="rating-bar-track"><div class="rating-bar-fill fill-ai" style="width:88%"></div></div>
+          <span class="rating-value">8.8/10</span>
+        </div>
+        <span class="verdict verdict-high">Tự động hoá</span>
+      </div>
+    </div>
+
+    <!-- 4. Quản lý kho & vận hành -->
+    <div class="compare-row">
+      <div class="cat-label">
+        <div class="cat-icon">📦</div>
+        <div class="cat-name">Vận hành</div>
+      </div>
+      <div class="cell cell-static">
+        <div class="cell-header"><span class="col-badge badge-static">Tĩnh</span></div>
+        <div class="cell-title">Nhập kho & đơn hàng thủ công</div>
+        <div class="cell-desc">Quản lý tồn kho bằng Excel, xử lý đơn tay, <strong>dễ sai sót</strong> vào mùa cao điểm Tết.</div>
+        <ul class="feature-list">
+          <li>Không biết khi nào nên nhập thêm hàng</li>
+          <li>Đơn hàng dễ bị bỏ sót khi nhiều kênh cùng lúc</li>
+          <li>Báo cáo cuối tháng mất nhiều giờ tổng hợp</li>
+        </ul>
+        <div class="rating-row">
+          <span class="rating-label">Hiệu suất</span>
+          <div class="rating-bar-track"><div class="rating-bar-fill fill-static" style="width:25%"></div></div>
+          <span class="rating-value">2.5/10</span>
+        </div>
+        <span class="verdict verdict-low">Dễ sai sót</span>
+      </div>
+      <div class="cell cell-ai">
+        <div class="cell-header"><span class="col-badge badge-ai">AI</span></div>
+        <div class="cell-title">Vận hành dự báo thông minh</div>
+        <div class="cell-desc">AI dự báo nhu cầu theo mùa, tự động xử lý đơn, cảnh báo <strong>sắp hết hàng</strong> trước 2–3 tuần.</div>
+        <ul class="feature-list">
+          <li>Dự báo: "Tháng 9 năm nay bán gấp 2.3x tháng 8"</li>
+          <li>Tự đồng bộ đơn từ Web, Shopee, Zalo</li>
+          <li>Dashboard báo cáo real-time, không cần Excel</li>
+        </ul>
+        <div class="rating-row">
+          <span class="rating-label">Hiệu suất</span>
+          <div class="rating-bar-track"><div class="rating-bar-fill fill-ai" style="width:92%"></div></div>
+          <span class="rating-value">9.2/10</span>
+        </div>
+        <span class="verdict verdict-high">Dự báo chính xác</span>
+      </div>
+    </div>
+
+    <!-- 5. Trải nghiệm pha trà (đặc thù) -->
+    <div class="compare-row">
+      <div class="cat-label">
+        <div class="cat-icon">🫖</div>
+        <div class="cat-name">Pha trà</div>
+      </div>
+      <div class="cell cell-static">
+        <div class="cell-header"><span class="col-badge badge-static">Tĩnh</span></div>
+        <div class="cell-title">Hướng dẫn tĩnh trên trang</div>
+        <div class="cell-desc">Một trang "Cách pha trà" cố định cho tất cả sản phẩm, <strong>không phân biệt</strong> loại trà hay khẩu vị người dùng.</div>
+        <ul class="feature-list">
+          <li>Không tính đến loại ấm, chất lượng nước</li>
+          <li>Hướng dẫn chung chung, thiếu thực tế</li>
+          <li>Không thể điều chỉnh theo sở thích cá nhân</li>
+        </ul>
+        <div class="rating-row">
+          <span class="rating-label">Giá trị</span>
+          <div class="rating-bar-track"><div class="rating-bar-fill fill-static" style="width:20%"></div></div>
+          <span class="rating-value">2/10</span>
+        </div>
+        <span class="verdict verdict-low">Quá chung</span>
+      </div>
+      <div class="cell cell-ai">
+        <div class="cell-header"><span class="col-badge badge-ai">AI</span></div>
+        <div class="cell-title">Trợ lý pha trà thông minh</div>
+        <div class="cell-desc">Nhập loại trà → AI tính toán <strong>nhiệt độ, thời gian ủ, tỉ lệ</strong> chính xác, điều chỉnh theo khẩu vị.</div>
+        <ul class="feature-list">
+          <li>"Trà Đinh Thượng Hạng: 85°C, 45 giây, 5g/150ml"</li>
+          <li>Gợi ý khác nhau cho ấm tử sa vs ấm thủy tinh</li>
+          <li>Nhận diện ảnh lá trà để định dạng chất lượng</li>
+        </ul>
+        <div class="rating-row">
+          <span class="rating-label">Giá trị</span>
+          <div class="rating-bar-track"><div class="rating-bar-fill fill-ai" style="width:95%"></div></div>
+          <span class="rating-value">9.5/10</span>
+        </div>
+        <span class="verdict verdict-high">Độc đáo</span>
+      </div>
+    </div>
+
+    <!-- 6. Chi phí & đầu tư -->
+    <div class="compare-row">
+      <div class="cat-label">
+        <div class="cat-icon">💰</div>
+        <div class="cat-name">Chi phí</div>
+      </div>
+      <div class="cell cell-static">
+        <div class="cell-header"><span class="col-badge badge-static">Tĩnh</span></div>
+        <div class="cell-title">Chi phí thấp, giới hạn nhiều</div>
+        <div class="cell-desc">Chi phí xây dựng ban đầu thấp, nhưng <strong>chi phí vận hành nhân sự</strong> cao theo quy mô.</div>
+        <ul class="feature-list">
+          <li>Xây dựng: 5–20 triệu đồng</li>
+          <li>Chi phí nhân sự: cao khi scale</li>
+          <li>Chi phí cơ hội: khách bỏ đi = doanh thu mất</li>
+        </ul>
+        <div class="rating-row">
+          <span class="rating-label">ROI</span>
+          <div class="rating-bar-track"><div class="rating-bar-fill fill-static" style="width:40%"></div></div>
+          <span class="rating-value">4/10</span>
+        </div>
+        <span class="verdict verdict-mid">Hợp lý ban đầu</span>
+      </div>
+      <div class="cell cell-ai">
+        <div class="cell-header"><span class="col-badge badge-ai">AI</span></div>
+        <div class="cell-title">Đầu tư cao, hoàn vốn nhanh</div>
+        <div class="cell-desc">Chi phí ban đầu cao hơn, nhưng tiết kiệm nhân sự, tăng tỉ lệ chuyển đổi → <strong>ROI dương trong 6–12 tháng</strong>.</div>
+        <ul class="feature-list">
+          <li>Xây dựng: 30–100 triệu + chi phí API</li>
+          <li>Tỉ lệ chuyển đổi tăng 25–40% với AI chatbot</li>
+          <li>Giảm 60% chi phí nhân sự chăm sóc khách hàng</li>
+        </ul>
+        <div class="rating-row">
+          <span class="rating-label">ROI</span>
+          <div class="rating-bar-track"><div class="rating-bar-fill fill-ai" style="width:85%"></div></div>
+          <span class="rating-value">8.5/10</span>
+        </div>
+        <span class="verdict verdict-high">ROI cao dài hạn</span>
+      </div>
+    </div>
+
+    <!-- 7. Tin cậy & nguồn gốc -->
+    <div class="compare-row">
+      <div class="cat-label">
+        <div class="cat-icon">🔐</div>
+        <div class="cat-name">Xác thực</div>
+      </div>
+      <div class="cell cell-static">
+        <div class="cell-header"><span class="col-badge badge-static">Tĩnh</span></div>
+        <div class="cell-title">Niềm tin dựa trên lời nói</div>
+        <div class="cell-desc">Chứng nhận, giấy phép VSATTP đăng tải dạng ảnh tĩnh. Khách hàng <strong>không thể xác minh</strong> nguồn gốc thực sự.</div>
+        <ul class="feature-list">
+          <li>Ảnh giấy chứng nhận dễ làm giả</li>
+          <li>Không truy xuất được lô hàng cụ thể</li>
+          <li>Khó xây dựng lòng tin với khách lần đầu</li>
+        </ul>
+        <div class="rating-row">
+          <span class="rating-label">Tin cậy</span>
+          <div class="rating-bar-track"><div class="rating-bar-fill fill-static" style="width:30%"></div></div>
+          <span class="rating-value">3/10</span>
+        </div>
+        <span class="verdict verdict-low">Khó xác minh</span>
+      </div>
+      <div class="cell cell-ai">
+        <div class="cell-header"><span class="col-badge badge-ai">AI</span></div>
+        <div class="cell-title">Truy xuất nguồn gốc minh bạch</div>
+        <div class="cell-desc">QR code + AI + blockchain: scan mã → biết <strong>ngày hái, vùng đất, hộ trồng</strong>, độ ẩm khi đóng gói.</div>
+        <ul class="feature-list">
+          <li>Mỗi hộp trà có "hộ chiếu số" riêng</li>
+          <li>Nhận diện ảnh để phân biệt trà thật/giả</li>
+          <li>Khách Hà Nội mua trà Tân Cương biết chính xác nguồn gốc</li>
+        </ul>
+        <div class="rating-row">
+          <span class="rating-label">Tin cậy</span>
+          <div class="rating-bar-track"><div class="rating-bar-fill fill-ai" style="width:93%"></div></div>
+          <span class="rating-value">9.3/10</span>
+        </div>
+        <span class="verdict verdict-high">Minh bạch tuyệt đối</span>
+      </div>
+    </div>
+
+    <!-- 8. Độ phức tạp triển khai -->
+    <div class="compare-row">
+      <div class="cat-label">
+        <div class="cat-icon">⚙️</div>
+        <div class="cat-name">Triển khai</div>
+      </div>
+      <div class="cell cell-static">
+        <div class="cell-header"><span class="col-badge badge-static">Tĩnh</span></div>
+        <div class="cell-title">Đơn giản, triển khai nhanh</div>
+        <div class="cell-desc">Chỉ cần hosting và tên miền, <strong>1–4 tuần</strong> là có website hoàn chỉnh, không cần kỹ sư AI.</div>
+        <ul class="feature-list">
+          <li>WordPress, Shopify: ai cũng có thể quản lý</li>
+          <li>Triển khai trong 1–4 tuần</li>
+          <li>Không cần đội kỹ thuật chuyên sâu</li>
+        </ul>
+        <div class="rating-row">
+          <span class="rating-label">Dễ triển khai</span>
+          <div class="rating-bar-track"><div class="rating-bar-fill fill-static" style="width:90%"></div></div>
+          <span class="rating-value">9/10</span>
+        </div>
+        <span class="verdict verdict-high">Rất dễ bắt đầu</span>
+      </div>
+      <div class="cell cell-ai">
+        <div class="cell-header"><span class="col-badge badge-ai">AI</span></div>
+        <div class="cell-title">Phức tạp hơn, cần đội kỹ thuật</div>
+        <div class="cell-desc">Cần tích hợp API AI, thiết kế luồng dữ liệu, kiểm thử nhiều kịch bản — <strong>2–4 tháng</strong> cho bản đầy đủ.</div>
+        <ul class="feature-list">
+          <li>Cần kỹ sư backend, AI/ML engineer</li>
+          <li>Triển khai 2–4 tháng, thử nghiệm 1–2 tháng thêm</li>
+          <li>Có thể bắt đầu bằng chatbot đơn giản để thử nghiệm</li>
+        </ul>
+        <div class="rating-row">
+          <span class="rating-label">Dễ triển khai</span>
+          <div class="rating-bar-track"><div class="rating-bar-fill fill-static" style="width:35%"></div></div>
+          <span class="rating-value">3.5/10</span>
+        </div>
+        <span class="verdict verdict-mid">Cần đội kỹ thuật</span>
+      </div>
+    </div>
+
+  </div><!-- /compare-grid -->
+
+  <!-- SUMMARY BANNER -->
+  <div class="summary">
+    <div class="sum-panel sum-static">
+      <div class="sum-eyebrow">Kết luận</div>
+      <div class="sum-heading">Web tĩnh phù hợp khi mới bắt đầu</div>
+      <div class="sum-text">Nếu ngân sách hạn chế và chưa có đội kỹ thuật, web tĩnh vẫn là bước khởi đầu đúng đắn. Quan trọng là xây dựng đúng cấu trúc để dễ dàng nâng cấp lên AI sau này mà không phải làm lại từ đầu.</div>
+      <div class="sum-best-for">
+        <div class="sum-best-label">Phù hợp nhất cho</div>
+        <div class="sum-tags">
+          <span class="sum-tag">Cơ sở mới thành lập</span>
+          <span class="sum-tag">Ngân sách &lt; 20 triệu</span>
+          <span class="sum-tag">1–2 người vận hành</span>
+          <span class="sum-tag">Thị trường địa phương</span>
+        </div>
+      </div>
+    </div>
+    <div class="sum-panel sum-ai">
+      <div class="sum-eyebrow">Khuyến nghị</div>
+      <div class="sum-heading">Web AI là tương lai của bán trà trực tuyến</div>
+      <div class="sum-text">Thị trường trà cao cấp đang tăng trưởng mạnh. Doanh nghiệp nào đầu tư AI sớm sẽ tạo được lợi thế cạnh tranh bền vững — đặc biệt trong việc xây dựng lòng tin về nguồn gốc và trải nghiệm khách hàng.</div>
+      <div class="sum-best-for">
+        <div class="sum-best-label">Phù hợp nhất cho</div>
+        <div class="sum-tags">
+          <span class="sum-tag">Thương hiệu muốn scale</span>
+          <span class="sum-tag">Bán toàn quốc / xuất khẩu</span>
+          <span class="sum-tag">Phân khúc trà cao cấp</span>
+          <span class="sum-tag">Có đội kỹ thuật hoặc đối tác</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /wrapper -->
+
+<script>
+  // Animate rating bars on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const bars = entry.target.querySelectorAll('.rating-bar-fill');
+        bars.forEach(bar => {
+          const w = bar.style.width;
+          bar.style.width = '0';
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => { bar.style.width = w; });
+          });
+        });
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.3 });
+
+  document.querySelectorAll('.compare-row').forEach(row => observer.observe(row));
+</script>
+
+<!-- ARTIO CTA -->
+<div style="background:#111;color:white;padding:72px 48px;text-align:center;font-family:'Be Vietnam Pro',sans-serif">
+  <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:16px">Artio Media</div>
+  <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(28px,4vw,44px);font-weight:300;line-height:1.2;margin-bottom:16px">
+    Bạn muốn thiết kế website<br><em style="font-style:italic;color:#ffe600">cho thương hiệu trà của mình?</em>
+  </h2>
+  <p style="font-size:15px;color:rgba(255,255,255,.55);max-width:480px;margin:0 auto 36px;line-height:1.7">
+    Artio Media thiết kế website chuyên nghiệp — từ web tĩnh đẹp đến tích hợp AI. Tư vấn miễn phí, bàn giao nhanh.
+  </p>
+  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+    <a href="https://artio.vn#contact" style="background:#ff4d00;color:white;padding:14px 32px;border-radius:100px;font-size:15px;font-weight:700;text-decoration:none;display:inline-block">💬 Tư vấn miễn phí →</a>
+    <a href="https://artio.vn/webdesign/" style="background:rgba(255,255,255,.1);color:white;padding:14px 32px;border-radius:100px;font-size:15px;font-weight:600;text-decoration:none;border:1px solid rgba(255,255,255,.2);display:inline-block">Xem mẫu thiết kế</a>
+  </div>
+</div>
+
+<!-- ARTIO FOOTER -->
+<div style="background:#0a0a0a;color:rgba(255,255,255,.35);padding:24px 48px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;font-family:'Be Vietnam Pro',sans-serif;font-size:13px">
+  <span style="font-weight:800;font-size:17px;color:white">Artio<span style="color:#ff4d00">.</span></span>
+  <span>© 2026 Artio Media — artio.vn</span>
+  <a href="https://artio.vn#contact" style="color:#ff4d00;text-decoration:none;font-weight:600">Liên hệ ngay →</a>
+</div>
+
+</body>
+</html>
